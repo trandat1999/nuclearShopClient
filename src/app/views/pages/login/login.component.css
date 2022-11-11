@@ -1,0 +1,10 @@
+
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
+mat-form-field {
+  display: block;
+}
+
