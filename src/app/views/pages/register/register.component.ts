@@ -42,35 +42,21 @@ export class RegisterComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    let existMail = false;
-    let existUser = false;
-    if(this.formRegister && this.formRegister.value && this.formRegister.value.email){
-      this.authService.checkEmail(this.formRegister.value.email).subscribe(data => {
-        if(data){
-          this.formRegister.controls["email"].setErrors({'error': "email is existing"});
-          existMail = true;
-        }
-      })
-    }
-    if(this.formRegister && this.formRegister.value && this.formRegister.value.username){
-      this.authService.checkUsername(this.formRegister.value.username).subscribe(data => {
-        if(data){
-          this.formRegister.controls["username"].setErrors({'error': "username is existing"});
-          existUser = true
-        }
-      })
-    }
-    console.log(!existMail && !existUser);
-    if(!existMail && !existUser){
-
       this.authService.register(this.formRegister.value).subscribe(data => {
-        if(data){
+        if(data && data.code === 200){
           this._router.navigateByUrl("/login");
         }else{
-          this.registerValid = false;
+          if(data && data.body && data.body.length){
+            for(let er of data.body){
+              Object.keys(er).forEach(key => {
+                console.log(key);
+                console.log(er[key]);
+              });
+            }
+            return;
+          }
         }
       })
-    }
   }
 
   MatchingPasswords(control: AbstractControl) {

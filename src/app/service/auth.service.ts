@@ -39,13 +39,6 @@ export class AuthService {
     return this.http.post(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/auth/signup", registerRequset);
   }
 
-  checkEmail(email : String): Observable<any> {
-    return this.http.get(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/auth/check/email/"+ email);
-  }
-
-  checkUsername(username : String): Observable<any> {
-    return this.http.get(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/auth/check/username/"+ username);
-  }
   refreshToken(username: string|null, refresh: string|null) {
     return this.http.post(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/auth/refresh/token", {
       username: username,refreshToken: refresh
