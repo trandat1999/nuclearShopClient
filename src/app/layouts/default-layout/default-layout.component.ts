@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MediaMatcher} from "@angular/cdk/layout";
-import {MatSidenavContainer} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-default-layout',

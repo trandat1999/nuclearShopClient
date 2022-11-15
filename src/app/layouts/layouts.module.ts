@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultLayoutComponent } from './default-layout/default-layout.component';
-import {RouterOutlet} from "@angular/router";
+import {RouterModule, RouterOutlet} from "@angular/router";
 import { DefaultFooterComponent } from './default-footer/default-footer.component';
 import { DefaultHeaderComponent } from './default-header/default-header.component';
 import {MaterialModule} from "../material-module";
@@ -17,11 +17,11 @@ import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
     DefaultHeaderComponent,
     DefaultSidenavComponent
   ],
-    imports: [
-        CommonModule,
-        RouterOutlet,
-        MaterialModule,
-        PerfectScrollbarModule
-    ]
+  imports: [
+    CommonModule,
+    MaterialModule,
+    PerfectScrollbarModule,
+    RouterModule
+  ]
 })
 export class NuclearLayoutsModule { }

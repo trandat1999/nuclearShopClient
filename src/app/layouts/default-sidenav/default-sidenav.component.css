@@ -1,0 +1,12 @@
+mat-list-item{
+  color: white !important;
+}
+.active{
+  background-color: #393f81;
+}
+mat-icon{
+  margin-right: 15px;
+}
+mat-label{
+  margin-top: 6px;
+}
