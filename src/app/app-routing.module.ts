@@ -5,7 +5,7 @@ import {Page500Component} from "./views/pages/page500/page500.component";
 import {LoginComponent} from "./views/pages/login/login.component";
 import {RegisterComponent} from "./views/pages/register/register.component";
 import {AuthGuardService} from "./service/authGuardService";
-import {AppComponent} from "./app.component";
+import {DefaultLayoutComponent} from "./layouts/default-layout/default-layout.component";
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: AppComponent,
+    component: DefaultLayoutComponent,
     data: {
       title: 'Home'
     }

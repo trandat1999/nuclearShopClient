@@ -1,0 +1,14 @@
+<div style="position:absolute; top:0; bottom:0; left:0; right: 0; display: flex; flex-direction: column;">
+  <mat-sidenav-container >
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'">
+      <app-default-sidenav></app-default-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-default-header [sidenav]="sidenav" ></app-default-header>
+      <router-outlet></router-outlet>
+      <app-default-footer></app-default-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+

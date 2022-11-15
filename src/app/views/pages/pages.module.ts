@@ -14,7 +14,6 @@ import {MatButtonModule} from "@angular/material/button";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatIconModule} from "@angular/material/icon";
 
-
 @NgModule({
   declarations: [
     LoginComponent,

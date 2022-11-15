@@ -4,7 +4,7 @@
       <div class="col-lg-12 col-xl-11">
         <div class="card text-black" style="border-radius: 25px;">
           <div class="card-body p-md-5">
-            <div class="row justify-content-center">
+            <div *ngIf="registerValid" class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
@@ -17,7 +17,7 @@
                     <input matInput placeholder="Email..." formControlName="email" name="email"
                            required>
                     <mat-error>
-                      Please provide a valid email
+                      {{getErrors('email')}}
                     </mat-error>
                   </mat-form-field>
 
@@ -26,7 +26,7 @@
                     <mat-icon class="fa fa-user" matSuffix></mat-icon>
                     <input matInput placeholder="Username..." formControlName="username" name="username"
                            required>
-                    <mat-error>
+                    <mat-error>{{getErrors('username')}}
                     </mat-error>
                   </mat-form-field>
 
@@ -36,7 +36,7 @@
                     <input matInput placeholder="Password..." formControlName="password" name="password" type="password"
                            required>
                     <mat-error>
-                      Please provide a valid password
+                      {{getErrors('password')}}
                     </mat-error>
                   </mat-form-field>
 
@@ -46,7 +46,7 @@
                     <input type="password" matInput placeholder="Repeat your password..." formControlName="confirmPassword" name="confirmPassword"
                            required>
                     <mat-error>
-                      RePassword is invalid Password
+                      {{getErrors('confirmPassword')}}
                     </mat-error>
                   </mat-form-field>
 
@@ -58,7 +58,7 @@
                   </div>
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button mat-raised-button class="btn btn-dark btn-lg btn-block"
-                            [disabled]="!formRegister.valid">Login
+                            [disabled]="!formRegister.valid">Register
                     </button>
                   </div>
                 </form>
@@ -67,6 +67,12 @@
                 <img src="/assets/images/register.webp"
                      class="img-fluid" alt="Sample image">
               </div>
+            </div>
+            <div *ngIf="!registerValid">
+              <p>{{responseSuccess?.message}}</p>
+              <a class="btn btn-success btn-lg btn-block"
+                      routerLink="/login">Back to Login
+              </a>
             </div>
           </div>
         </div>

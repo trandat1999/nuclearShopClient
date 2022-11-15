@@ -15,6 +15,8 @@ import {MaterialModule} from "./material-module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToastContainer} from "./containers/toast-container.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {NuclearLayoutsModule} from "./layouts/layouts.module";
+import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 
 export function jwtOptionsFactory(storageService: StorageService){
   return {
@@ -27,10 +29,13 @@ export function jwtOptionsFactory(storageService: StorageService){
   }
 }
 
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 @NgModule({
   declarations: [
     AppComponent,
-    ToastContainer
+    ToastContainer,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +52,14 @@ export function jwtOptionsFactory(storageService: StorageService){
     }),
     MaterialModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NuclearLayoutsModule,
+    PerfectScrollbarModule
   ],
-  providers: [authInterceptorProviders,AuthGuardService],
+  providers: [authInterceptorProviders,AuthGuardService,{
+    provide: PERFECT_SCROLLBAR_CONFIG,
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

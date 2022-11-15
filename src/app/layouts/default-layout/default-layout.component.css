@@ -1,0 +1,19 @@
+app-default-header{
+  position: fixed;
+  top: 0;
+  width : 100%;
+}
+app-default-footer{
+  position: fixed;
+  bottom: 0;
+  width : 100%;
+}
+mat-sidenav{
+  width: 20vh
+}
+mat-sidenav-content{
+  width: 80vh;
+}
+mat-sidenav{
+  height: 100vh;
+}
