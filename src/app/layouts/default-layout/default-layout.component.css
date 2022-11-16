@@ -9,14 +9,14 @@ app-default-footer{
   width : 100%;
 }
 mat-sidenav-content{
-  width: 90%;
+  width: 85%;
   border: 0;
 }
 mat-sidenav{
   height: 100vh;
   background: #3f51b5;
   border:0;
-  width: 10%
+  width: 15%
 }
 mat-sidenav-container{
   position: absolute;
