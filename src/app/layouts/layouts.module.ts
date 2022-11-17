@@ -7,6 +7,9 @@ import { DefaultHeaderComponent } from './default-header/default-header.componen
 import {MaterialModule} from "../material-module";
 import { DefaultSidenavComponent } from './default-sidenav/default-sidenav.component';
 import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
+import {GridModule} from "@coreui/angular";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 
@@ -21,7 +24,10 @@ import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
     CommonModule,
     MaterialModule,
     PerfectScrollbarModule,
-    RouterModule
+    RouterModule,
+    GridModule,
+    FontAwesomeModule,
+    NgbDropdownModule
   ]
 })
 export class NuclearLayoutsModule { }

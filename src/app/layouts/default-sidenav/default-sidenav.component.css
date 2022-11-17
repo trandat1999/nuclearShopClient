@@ -1,12 +1,14 @@
-mat-list-item{
+mat-list-item a.active {
+  background: blue;
   color: white !important;
 }
-.active{
-  background-color: #393f81;
-}
+/*.active{*/
+/*  background-color: #393f81;*/
+/*}*/
 mat-icon{
   margin-right: 15px;
 }
 mat-label{
   margin-top: 6px;
 }
+

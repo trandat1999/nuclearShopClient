@@ -2,26 +2,26 @@ app-default-header{
   position: fixed;
   top: 0;
   width : 100%;
+  z-index: 999999;
 }
 app-default-footer{
-  position: fixed;
-  bottom: 0;
   width : 100%;
 }
 mat-sidenav-content{
-  width: 85%;
   border: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
 }
 mat-sidenav{
-  height: 100vh;
+  width: 15%;
   background: #3f51b5;
   border:0;
-  width: 15%
+}
+.content{
+  flex: 1;
 }
 mat-sidenav-container{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  margin-top: 64px;
 }

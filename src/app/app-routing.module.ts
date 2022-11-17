@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {Page404Component} from "./views/pages/page404/page404.component";
 import {Page500Component} from "./views/pages/page500/page500.component";
 import {LoginComponent} from "./views/pages/login/login.component";
@@ -10,15 +10,22 @@ import {DefaultLayoutComponent} from "./layouts/default-layout/default-layout.co
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: '',
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'
-    }
+    },
+    children: [
+      {
+        path: 'category',
+        loadChildren: () =>
+          import('./views/category/category.module').then((m) => m.CategoryModule)
+      }
+    ]
   },
   {
     path: '404',
