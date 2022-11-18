@@ -60,4 +60,24 @@ export class StorageService {
       return this.getToken() as string;
     }
   }
+
+  public setLanguage(language : string) {
+    localStorage.removeItem(AppSettings.LANGUAGE);
+    if(language) {
+      localStorage.setItem(AppSettings.LANGUAGE,language);
+    }else{
+      localStorage.setItem(AppSettings.LANGUAGE,AppSettings.LANGUAGE_EN);
+    }
+  }
+
+  public getLanguage() {
+    let lang = localStorage.getItem(AppSettings.LANGUAGE);
+    if(lang){
+      return lang;
+    }else{
+      localStorage.setItem(AppSettings.LANGUAGE,AppSettings.LANGUAGE_EN);
+      return AppSettings.LANGUAGE_EN;
+    }
+  }
+
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {AuthService} from "./service/auth.service";
 import {AutoLogoutService} from "./service/autoLogoutService";
+import {TranslateConfigService} from "./service/translate.service";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
   constructor(
     private authService : AuthService,
     private router: Router,
-    private autoLogoutService: AutoLogoutService
+    private autoLogoutService: AutoLogoutService,
+    private translate : TranslateConfigService
   ) {
   }
 
@@ -26,4 +28,7 @@ export class AppComponent implements OnInit {
       })
     }
   }
+  public perfectScrollbarConfig = {
+    suppressScrollX: true,
+  };
 }

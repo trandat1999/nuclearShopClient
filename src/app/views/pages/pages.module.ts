@@ -13,6 +13,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatIconModule} from "@angular/material/icon";
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -21,17 +22,18 @@ import {MatIconModule} from "@angular/material/icon";
     Page500Component,
     RegisterComponent
   ],
-  imports: [
-    CommonModule,
-    PagesRoutingModule,
-    MatFormFieldModule,
-    MatCardModule,
-    FormsModule,
-    MatInputModule,
-    MatButtonModule,
-    FontAwesomeModule,
-    MatIconModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        PagesRoutingModule,
+        MatFormFieldModule,
+        MatCardModule,
+        FormsModule,
+        MatInputModule,
+        MatButtonModule,
+        FontAwesomeModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        TranslateModule
+    ]
 })
 export class PagesModule { }

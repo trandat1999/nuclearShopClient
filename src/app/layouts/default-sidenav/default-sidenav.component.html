@@ -1,13 +1,12 @@
 <perfect-scrollbar [config]="perfectScrollbarConfig">
   <mat-nav-list>
-    <a mat-list-item routerLink="/category" routerLinkActive="active"></a>
-    <mat-list-item routerLink="" routerLinkActive="active">
-      <mat-icon>home</mat-icon>
-      <mat-label>Dashboard</mat-label>
+    <mat-list-item [routerLink]="['/dashboard']" [routerLinkActive]="['active']">
+      <mat-icon matListIcon>home</mat-icon>
+      <a matLine>Dashboard</a>
     </mat-list-item>
-    <mat-list-item routerLink="/category" routerLinkActive="active">
-      <mat-icon>home</mat-icon>
-      <mat-label>Category</mat-label>
+    <mat-list-item [routerLink]="['/category']" [routerLinkActive]="['active']">
+      <mat-icon matListIcon>home</mat-icon>
+      <a matLine>Category</a>
     </mat-list-item>
   </mat-nav-list>
 </perfect-scrollbar>

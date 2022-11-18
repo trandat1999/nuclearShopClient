@@ -24,6 +24,11 @@ const routes: Routes = [
         path: 'category',
         loadChildren: () =>
           import('./views/category/category.module').then((m) => m.CategoryModule)
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       }
     ]
   },

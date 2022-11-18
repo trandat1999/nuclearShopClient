@@ -12,7 +12,6 @@ mat-sidenav-content{
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-
 }
 mat-sidenav{
   width: 15%;

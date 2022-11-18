@@ -7,4 +7,6 @@ export class AppSettings {
   public static USERNAME_KEY = 'auth-username';
   public static DOMAIN = 'localhost:4200';
   public static URL_LOGIN = 'http://localhost:4200/login';
+  public static LANGUAGE  = 'language';
+  public static LANGUAGE_EN  = 'en';
 }

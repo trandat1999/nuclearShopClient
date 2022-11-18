@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../service/auth.service";
 import {LoginRequest} from "../../../dto/AuthRequest.class";
+import {TranslateConfigService} from "../../../service/translate.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit,OnDestroy {
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '';
   }

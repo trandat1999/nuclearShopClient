@@ -19,5 +19,7 @@ export class DefaultLayoutComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-
+  public perfectScrollbarConfig = {
+    suppressScrollX: true,
+  };
 }

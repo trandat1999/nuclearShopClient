@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {PagesModule} from "./views/pages/pages.module";
 import {authInterceptorProviders} from "./helpers/auth.interceptor";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {StorageService} from './service/storage.service';
 import {AppSettings} from "../../AppSettings";
@@ -17,7 +17,10 @@ import {ToastContainer} from "./containers/toast-container.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {NuclearLayoutsModule} from "./layouts/layouts.module";
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
-
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {MatPaginatorIntl} from "@angular/material/paginator";
+import {CustomMatPaginator} from "./components/CustomMatPage";
 export function jwtOptionsFactory(storageService: StorageService){
   return {
     tokenGetter : () =>{
@@ -27,6 +30,10 @@ export function jwtOptionsFactory(storageService: StorageService){
     disallowedRoutes: [ AppSettings.API_ENDPOINT+":"+AppSettings.PORT+"/api/auth/**",
       AppSettings.API_ENDPOINT+":"+AppSettings.PORT+"/api/v1/publish/**"]
   }
+}
+
+export function rootLoaderI18n(http: HttpClient){
+  return new TranslateHttpLoader(http,"assets/i18n/",".json");
 }
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -54,12 +61,24 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgbModule,
     FontAwesomeModule,
     NuclearLayoutsModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    TranslateModule.forRoot({
+      loader:{
+        provide: TranslateLoader,
+        useFactory: rootLoaderI18n,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [authInterceptorProviders,AuthGuardService,{
     provide: PERFECT_SCROLLBAR_CONFIG,
-    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-  }],
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+  },
+    {
+      provide: MatPaginatorIntl,
+      useClass: CustomMatPaginator
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

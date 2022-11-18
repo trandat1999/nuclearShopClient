@@ -1,0 +1,18 @@
+{
+  "loginComponent":{
+    "username":"username",
+    "password":"password"
+  },
+  "categoryComponent" : {
+    "title": "Category",
+    "name": "Name",
+    "inputName":"Please enter name for search",
+    "code": "Code",
+    "inputCode":"Please enter code for search"
+  },
+  "paginator": {
+    "itemsPerPageLabel": "items per page en",
+    "nextPageLabel": "Next page en",
+    "previousPageLabel": "Previous page en"
+  }
+}
