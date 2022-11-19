@@ -1,4 +1,13 @@
 {
+  "common": {
+    "action": "Action",
+    "edit" : "Edit",
+    "delete" : "Delete",
+    "done" : "Done",
+    "close" : "Close",
+    "create" : "Create",
+    "update" : "Update"
+  },
   "loginComponent":{
     "username":"username",
     "password":"password"
@@ -8,11 +17,13 @@
     "name": "Name",
     "inputName":"Please enter name for search",
     "code": "Code",
-    "inputCode":"Please enter code for search"
+    "inputCode":"Please enter code for search",
+    "parent": "Parent",
+    "description" : "Description"
   },
   "paginator": {
-    "itemsPerPageLabel": "items per page en",
+    "itemsPerPageLabel": "items per page",
     "nextPageLabel": "Next page en",
-    "previousPageLabel": "Previous page en"
+    "previousPageLabel": "Previous page"
   }
 }

@@ -1,9 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AppSettings} from "../../../AppSettings";
-import {map} from "rxjs/operators";
-import {LoginResponse} from "../dto/AuthRequest.class";
-import {catchError, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +13,17 @@ export class CategoryService {
 
   getPages(search : any){
     return this.http.post(this.urlCategory+"/search",search);
+  }
+
+  save(category : any){
+    return this.http.post(this.urlCategory,category);
+  }
+
+  get(id : any){
+    return this.http.get(this.urlCategory+"/"+id);
+  }
+
+  delete(id : any){
+    return this.http.delete(this.urlCategory+"/"+id);
   }
 }

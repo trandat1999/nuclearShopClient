@@ -1,0 +1,20 @@
+<h1 mat-dialog-title *ngIf="!data.category.id">{{'common.create'}}</h1>
+<h1 mat-dialog-title *ngIf="data.category.id">{{'common.update'}}</h1>
+<div mat-dialog-content class="row">
+  <mat-form-field class="col-md-6" appearance="outline">
+    <mat-label>{{'categoryComponent.code' | translate}}</mat-label>
+    <input matInput [(ngModel)]="data.category.code" type="text">
+  </mat-form-field >
+  <mat-form-field class="col-md-6" appearance="outline">
+    <mat-label>{{'categoryComponent.name' | translate}}</mat-label>
+    <input matInput [(ngModel)]="data.category.name" type="text">
+  </mat-form-field>
+  <mat-form-field class="col-md-6" appearance="outline">
+    <mat-label>{{'categoryComponent.description' | translate}}</mat-label>
+    <input matInput [(ngModel)]="data.category.description" type="text">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button >Ok</button>
+</div>
