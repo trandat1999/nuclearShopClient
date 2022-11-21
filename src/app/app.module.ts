@@ -21,6 +21,9 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {MatPaginatorIntl} from "@angular/material/paginator";
 import {CustomMatPaginator} from "./components/CustomMatPage";
+import {NgHttpLoaderModule} from "ng-http-loader";
+import {NgxSpinnerModule} from "ngx-spinner";
+import {color} from "chart.js/types/helpers";
 export function jwtOptionsFactory(storageService: StorageService){
   return {
     tokenGetter : () =>{
@@ -51,10 +54,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PagesModule,
     HttpClientModule,
     JwtModule.forRoot({
-      jwtOptionsProvider:{
+      jwtOptionsProvider: {
         provide: JWT_OPTIONS,
-        useFactory :jwtOptionsFactory,
-        deps : [StorageService]
+        useFactory: jwtOptionsFactory,
+        deps: [StorageService]
       }
     }),
     MaterialModule,
@@ -63,12 +66,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NuclearLayoutsModule,
     PerfectScrollbarModule,
     TranslateModule.forRoot({
-      loader:{
+      loader: {
         provide: TranslateLoader,
         useFactory: rootLoaderI18n,
         deps: [HttpClient]
       }
-    })
+    }),
+    NgxSpinnerModule.forRoot({
+      type : "square-jelly-box"
+      }
+    )
   ],
   providers: [authInterceptorProviders,AuthGuardService,{
     provide: PERFECT_SCROLLBAR_CONFIG,

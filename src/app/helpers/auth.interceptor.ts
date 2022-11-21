@@ -20,6 +20,11 @@ export class AuthInterceptor implements HttpInterceptor {
     private jwtHelper : JwtHelperService
   ) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if(this.storageService.getLanguage()){
+      req = req.clone({
+        setHeaders: {"Accept-language": this.storageService.getLanguage()}
+      })
+    }
     if (!req.url.includes('/api/auth') && !req.url.includes('/api/v1/publish')) {
       const token = this.storageService.getToken();
       if (!token || token.length <=0) {

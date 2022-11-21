@@ -6,7 +6,8 @@
     "done" : "Done",
     "close" : "Close",
     "create" : "Create",
-    "update" : "Update"
+    "update" : "Update",
+    "loading" : "Loading"
   },
   "loginComponent":{
     "username":"username",
@@ -19,7 +20,9 @@
     "code": "Code",
     "inputCode":"Please enter code for search",
     "parent": "Parent",
-    "description" : "Description"
+    "description" : "Description",
+    "codeRequired" : "Code is required",
+    "nameRequired" : "Name is required"
   },
   "paginator": {
     "itemsPerPageLabel": "items per page",

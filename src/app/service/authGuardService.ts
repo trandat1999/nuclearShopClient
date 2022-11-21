@@ -13,7 +13,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     if(this.storageService.isLoggedIn()){
-      this.router.navigate(["/home"]);
+      this.router.navigate(["/dashboard"]);
       return !this.storageService.isLoggedIn();
     }
     return !this.storageService.isLoggedIn();

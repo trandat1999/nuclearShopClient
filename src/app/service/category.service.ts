@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AppSettings} from "../../../AppSettings";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CategoryService {
     return this.http.post(this.urlCategory+"/search",search);
   }
 
-  save(category : any){
+  save(category : any) : Observable<any>{
     return this.http.post(this.urlCategory,category);
   }
 
@@ -26,4 +27,9 @@ export class CategoryService {
   delete(id : any){
     return this.http.delete(this.urlCategory+"/"+id);
   }
+
+  getAllParent(){
+    return this.http.get(this.urlCategory+"/parent");
+  }
+
 }
