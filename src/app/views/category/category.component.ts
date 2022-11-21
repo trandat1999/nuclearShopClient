@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { CategoryService } from 'src/app/service/category.service';
 import {Category} from "../../dto/Category";
 import {BaseResponse} from "../../dto/BaseResponse";
@@ -7,8 +7,10 @@ import { PageEvent } from '@angular/material/paginator';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
 import {map, startWith} from "rxjs/operators";
-import {catchError, Observable} from "rxjs";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {catchError, Observable, of} from "rxjs";
+import {FormControl, FormGroup, UntypedFormControl, Validators} from "@angular/forms";
+import {MatSelect} from "@angular/material/select";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-category',
@@ -18,13 +20,16 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class CategoryComponent implements OnInit {
   pageEvent! : PageEvent;
   totalElement: number = 0;
-  pageIndex: number = 1;
-  pageSize: number = 10;
   pageSizeOptions: number[] = [5,10,20,50,100];
   displayedColumns: string[] = ['action', 'name', 'code', 'description', 'parent'];
   categories : Array<Category> = [];
   category! : Category;
   categoryParent : Array<Category> = [];
+  search : any = {
+    pageIndex : 0,
+    pageSize : 10,
+    keyword : ""
+  }
   constructor(
     private categoryService: CategoryService,
     private translateService: TranslateService,
@@ -33,14 +38,38 @@ export class CategoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.categoryService.getPages({}).subscribe(data => {
+    this.getPages()
+  }
+
+  enterSearch(type :any): void {
+    if(type){
+      if(this.search.keyword.length>0) {
+        this.search.pageIndex = 0;
+        this.getPages();
+      }
+    }else{
+      this.search.pageIndex = 0;
+      this.getPages();
+    }
+  }
+
+  getPages(){
+    this.spinner.show();
+    this.categoryService.getPages(this.search).subscribe(data => {
+      this.spinner.hide();
       let rs = data as BaseResponse
       this.categories = rs.body.content;
+      this.totalElement = rs.body.totalElements;
+    },error => {
+      this.spinner.hide();
     })
   }
 
   handlePageEvent(event : PageEvent){
     this.pageEvent = event;
+    this.search.pageIndex = this.pageEvent.pageIndex;
+    this.search.pageSize = this.pageEvent.pageSize;
+    this.getPages()
   }
 
   onCreate(){
@@ -63,6 +92,9 @@ export class CategoryComponent implements OnInit {
         },
         disableClose : true
       });
+      dialogCreate.afterClosed().subscribe(result => {
+        this.getPages();
+      });
     })
   }
 }
@@ -77,10 +109,14 @@ export class DialogCreate implements OnInit {
   categoryParent! : Array<Category>
   filteredOptions!: Observable<Category[]>;
   categoryForm! : FormGroup;
+  public categoryFilterCtrl: UntypedFormControl = new UntypedFormControl();
+  @ViewChild('singleSelect', { static: true }) singleSelect!: MatSelect;
   constructor(
     public dialogRef: MatDialogRef<DialogCreate>,
     @Inject(MAT_DIALOG_DATA) public data: MatDialogData,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private translateService: TranslateService,
+    private toast: ToastrService
   ) {
     this.category = data.category;
     this.categoryParent = data.categoryParent;
@@ -92,7 +128,7 @@ export class DialogCreate implements OnInit {
       description: new FormControl(this.category.description),
       parentId : new FormControl(this.category.parentId)
     })
-    this.filteredOptions = this.categoryForm.controls['parentId'].valueChanges.pipe(
+    this.filteredOptions = this.categoryFilterCtrl.valueChanges.pipe(
       startWith(''),
       map(value => {
         const name = typeof value === 'string' ? value : value?.name;
@@ -118,18 +154,33 @@ export class DialogCreate implements OnInit {
   onSubmit(){
     this.categoryService.save(this.categoryForm.value).subscribe(data => {
       if(data && data.code === 200){
-        let responseSuccess = data as BaseResponse;
+        this.toast.success(this.translateService.instant("common.success"),this.translateService.instant("common.notification"));
+        this.dialogRef.close();
       }else{
         if(data && data.body && data.body.length){
           for(let er of data.body){
             Object.keys(er).forEach(key => {
-              this.categoryForm.controls[key].setErrors({'alreadyExist': true});
+              this.categoryForm.controls[key].setErrors({'alreadyExist': true,'alreadyExistMess': er[key]});
             });
           }
           return;
         }
       }
     })
+  }
+
+  getErrors(key :String) {
+    if(this.categoryForm && key){
+      if(key=="code" && this.categoryForm.controls['code'].errors &&
+        (this.categoryForm.controls['code'].touched || this.categoryForm.controls['code'].dirty)) {
+        if (this.categoryForm.controls['code'].errors?.['required']) {
+          return this.translateService.instant("categoryComponent.codeRequired");
+        } else if (this.categoryForm.controls['code'].errors?.['alreadyExist'] || this.categoryForm.controls['code'].errors?.['alreadyExistMess']) {
+          return  this.categoryForm.controls['code'].errors?.['alreadyExistMess'];
+        }
+      }
+    }
+    return "";
   }
 }
 

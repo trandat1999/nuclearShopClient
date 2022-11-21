@@ -13,7 +13,6 @@ import {AppSettings} from "../../AppSettings";
 import {AuthGuardService} from "./service/authGuardService";
 import {MaterialModule} from "./material-module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ToastContainer} from "./containers/toast-container.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {NuclearLayoutsModule} from "./layouts/layouts.module";
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
@@ -21,9 +20,9 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {MatPaginatorIntl} from "@angular/material/paginator";
 import {CustomMatPaginator} from "./components/CustomMatPage";
-import {NgHttpLoaderModule} from "ng-http-loader";
 import {NgxSpinnerModule} from "ngx-spinner";
-import {color} from "chart.js/types/helpers";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {ToastrModule} from "ngx-toastr";
 export function jwtOptionsFactory(storageService: StorageService){
   return {
     tokenGetter : () =>{
@@ -45,7 +44,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
-    ToastContainer,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +73,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxSpinnerModule.forRoot({
       type : "square-jelly-box"
       }
-    )
+    ),
+    NgxMatSelectSearchModule,
+    ToastrModule.forRoot({
+      timeOut: 6000,
+      positionClass: 'toast-top-right',
+      closeButton : true,
+      progressBar : true,
+      progressAnimation : "decreasing",
+      enableHtml : true,
+      tapToDismiss : true,
+    })
   ],
   providers: [authInterceptorProviders,AuthGuardService,{
     provide: PERFECT_SCROLLBAR_CONFIG,

@@ -1,7 +1,7 @@
 import {Injectable, NgZone} from "@angular/core";
 import {Router} from "@angular/router";
 import {StorageService} from "./storage.service";
-import {ToastService} from "./toast-service";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class AutoLogoutService {
     private router: Router,
     private ngZone: NgZone,
     private storage : StorageService,
-    private toastService: ToastService
+    private toast: ToastrService
   ) {
     if(this.isUserLoggedIn()){
       this.isLogin=true;
@@ -77,7 +77,7 @@ export class AutoLogoutService {
     this.ngZone.run(() => {
       if (this.checkOutTime() && this.isLogin && !this.isOutTime) {
         this.isOutTime = true;
-        this.toastService.showDanger("Bạn đã không hoạt động trong thời gian dài hệ thống sẽ đăng xuất sau 10 giây","Cảnh báo");
+        this.toast.warning("Bạn đã không hoạt động trong thời gian dài hệ thống sẽ đăng xuất sau 10 giây","Cảnh báo");
         setTimeout(()=>{
           if (this.checkOutTime() && this.isLogin){
             localStorage.clear();

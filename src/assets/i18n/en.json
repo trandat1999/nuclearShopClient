@@ -7,7 +7,14 @@
     "close" : "Close",
     "create" : "Create",
     "update" : "Update",
-    "loading" : "Loading"
+    "loading" : "Loading",
+    "ok" : "Ok",
+    "save" : "Save",
+    "noEntriesFound": "No Entries Found",
+    "search" : "Search",
+    "none" : "None",
+    "success" : "Success",
+    "notification" : "Notification"
   },
   "loginComponent":{
     "username":"username",
