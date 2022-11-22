@@ -6,8 +6,10 @@ export interface BaseResponse{
 }
 
 export interface ErrorResponse{
-  body : any;
+  errors : any;
   message : string;
   status : string;
   code : number;
+  timestamp: any;
+  path : string;
 }

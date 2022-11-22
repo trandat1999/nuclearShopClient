@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CategoryComponent, DialogCreate} from './category.component';
+import {CategoryComponent, CategoryDialogDeleteConfirm, DialogCreate} from './category.component';
 import {CategoryRoutingModule} from "./category-routing.module";
 import {MaterialModule} from "../../material-module";
 import {TranslateModule} from "@ngx-translate/core";
@@ -9,7 +9,7 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 
 @NgModule({
   declarations: [
-    CategoryComponent,DialogCreate
+    CategoryComponent,DialogCreate,CategoryDialogDeleteConfirm
   ],
     imports: [
         CommonModule, CategoryRoutingModule, MaterialModule, TranslateModule, FormsModule, ReactiveFormsModule, NgxMatSelectSearchModule

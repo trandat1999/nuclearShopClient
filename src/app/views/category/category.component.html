@@ -1,5 +1,5 @@
 <div class="col-12 col-md-12 col-lg-12">
-  <mat-card class="mat-elevation-z1">
+  <mat-card>
     <mat-card-header>
       <mat-card-subtitle></mat-card-subtitle>
       <mat-card-title>{{'categoryComponent.title' | translate}}</mat-card-title>
@@ -19,11 +19,14 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row mat-elevation-z8">
+      <div class="row">
         <table mat-table [dataSource]="categories" class="border" >
           <ng-container matColumnDef="action">
             <th class="fw-bold" mat-header-cell *matHeaderCellDef> {{'common.action'|translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            <td mat-cell *matCellDef="let element">
+              <button (click)="update(element)"  mat-icon-button mat-button color="primary"><mat-icon>edit</mat-icon></button>
+              <button (click)="delete(element.id)" mat-icon-button mat-button color="warn"><mat-icon>delete</mat-icon></button>
+            </td>
           </ng-container>
           <ng-container matColumnDef="name">
             <th class="fw-bold" mat-header-cell *matHeaderCellDef> {{'categoryComponent.name' | translate}} </th>
@@ -39,7 +42,7 @@
           </ng-container>
           <ng-container matColumnDef="parent">
             <th class="fw-bold" mat-header-cell *matHeaderCellDef> {{'categoryComponent.parent' | translate}} </th>
-            <td mat-cell *matCellDef="let element"> {{element.parentId}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.parentName}} </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

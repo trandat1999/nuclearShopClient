@@ -14,7 +14,11 @@
     "search" : "Search",
     "none" : "None",
     "success" : "Success",
-    "notification" : "Notification"
+    "notification" : "Notification",
+    "confirmDelete" : "Confirm delete?",
+    "deleteSuccess" : "Delete Successfully",
+    "error" : "Error",
+    "commonError" : "An error occurred, please try again later"
   },
   "loginComponent":{
     "username":"username",

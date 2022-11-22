@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <p>
+    {{'common.confirmDelete'|translate}}
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="warn" (click)="onNoClick()">
+    <mat-icon>close</mat-icon>
+    {{'common.close' |translate}}
+  </button>
+  <button mat-raised-button color="primary" (click)="confirmDelete()" mat-button>
+    <mat-icon>done</mat-icon>
+    {{'common.delete'| translate}}</button>
+</mat-dialog-actions>

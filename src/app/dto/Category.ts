@@ -4,4 +4,5 @@ export class Category {
   description: string | undefined
   id : number| undefined
   parentId: number| undefined
+  parentName : string| undefined
 }

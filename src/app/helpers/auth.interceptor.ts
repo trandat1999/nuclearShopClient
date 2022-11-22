@@ -8,6 +8,8 @@ import {AuthService} from "../service/auth.service";
 import { Router } from '@angular/router';
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {LoginResponse} from "../dto/AuthRequest.class";
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 const TOKEN_HEADER_KEY = 'Authorization';       // for Spring Boot back-end
 
@@ -17,7 +19,9 @@ export class AuthInterceptor implements HttpInterceptor {
     private storageService: StorageService,
     private authService: AuthService,
     private router: Router,
-    private jwtHelper : JwtHelperService
+    private jwtHelper : JwtHelperService,
+    private toast: ToastrService,
+    private translate : TranslateService
   ) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if(this.storageService.getLanguage()){
@@ -43,7 +47,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
       if (this.storageService.getUsername() && this.storageService.getRefreshToken()) {
-        return this.authService.refreshToken(this.storageService.getUsername(),this.storageService.getRefreshToken()).pipe(
+        return this.authService.refreshToken(this.storageService.getUsername(),this.storageService.getRefreshToken())
+          .pipe(
           switchMap((data) => {
             let loginResponse = data as LoginResponse;
             this.storageService.saveToken(loginResponse);
@@ -53,10 +58,13 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(req);
           }),
           catchError((error) => {
+            if(error && error.error && error.error.message){
+              this.toast.error(error.error.message, this.translate.instant("common.error"));
+            }
+            this.storageService.signOut();
             this.router.navigate(['/login']);
-            return throwError(() => error);
-          })
-        );
+            return next.handle(request);
+          }))
       }
     this.router.navigate(['/login']);
     return next.handle(request);
