@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatSidenav} from "@angular/material/sidenav";
+import {TranslateConfigService} from "../../service/translate.service";
+import {StorageService} from "../../service/storage.service";
 
 @Component({
   selector: 'app-default-header',
@@ -8,10 +9,29 @@ import {MatSidenav} from "@angular/material/sidenav";
 })
 export class DefaultHeaderComponent implements OnInit {
 
-  constructor() { }
+  currentLanguage: string = "";
+  languages : language[] = [{value: "en", name: "English"}, {value: "vi", name: "Vietnamese"}];
+  constructor(
+    private translateService: TranslateConfigService,
+    private localStorage : StorageService,) {
+    this.currentLanguage = localStorage.getLanguage();
+  }
 
   @Input() sidenav : any
   ngOnInit(): void {
+    this.currentLanguage = this.localStorage.getLanguage();
   }
 
+  changeLanguage(language : string){
+    this.currentLanguage= language;
+    this.translateService.changeLanguage(this.currentLanguage);
+  }
+
+  logout(){
+  }
+}
+
+export interface language{
+  value: string;
+  name: string
 }

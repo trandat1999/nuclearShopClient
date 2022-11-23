@@ -16,4 +16,8 @@ export class TranslateConfigService {
     this.localStorage.setLanguage(language);
     this.translate.use(this.localStorage.getLanguage());
   }
+
+  getLanguage(){
+    return this.localStorage.getLanguage();
+  }
 }

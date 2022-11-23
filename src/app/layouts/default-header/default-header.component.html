@@ -3,12 +3,37 @@
     <mat-icon *ngIf="!sidenav?.opened">menu</mat-icon>
     <mat-icon *ngIf="sidenav?.opened">arrow_back</mat-icon>
   </button>
-  <span>My App</span>
+  <span>NuclearShop</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
+  <button mat-icon-button [matMenuTriggerFor]="menuLang">
+    <mat-icon>translate</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
+  <mat-menu #menuLang="matMenu">
+    <button mat-menu-item *ngFor="let item of languages" (click)="changeLanguage(item.value)">
+      <span>{{item.name}}</span>
+    </button>
+  </mat-menu>
+  <button
+    class="matero-toolbar-button matero-avatar-button"
+    mat-button
+    [matMenuTriggerFor]="menuUser"
+  >
+    <img class="matero-avatar" [src]="" width="32" alt="avatar" />
+    <span class="matero-username" fxHide.lt-sm>nameUser</span>
   </button>
+
+  <mat-menu #menuUser="matMenu">
+    <button routerLink="/profile/overview" mat-menu-item>
+      <mat-icon>account_circle</mat-icon>
+      <span>{{ 'user.profile' | translate }}</span>
+    </button>
+    <button routerLink="/profile/settings" mat-menu-item>
+      <mat-icon>settings</mat-icon>
+      <span>{{ 'user.settings' | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>{{ 'user.logout' | translate }}</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>

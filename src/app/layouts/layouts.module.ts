@@ -11,6 +11,8 @@ import {GridModule} from "@coreui/angular";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgHttpLoaderModule} from "ng-http-loader";
+import {FormsModule} from "@angular/forms";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 
@@ -21,15 +23,17 @@ import {NgHttpLoaderModule} from "ng-http-loader";
     DefaultHeaderComponent,
     DefaultSidenavComponent
   ],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        PerfectScrollbarModule,
-        RouterModule,
-        GridModule,
-        FontAwesomeModule,
-        NgbDropdownModule,
-        NgHttpLoaderModule
-    ]
+  imports: [
+    CommonModule,
+    MaterialModule,
+    PerfectScrollbarModule,
+    RouterModule,
+    GridModule,
+    FontAwesomeModule,
+    NgbDropdownModule,
+    NgHttpLoaderModule,
+    FormsModule,
+    TranslateModule
+  ]
 })
 export class NuclearLayoutsModule { }

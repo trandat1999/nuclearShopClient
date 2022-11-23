@@ -1,6 +1,6 @@
 app-default-header{
-  position: fixed;
-  top: 0;
+  position: sticky;
+  /*top: 0;*/
   width : 100%;
   z-index: 999;
 }
@@ -10,7 +10,7 @@ app-default-footer{
 mat-sidenav-content{
   border: 0;
   display: flex;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   flex-direction: column;
 }
 mat-sidenav{
@@ -19,8 +19,8 @@ mat-sidenav{
   border:0;
 }
 .content{
-  flex: 1;
+  min-height: 78vh;
 }
 mat-sidenav-container{
-  margin-top: 64px;
+  /*margin-top: 64px;*/
 }

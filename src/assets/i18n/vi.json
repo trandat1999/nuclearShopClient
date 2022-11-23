@@ -1,6 +1,52 @@
 {
-  "loginComponent":{
-    "username":"tài khoản",
-    "password":"mật khẩu"
+  "common": {
+    "action": "Action",
+    "edit": "Edit",
+    "delete": "Delete",
+    "done": "Done",
+    "close": "Close",
+    "create": "Create",
+    "update": "Update",
+    "loading": "Loading",
+    "ok": "Ok",
+    "save": "Save",
+    "noEntriesFound": "No Entries Found",
+    "search": "Search",
+    "none": "None",
+    "success": "Success",
+    "notification": "Notification",
+    "confirmDelete": "Confirm delete?",
+    "deleteSuccess": "Delete Successfully",
+    "error": "Error",
+    "commonError": "An error occurred, please try again later"
+  },
+  "loginComponent": {
+    "username": "username",
+    "password": "password"
+  },
+  "categoryComponent": {
+    "title": "Category",
+    "name": "Name",
+    "inputName": "Please enter name for search",
+    "code": "Code",
+    "inputCode": "Please enter code for search",
+    "parent": "Parent",
+    "description": "Description",
+    "codeRequired": "Code is required",
+    "nameRequired": "Name is required"
+  },
+  "paginator": {
+    "itemsPerPageLabel": "items per page",
+    "nextPageLabel": "Next page en",
+    "previousPageLabel": "Previous page"
+  },
+  "navigation": {
+    "dashboard": "Trang chủ",
+    "category": "Thể loại"
+  },
+  "user" : {
+    "profile": "User",
+    "settings": "Settings",
+    "logout": "Logout"
   }
 }

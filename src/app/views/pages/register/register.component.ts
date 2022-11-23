@@ -48,12 +48,10 @@ export class RegisterComponent implements OnInit {
           this.responseSuccess = data as BaseResponse;
           // this._router.navigateByUrl("/login");
         }else{
-          if(data && data.body && data.body.length){
-            for(let er of data.body){
-              Object.keys(er).forEach(key => {
+          if(data && data.body){
+              Object.keys(data.body).forEach(key => {
                 this.formRegister.controls[key].setErrors({'alreadyExist': true});
               });
-            }
             return;
           }
         }

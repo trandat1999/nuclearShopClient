@@ -63,4 +63,11 @@ export class AuthService {
         }
       ));
   }
+
+  logout(username: string|null, refresh: string|null) : Observable<any> {
+    return this.http.post(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/auth/logout", {
+      username: username,refreshToken: refresh
+    });
+  }
+
 }

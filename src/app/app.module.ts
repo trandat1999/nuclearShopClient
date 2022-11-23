@@ -23,6 +23,7 @@ import {CustomMatPaginator} from "./components/CustomMatPage";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {ToastrModule} from "ngx-toastr";
+import {A} from "@angular/cdk/keycodes";
 export function jwtOptionsFactory(storageService: StorageService){
   return {
     tokenGetter : () =>{

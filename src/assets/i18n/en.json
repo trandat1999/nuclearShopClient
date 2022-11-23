@@ -1,43 +1,52 @@
 {
   "common": {
     "action": "Action",
-    "edit" : "Edit",
-    "delete" : "Delete",
-    "done" : "Done",
-    "close" : "Close",
-    "create" : "Create",
-    "update" : "Update",
-    "loading" : "Loading",
-    "ok" : "Ok",
-    "save" : "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "done": "Done",
+    "close": "Close",
+    "create": "Create",
+    "update": "Update",
+    "loading": "Loading",
+    "ok": "Ok",
+    "save": "Save",
     "noEntriesFound": "No Entries Found",
-    "search" : "Search",
-    "none" : "None",
-    "success" : "Success",
-    "notification" : "Notification",
-    "confirmDelete" : "Confirm delete?",
-    "deleteSuccess" : "Delete Successfully",
-    "error" : "Error",
-    "commonError" : "An error occurred, please try again later"
+    "search": "Search",
+    "none": "None",
+    "success": "Success",
+    "notification": "Notification",
+    "confirmDelete": "Confirm delete?",
+    "deleteSuccess": "Delete Successfully",
+    "error": "Error",
+    "commonError": "An error occurred, please try again later"
   },
-  "loginComponent":{
-    "username":"username",
-    "password":"password"
+  "loginComponent": {
+    "username": "username",
+    "password": "password"
   },
-  "categoryComponent" : {
+  "categoryComponent": {
     "title": "Category",
     "name": "Name",
-    "inputName":"Please enter name for search",
+    "inputName": "Please enter name for search",
     "code": "Code",
-    "inputCode":"Please enter code for search",
+    "inputCode": "Please enter code for search",
     "parent": "Parent",
-    "description" : "Description",
-    "codeRequired" : "Code is required",
-    "nameRequired" : "Name is required"
+    "description": "Description",
+    "codeRequired": "Code is required",
+    "nameRequired": "Name is required"
   },
   "paginator": {
     "itemsPerPageLabel": "items per page",
     "nextPageLabel": "Next page en",
     "previousPageLabel": "Previous page"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "category": "Category"
+  },
+  "user" : {
+    "profile": "User",
+    "settings": "Settings",
+    "logout": "Logout"
   }
 }

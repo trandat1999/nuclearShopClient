@@ -3,7 +3,6 @@ import {Subject} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../service/auth.service";
 import {LoginRequest} from "../../../dto/AuthRequest.class";
-import {TranslateConfigService} from "../../../service/translate.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

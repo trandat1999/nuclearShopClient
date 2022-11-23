@@ -13,6 +13,7 @@ export class DefaultSidenavComponent implements OnInit {
   }
   public perfectScrollbarConfig = {
     suppressScrollX: true,
+    suppressScrollY : true
   };
 
 

@@ -207,7 +207,7 @@ export class DialogCreate implements OnInit {
 
   onSubmit(){
     this.spinner.show();
-    this.categoryService.save(this.categoryForm.value).pipe(map(
+    this.categoryService.saveOrUpdate(this.categoryForm.value).pipe(map(
       (data) =>{
         this.spinner.hide();
         return data;
@@ -224,13 +224,14 @@ export class DialogCreate implements OnInit {
       }
     )).subscribe(data => {
       this.spinner.hide();
-      if(data && data.code === 200){
+      let rs = data as BaseResponse
+      if(rs && rs.code === 200){
         this.toast.success(this.translateService.instant("common.success"),this.translateService.instant("common.notification"));
         this.dialogRef.close(1);
       }else{
-        if(data && data.body && data.body){
-            Object.keys(data.body).forEach(key => {
-              this.categoryForm.controls[key].setErrors({'alreadyExist': true,'alreadyExistMess': data.body[key]});
+        if(rs && rs.body && rs.body){
+            Object.keys(rs.body).forEach(key => {
+              this.categoryForm.controls[key].setErrors({'alreadyExist': true,'alreadyExistMess': rs.body[key]});
             });
           return;
         }
