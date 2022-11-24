@@ -1,12 +1,56 @@
-<perfect-scrollbar [config]="perfectScrollbarConfig">
-  <mat-nav-list>
-    <mat-list-item [routerLink]="['/dashboard']" [routerLinkActive]="['active']">
-      <mat-icon matListIcon>home</mat-icon>
-      <a matLine>{{'navigation.dashboard' | translate}}</a>
+<!--<perfect-scrollbar [config]="perfectScrollbarConfig">-->
+<!--  <mat-nav-list>-->
+<!--    <mat-list-item [routerLink]="['/dashboard']" [routerLinkActive]="['active']">-->
+<!--      <mat-icon matListIcon>home</mat-icon>-->
+<!--      <a matLine>{{'navigation.dashboard' | translate}}</a>-->
+<!--    </mat-list-item>-->
+<!--    <mat-list-item [routerLink]="['/category']" [routerLinkActive]="['active']">-->
+<!--      <mat-icon matListIcon>widgets</mat-icon>-->
+<!--      <a matLine>{{'navigation.category' | translate}}</a>-->
+<!--    </mat-list-item>-->
+<!--    <mat-expansion-panel [class.mat-elevation-z0]="true">-->
+<!--      <mat-expansion-panel-header>-->
+<!--        Frameworks-->
+<!--      </mat-expansion-panel-header>-->
+<!--      <mat-nav-list>-->
+<!--        <a mat-list-item routerLink="#">Spring</a>-->
+<!--        <a mat-list-item routerLink="#">Hibernate</a>-->
+<!--        <a mat-list-item routerLink="#">Struts</a>-->
+<!--      </mat-nav-list>-->
+<!--    </mat-expansion-panel>-->
+<!--  </mat-nav-list>-->
+  <ng-container [ngTemplateOutlet]="rootMenu"
+                [ngTemplateOutletContext]="{menu: menuList, level: 0}">
+  </ng-container>
+
+  <ng-template #rootMenu let-menu="menu" let-level="level">
+    <mat-nav-list class="side-navnar">
+      <ng-container *ngFor="let menu of menuList ; index as i;">
+        <ng-container [ngTemplateOutlet]="menu.children ?  childMenu : parentMenu"
+                      [ngTemplateOutletContext]="{menu:menu, level: level, index : i}">
+        </ng-container>
+      </ng-container>
+    </mat-nav-list>
+  </ng-template>
+  <ng-template #parentMenu let-menu="menu"  let-level="level">
+    <mat-list-item class="level-{{level}}" [routerLink]="menu.routerLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+        true}">
+      <mat-icon>{{menu.icon}}</mat-icon> {{menu.text}}
     </mat-list-item>
-    <mat-list-item [routerLink]="['/category']" [routerLinkActive]="['active']">
-      <mat-icon matListIcon>home</mat-icon>
-      <a matLine>{{'navigation.category' | translate}}</a>
-    </mat-list-item>
-  </mat-nav-list>
-</perfect-scrollbar>
+  </ng-template>
+
+  <ng-template #childMenu let-menu="menu" let-index="index" let-level="level">
+      <mat-expansion-panel (opened)="setOpend(menu.text)"
+                           [expanded]="displayOpen(menu.text)"
+                           class="level-{{level}}" [class.mat-elevation-z0]="true">
+        <mat-expansion-panel-header>
+          <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>{{menu.text}}
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let submenu of menu.children ; index as i;">
+          <ng-container [ngTemplateOutlet]="submenu.children ?  childMenu : parentMenu"
+                        [ngTemplateOutletContext]="{menu:submenu, level : level+1, index : i}">
+          </ng-container>
+        </ng-container>
+      </mat-expansion-panel>
+  </ng-template>
+<!--</perfect-scrollbar>-->

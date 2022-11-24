@@ -29,22 +29,22 @@ const routes: Routes = [
         path: 'dashboard',
         loadChildren: () =>
           import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
-      }
+      },
+      {
+        path: '404',
+        component: Page404Component,
+        data: {
+          title: 'Page 404'
+        }
+      },
+      {
+        path: '500',
+        component: Page500Component,
+        data: {
+          title: 'Page 500'
+        }
+      },
     ]
-  },
-  {
-    path: '404',
-    component: Page404Component,
-    data: {
-      title: 'Page 404'
-    }
-  },
-  {
-    path: '500',
-    component: Page500Component,
-    data: {
-      title: 'Page 500'
-    }
   },
   {
     path: 'login',

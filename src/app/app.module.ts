@@ -24,6 +24,7 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {ToastrModule} from "ngx-toastr";
 import {A} from "@angular/cdk/keycodes";
+import {MaterialExtensionsModule} from "./material-extensions.module";
 export function jwtOptionsFactory(storageService: StorageService){
   return {
     tokenGetter : () =>{
@@ -60,6 +61,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       }
     }),
     MaterialModule,
+    MaterialExtensionsModule,
     NgbModule,
     FontAwesomeModule,
     NuclearLayoutsModule,

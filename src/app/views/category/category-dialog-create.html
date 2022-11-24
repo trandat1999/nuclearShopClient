@@ -22,6 +22,9 @@
     </mat-form-field>
     <mat-form-field class="col-md-6" appearance="outline">
       <mat-label>{{'categoryComponent.parent' | translate}}</mat-label>
+<!--      <mtx-select formControlName="parentId" [items]="categoryParent" bindLabel="name" bindValue="id"-->
+<!--                  placeholder="{{'categoryComponent.parent' | translate}}">-->
+<!--      </mtx-select>-->
       <mat-select formControlName="parentId" placeholder="{{'categoryComponent.parent' | translate}}" #singleSelect>
         <mat-option>
           <ngx-mat-select-search placeholderLabel="{{'common.search' | translate}}"

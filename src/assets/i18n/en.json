@@ -18,7 +18,10 @@
     "confirmDelete": "Confirm delete?",
     "deleteSuccess": "Delete Successfully",
     "error": "Error",
-    "commonError": "An error occurred, please try again later"
+    "commonError": "An error occurred, please try again later",
+    "backToHome" : "Back to Home",
+    "404Title": "Page Not Found",
+    "404Message": "This is not the web page you are looking for."
   },
   "loginComponent": {
     "username": "username",
