@@ -14,80 +14,29 @@ export class DefaultSidenavComponent implements OnInit {
   menuList : IMenu[] = [
     {
       text : this.translate.instant("navigation.dashboard"),
-      icon : "dashboard",
+      icon : "home",
       routerLink: "/dashboard",
       children : null
     },
     {
       text : this.translate.instant("navigation.category"),
-      icon : "dashboard",
+      icon : "category",
       routerLink: "/category",
       children : null
     },
     {
-      text : "dashboard1",
-      icon : "dashboard",
-      routerLink: "/dashboard",
+      text : this.translate.instant("navigation.profile"),
+      icon : "person",
+      routerLink: "",
       children : [
         {
-          text : "dashboard1.1",
-          icon : "dashboard",
-          routerLink: "/dashboard",
-          children : null
-        },
-        {
-          text : "dashboard1.2",
-          icon : "dashboard",
-          routerLink: "/dashboard",
+          text : this.translate.instant("navigation.settings"),
+          icon : "settings",
+          routerLink: "/profile/settings",
           children : null
         },
       ]
     },
-    {
-      text : "dashboard2",
-      icon : "dashboard",
-      routerLink: "/dashboard",
-      children : [
-        {
-          text : "dashboard2.1",
-          icon : "dashboard",
-          routerLink: "/dashboard",
-          children : [
-            {
-              text : "dashboard2.1.1",
-              icon : "dashboard",
-              routerLink: "/dashboard",
-              children : null
-            },
-            {
-              text : "dashboard2.1.2",
-              icon : "dashboard",
-              routerLink: "/dashboard",
-              children : null
-            },
-          ]
-        },
-        {
-          text : "dashboard2.2",
-          icon : "dashboard",
-          routerLink: "/dashboard",
-          children : [
-            {
-              text : "dashboard2.2.1",
-              icon : "dashboard",
-              routerLink: "/dashboard",
-              children : null
-            },
-            {
-              text : "dashboard2.2.2",
-              icon : "dashboard",
-              routerLink: "/dashboard",
-              children : null
-            },
-          ]
-        },
-      ]
-    }
   ]
 
   constructor(
@@ -105,7 +54,6 @@ export class DefaultSidenavComponent implements OnInit {
     this.textExpend = text;
     this.listText = [];
     this.displayExpanded(text,this.menuList);
-    console.log(this.listText);
   }
 
   displayOpen(text :string): boolean {

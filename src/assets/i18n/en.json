@@ -45,11 +45,17 @@
   },
   "navigation": {
     "dashboard": "Dashboard",
-    "category": "Category"
+    "category": "Category",
+    "profile" : "Profile",
+    "settings": "Settings"
   },
   "user" : {
-    "profile": "User",
+    "profile": "Profile",
     "settings": "Settings",
     "logout": "Logout"
+  },
+  "profile" : {
+    "profile": "Profile",
+    "settings": "Settings"
   }
 }

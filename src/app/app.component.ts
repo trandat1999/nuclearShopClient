@@ -21,12 +21,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(!window.location.href.includes("/login") && !window.location.href.includes("/register")
-      && !window.location.href.includes("/404") && !window.location.href.includes("/500")) {
-      this.authService.currentUser().subscribe(user => {
-
-      })
-    }
   }
   public perfectScrollbarConfig = {
     suppressScrollX: true,
