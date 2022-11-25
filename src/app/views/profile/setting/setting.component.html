@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="showComponent">
   <mat-card-header>
     <mat-card-title>
       {{'profile.profile' | translate}}
@@ -13,16 +13,87 @@
         <mat-card>
           <mat-card-content>
             <div class="text-center">
-              <img alt="Photo of a Shiba Inu" src="https://material.angular.io/assets/img/examples/shiba2.jpg" mat-card-avatar>
+              <label class="hoverable" for="fileInput">
+                <img alt="avatar-settings" [src]="'./assets/images/no-avatar.jpg'">
+                <div class="hover-text"><mat-icon>add_a_photo</mat-icon></div>
+                <div class="background"></div>
+              </label>
+              <br/>
+              <input id="fileInput" type='file' (change)="onSelectFile($event)">
+              <h4 class="fw-bold">{{formEdit.controls['firstName'].value}} {{formEdit.controls['lastName'].value}}</h4>
             </div>
           </mat-card-content>
 
         </mat-card>
       </div>
       <div class="col-md-9 col-lg-9 col-xl-9">
+        <form [formGroup]="formEdit">
         <mat-card >
+          <mat-card-title>{{'profile.edit' | translate}}</mat-card-title>
+          <mat-card-content>
 
+              <div class="row">
+                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+                  <mat-label>{{'profile.firstName' | translate}}</mat-label>
+                  <input matInput formControlName="firstName" type="text">
+                  <mat-error>{{'validation.required' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+                  <mat-label>{{'profile.lastName' | translate}}</mat-label>
+                  <input matInput formControlName="lastName" type="text">
+                  <mat-error>{{'validation.required' | translate}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+                  <mat-label>{{'profile.gender' | translate}}</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                      {{gender.name | translate}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>{{'validation.required' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+                  <mat-label>{{'profile.birthDate' | translate}}</mat-label>
+                  <input matInput formControlName="birthDate" [matDatepicker]="picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error>{{'validation.required' | translate}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+                  <mat-label>{{'profile.phoneNumber' | translate}}</mat-label>
+                  <input matInput formControlName="phoneNumber" type="text">
+                  <mat-error>{{'validation.invalid' | translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+                  <mat-label>{{'profile.email' | translate}}</mat-label>
+                  <input matInput formControlName="email" type="text">
+                  <mat-error>{{'validation.required' | translate}}</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field appearance="outline" class="col-md-4 col-xl-6 col-lg-6">
+                  <mat-label>{{'profile.idNumber' | translate}}</mat-label>
+                  <input matInput formControlName="idNumber" type="text">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+                  <mat-label>{{'profile.idNumberIssueDate' | translate}}</mat-label>
+                  <input matInput formControlName="idNumberIssueDate" type="text">
+                </mat-form-field>
+              </div>
+
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button mat-raised-button (click)="onSubmit()">
+              <mat-icon>done</mat-icon>
+              <mat-label>{{'common.save'|translate}}</mat-label>
+            </button>
+          </mat-card-actions>
         </mat-card>
+        </form>
       </div>
     </div>
   </mat-card-content>

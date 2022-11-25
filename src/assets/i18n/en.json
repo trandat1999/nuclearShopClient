@@ -56,6 +56,15 @@
   },
   "profile" : {
     "profile": "Profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "edit": "Edit Profile"
+  },
+  "gender" : {
+    "male": "Male",
+    "female": "Female",
+    "unknown": "Unknown"
+  },
+  "validation" : {
+    "required" : "Field is required"
   }
 }

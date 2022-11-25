@@ -13,14 +13,13 @@
       <span>{{item.name}}</span>
     </button>
   </mat-menu>
-  <button
-    class="matero-toolbar-button matero-avatar-button"
+  <mat-card style="display: none"></mat-card>
+  <button *ngIf="visibleData"
     mat-button
     [matMenuTriggerFor]="menuUser"
   >
-    <img alt="avatar" src="https://material.angular.io/assets/img/examples/shiba2.jpg" mat-card-avatar>
-<!--    <mat-icon>person</mat-icon>-->
-    <span class="matero-username">nameUser</span>
+    <img *ngIf="!currentUser || !currentUser.person || !currentUser.person.photoFile || !currentUser.person.photoFile.downloadUrl" alt="avatar" src="./assets/images/no-avatar.jpg" mat-card-avatar>
+    <span> {{currentUser.person.firstName}} {{currentUser.person.lastName}}</span>
   </button>
 
   <mat-menu #menuUser="matMenu">

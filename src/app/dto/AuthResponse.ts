@@ -17,4 +17,10 @@ export interface Role {
 export interface Person {
   lastName : string;
   firstName : string;
+  photoFile : Attachment;
 }
+
+export interface Attachment {
+  downloadUrl : string;
+}
+

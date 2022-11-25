@@ -13,15 +13,15 @@
     </mat-nav-list>
   </ng-template>
   <ng-template #parentMenu let-menu="menu"  let-level="level">
-    <mat-list-item (click)="setOpend(menu.text)"  class="level-{{level}}" [routerLink]="menu.routerLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+    <mat-list-item (click)="setOpenRouter(menu.routerLink)"  class="level-{{level}}" [routerLink]="menu.routerLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
         true}">
       <mat-icon>{{menu.icon}}</mat-icon> {{menu.text}}
     </mat-list-item>
   </ng-template>
 
   <ng-template #childMenu let-menu="menu" let-level="level">
-      <mat-expansion-panel  (opened)="setOpend(menu.text)"
-                           [expanded]="displayOpen(menu.text)"
+      <mat-expansion-panel  (opened)="setOpenRouter(menu.routerLink)"
+                           [expanded]="displayOpenRouter(menu.routerLink)"
                            class="level-{{level}} " [class.mat-elevation-z0]="true">
         <mat-expansion-panel-header class="specific-class">
           <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>{{menu.text}}

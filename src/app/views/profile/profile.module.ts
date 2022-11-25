@@ -5,7 +5,8 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { SettingComponent } from './setting/setting.component';
 import {MaterialModule} from "../../material-module";
 import {TranslateModule} from "@ngx-translate/core";
-
+import {ReactiveFormsModule} from "@angular/forms";
+import {MaterialExtensionsModule} from "../../material-extensions.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import {TranslateModule} from "@ngx-translate/core";
     CommonModule,
     ProfileRoutingModule,
     MaterialModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule,
+    MaterialExtensionsModule
   ]
 })
 export class ProfileModule { }

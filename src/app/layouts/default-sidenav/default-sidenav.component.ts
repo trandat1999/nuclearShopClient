@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-default-sidenav',
@@ -8,9 +8,8 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
   styleUrls: ['./default-sidenav.component.css']
 })
 export class DefaultSidenavComponent implements OnInit {
-  textExpend: string = "";
-  listText: string[] = [];
-
+  currentRoute : string = this.router.url;
+  listTextRouter: string[] = [this.currentRoute];
   menuList : IMenu[] = [
     {
       text : this.translate.instant("navigation.dashboard"),
@@ -27,7 +26,7 @@ export class DefaultSidenavComponent implements OnInit {
     {
       text : this.translate.instant("navigation.profile"),
       icon : "person",
-      routerLink: "",
+      routerLink: "/profile",
       children : [
         {
           text : this.translate.instant("navigation.settings"),
@@ -40,47 +39,51 @@ export class DefaultSidenavComponent implements OnInit {
   ]
 
   constructor(
-    private translate : TranslateService
+    private translate : TranslateService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
+    this.setOpenRouter(this.currentRoute)
+    this.router.events.subscribe(evt => {
+      if (evt instanceof NavigationEnd) {
+        this.currentRoute = evt.url;
+        this.listTextRouter = [];
+        this.displayExpandedRouter(this.currentRoute,this.menuList);
+      }
+    });
   }
   public perfectScrollbarConfig = {
     suppressScrollX: true,
     suppressScrollY : true
   };
 
-  setOpend(text:string): void {
-    this.textExpend = text;
-    this.listText = [];
-    this.displayExpanded(text,this.menuList);
-  }
-
-  displayOpen(text :string): boolean {
-    return this.listText.includes(text);
-  }
-
-  displayExpanded(text: string, list : IMenu[] | null): boolean {
+  displayExpandedRouter(text: string, list : IMenu[] | null): boolean {
     if(list){
       for(let i = 0; i < list.length; i++) {
-        if(list[i].text === text || this.displayExpanded(text, list[i].children)){
-          this.listText.push(list[i].text);
+        if(list[i].routerLink === text || this.displayExpandedRouter(text, list[i].children)){
+          this.listTextRouter.push(list[i].routerLink);
           return true;
         }
-        // else{
-        //   if(list[i].children){
-        //     return  this.displayExpanded(text, list[i].children);
-        //   }
-        // }
       }
     }
     return false;
+  }
+
+  displayOpenRouter(text :string): boolean {
+    return this.listTextRouter.includes(text);
+  }
+
+  setOpenRouter(text:string): void {
+    this.currentRoute = text;
+    this.listTextRouter = [];
+    this.displayExpandedRouter(text,this.menuList);
   }
 }
 
 export interface IMenu {
   text: string,
   icon: string,
-  routerLink?: string;
+  routerLink: string;
   children: IMenu[] | null
 }

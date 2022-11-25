@@ -46,22 +46,8 @@ export class AuthService {
   }
 
   currentUser() {
-    return this.http.get(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/v1/user/current")
-      .pipe(map(
-        (data) =>{
-          let baseResponse = data as BaseResponse
-          if(baseResponse && baseResponse.code === 200 && baseResponse.body) {
-            this.storageService.saveUser(baseResponse.body as CurrentUser);
-            return baseResponse.body as CurrentUser;
-          }
-          return false;
-        }
-      ),catchError(
-        (error) => {
-          this.storageService.signOut();
-          return of(false);
-        }
-      ));
+    return this.http.get(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/v1/user/current");
+
   }
 
   logout(username: string|null, refresh: string|null) : Observable<any> {
