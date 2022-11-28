@@ -19,9 +19,10 @@
     "deleteSuccess": "Delete Successfully",
     "error": "Error",
     "commonError": "An error occurred, please try again later",
-    "backToHome" : "Back to Home",
+    "backToHome": "Back to Home",
     "404Title": "Page Not Found",
-    "404Message": "This is not the web page you are looking for."
+    "404Message": "This is not the web page you are looking for.",
+    "updateSuccess": "Update successfully"
   },
   "loginComponent": {
     "username": "username",
@@ -40,31 +41,55 @@
   },
   "paginator": {
     "itemsPerPageLabel": "items per page",
-    "nextPageLabel": "Next page en",
-    "previousPageLabel": "Previous page"
+    "nextPageLabel": "Next page",
+    "previousPageLabel": "Previous page",
+    "lastPageLabel": "Last page",
+    "firstPageLabel": "first page"
   },
   "navigation": {
     "dashboard": "Dashboard",
     "category": "Category",
-    "profile" : "Profile",
-    "settings": "Settings"
-  },
-  "user" : {
     "profile": "Profile",
     "settings": "Settings",
-    "logout": "Logout"
+    "manage": "Manage",
+    "users": "Users",
+    "roles": "Role"
   },
-  "profile" : {
+  "user": {
     "profile": "Profile",
     "settings": "Settings",
-    "edit": "Edit Profile"
+    "logout": "Logout",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email"
   },
-  "gender" : {
+  "profile": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "edit": "Edit Profile",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "gender": "Gender",
+    "birthDate": "Birth Date",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "idNumber": "Id Number",
+    "idNumberIssueDate": "Id Issue Date"
+  },
+  "gender": {
     "male": "Male",
     "female": "Female",
     "unknown": "Unknown"
   },
-  "validation" : {
-    "required" : "Field is required"
+  "validation": {
+    "required": "Field is required"
+  },
+  "person": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email" : "Email"
+  },
+  "role": {
+    "name": "Roles"
   }
 }

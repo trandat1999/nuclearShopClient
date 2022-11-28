@@ -36,6 +36,11 @@ const routes: Routes = [
           import('./views/profile/profile.module').then((m) => m.ProfileModule)
       },
       {
+        path: 'manage',
+        loadChildren: () =>
+          import('./views/manage/manage.module').then((m) => m.ManageModule)
+      },
+      {
         path: '404',
         component: Page404Component,
         data: {

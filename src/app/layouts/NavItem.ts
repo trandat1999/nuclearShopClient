@@ -1,0 +1,53 @@
+export interface IMenu {
+  text: string,
+  icon: string,
+  routerLink: string;
+  children: IMenu[] | null
+}
+
+export const navItem : IMenu[] = [
+  {
+    text : "navigation.dashboard",
+    icon : "home",
+    routerLink: "/dashboard",
+    children : null
+  },
+  {
+    text : "navigation.category",
+    icon : "category",
+    routerLink: "/category",
+    children : null
+  },
+  {
+    text : "navigation.profile",
+    icon : "person",
+    routerLink: "/profile",
+    children : [
+      {
+        text : "navigation.settings",
+        icon : "settings",
+        routerLink: "/profile/settings",
+        children : null
+      },
+    ]
+  },
+  {
+    text : "navigation.manage",
+    icon : "people",
+    routerLink: "/manage",
+    children : [
+      {
+        text : "navigation.users",
+        icon : "supervisor_account",
+        routerLink: "/manage/users",
+        children : null
+      },
+      {
+        text : "navigation.roles",
+        icon : "bubble_chart",
+        routerLink: "/manage/roles",
+        children : null
+      },
+    ]
+  },
+]

@@ -15,7 +15,7 @@
   <ng-template #parentMenu let-menu="menu"  let-level="level">
     <mat-list-item (click)="setOpenRouter(menu.routerLink)"  class="level-{{level}}" [routerLink]="menu.routerLink" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
         true}">
-      <mat-icon>{{menu.icon}}</mat-icon> {{menu.text}}
+      <mat-icon>{{menu.icon}}</mat-icon> {{menu.text | translate}}
     </mat-list-item>
   </ng-template>
 
@@ -24,7 +24,7 @@
                            [expanded]="displayOpenRouter(menu.routerLink)"
                            class="level-{{level}} " [class.mat-elevation-z0]="true">
         <mat-expansion-panel-header class="specific-class">
-          <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>{{menu.text}}
+          <mat-icon mat-list-icon>{{menu.icon}}</mat-icon>{{menu.text | translate}}
         </mat-expansion-panel-header>
         <ng-container *ngFor="let submenu of menu.children ; index as i;">
           <ng-container [ngTemplateOutlet]="submenu.children ?  childMenu : parentMenu"

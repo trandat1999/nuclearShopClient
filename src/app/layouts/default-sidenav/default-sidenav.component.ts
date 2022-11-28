@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import {NavigationEnd, Router} from "@angular/router";
+import {IMenu, navItem} from "../NavItem";
 
 @Component({
   selector: 'app-default-sidenav',
@@ -10,33 +11,7 @@ import {NavigationEnd, Router} from "@angular/router";
 export class DefaultSidenavComponent implements OnInit {
   currentRoute : string = this.router.url;
   listTextRouter: string[] = [this.currentRoute];
-  menuList : IMenu[] = [
-    {
-      text : this.translate.instant("navigation.dashboard"),
-      icon : "home",
-      routerLink: "/dashboard",
-      children : null
-    },
-    {
-      text : this.translate.instant("navigation.category"),
-      icon : "category",
-      routerLink: "/category",
-      children : null
-    },
-    {
-      text : this.translate.instant("navigation.profile"),
-      icon : "person",
-      routerLink: "/profile",
-      children : [
-        {
-          text : this.translate.instant("navigation.settings"),
-          icon : "settings",
-          routerLink: "/profile/settings",
-          children : null
-        },
-      ]
-    },
-  ]
+  menuList = navItem
 
   constructor(
     private translate : TranslateService,
@@ -79,11 +54,4 @@ export class DefaultSidenavComponent implements OnInit {
     this.listTextRouter = [];
     this.displayExpandedRouter(text,this.menuList);
   }
-}
-
-export interface IMenu {
-  text: string,
-  icon: string,
-  routerLink: string;
-  children: IMenu[] | null
 }

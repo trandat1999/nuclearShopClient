@@ -24,3 +24,11 @@ export interface Attachment {
   downloadUrl : string;
 }
 
+export interface UserRequest {
+  username : string;
+  password : string;
+  email : string;
+  person : Person;
+  roles : Role[];
+}
+

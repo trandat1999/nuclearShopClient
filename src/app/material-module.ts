@@ -68,7 +68,6 @@ import {MatTreeModule} from '@angular/material/tree';
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatNativeDateModule,
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,

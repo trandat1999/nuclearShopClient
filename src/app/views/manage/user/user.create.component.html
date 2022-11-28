@@ -1,0 +1,37 @@
+<h2 *ngIf="user.id" mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane"
+    cdkDragHandle>{{'common.update' |translate}}</h2>
+<h2 *ngIf="!user.id" mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane"
+    cdkDragHandle>{{'common.create' |translate}}</h2>
+<form [formGroup]="userForm">
+  <mat-dialog-content class="row">
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'user.username' | translate}}</mat-label>
+      <input matInput formControlName="username" type="text">
+      <mat-error>
+        {{getErrors('username')}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'user.email' | translate}}</mat-label>
+      <input matInput formControlName="email" type="text">
+      <mat-error>
+        {{getErrors('name')}}
+      </mat-error>
+    </mat-form-field>
+    <mat-radio-group class="col-md-6" formControlName="enabled" aria-label="Select an option">
+      <mat-radio-button value="1">Option 1</mat-radio-button>
+      <mat-radio-button value="2">Option 2</mat-radio-button>
+    </mat-radio-group>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+      {{'common.close' |translate}}
+    </button>
+    <button mat-raised-button color="primary" mat-button (click)="onsubmit()">
+      <mat-icon>done</mat-icon>
+      {{'common.save'| translate}}
+    </button>
+  </mat-dialog-actions>
+</form>
+

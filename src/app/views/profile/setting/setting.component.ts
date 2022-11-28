@@ -9,7 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {ProfileService} from "../../../service/profile.service";
 import {Person} from "../../../dto/Profile.class";
 import {Gender} from "../../../dto/Enum.class";
-import { Router } from '@angular/router';
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-setting',
@@ -26,7 +26,7 @@ export class SettingComponent implements OnInit {
     private profileService: ProfileService,
     private toast: ToastrService,
     private translate: TranslateService,
-    private router: Router) {}
+    private spinner: NgxSpinnerService) {}
 
   ngOnInit(): void {
     this.profileService.getProfile().pipe(
@@ -83,7 +83,22 @@ export class SettingComponent implements OnInit {
 
   onSubmit() {
     if(!this.formEdit.errors){
-      console.log(this.formEdit.value);
+      this.spinner.show();
+      this.profileService.updateProfile(this.formEdit.value).pipe(
+        map(response => {
+          this.spinner.hide();
+          return  response}),
+        catchError(error => {
+          this.spinner.hide();
+          return of(false);
+        })
+      ).subscribe(data => {
+        this.spinner.hide();
+        this.toast.success(this.translate.instant("common.updateSuccess"),this.translate.instant("common.notification"))
+        let rs = data as BaseResponse
+        this.person = rs.body;
+        this.afterInit()
+      })
     }
   }
 

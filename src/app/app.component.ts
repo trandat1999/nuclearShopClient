@@ -3,6 +3,8 @@ import {NavigationEnd, Router} from '@angular/router';
 import {AuthService} from "./service/auth.service";
 import {AutoLogoutService} from "./service/autoLogoutService";
 import {TranslateConfigService} from "./service/translate.service";
+import {DateAdapter} from "@angular/material/core";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,7 @@ export class AppComponent implements OnInit {
     private authService : AuthService,
     private router: Router,
     private autoLogoutService: AutoLogoutService,
-    private translate : TranslateConfigService
+    private translate : TranslateConfigService,
   ) {
   }
 

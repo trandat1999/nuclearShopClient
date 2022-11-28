@@ -19,9 +19,10 @@
     "deleteSuccess": "Delete Successfully",
     "error": "Error",
     "commonError": "An error occurred, please try again later",
-    "backToHome" : "Back to Home",
+    "backToHome": "Back to Home",
     "404Title": "Page Not Found",
-    "404Message": "This is not the web page you are looking for."
+    "404Message": "This is not the web page you are looking for.",
+    "updateSuccess": "Update successfully"
   },
   "loginComponent": {
     "username": "username",
@@ -39,17 +40,56 @@
     "nameRequired": "Name is required"
   },
   "paginator": {
-    "itemsPerPageLabel": "items per page",
-    "nextPageLabel": "Next page en",
-    "previousPageLabel": "Previous page"
+    "itemsPerPageLabel": "Số bản ghi 1 trang",
+    "nextPageLabel": "Trang tiếp",
+    "previousPageLabel": "Trang trước",
+    "lastPageLabel": "Trang cuối",
+    "firstPageLabel": "Trang đầu"
   },
   "navigation": {
-    "dashboard": "Trang chủ",
-    "category": "Thể loại"
-  },
-  "user" : {
-    "profile": "User",
+    "dashboard": "Dashboard",
+    "category": "Category",
+    "profile": "Profile",
     "settings": "Settings",
-    "logout": "Logout"
+    "manage": "Manage",
+    "users": "Users",
+    "roles": "Role"
+  },
+  "user": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "username": "Username",
+    "password": "Password",
+    "email": "Email"
+  },
+  "profile": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "edit": "Edit Profile",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "gender": "Gender",
+    "birthDate": "Birth Date",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "idNumber": "Id Number",
+    "idNumberIssueDate": "Id Issue Date"
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female",
+    "unknown": "Unknown"
+  },
+  "validation": {
+    "required": "Field is required"
+  },
+  "person": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email" : "Email"
+  },
+  "role": {
+    "name": "Roles"
   }
 }

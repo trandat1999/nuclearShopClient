@@ -16,6 +16,6 @@ export class ProfileService {
   }
 
   updateProfile(person: any){
-    return this.http.post(this.base_url+"/get-profile",person);
+    return this.http.post(this.base_url+"/update-profile",person);
   }
 }
