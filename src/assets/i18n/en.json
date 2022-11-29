@@ -61,7 +61,11 @@
     "logout": "Logout",
     "username": "Username",
     "password": "Password",
-    "email": "Email"
+    "email": "Email",
+    "required": "User is required",
+    "status": "Status",
+    "statusEnabled" : "Enabled",
+    "statusDisabled" : "Disabled"
   },
   "profile": {
     "profile": "Profile",

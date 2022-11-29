@@ -17,6 +17,9 @@ export interface Role {
 export interface Person {
   lastName : string;
   firstName : string;
+  gender : string;
+  birthDate : Date;
+  phoneNumber : string;
   photoFile : Attachment;
 }
 

@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../service/auth.service";
 import {LoginRequest} from "../../../dto/AuthRequest.class";
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit,OnDestroy {
     private _route: ActivatedRoute,
     private _router: Router,
     private authService: AuthService,
+    private spinner: NgxSpinnerService
   ) {
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '';
   }
@@ -30,7 +32,9 @@ export class LoginComponent implements OnInit,OnDestroy {
     this._destroySub$.next();
   }
   public onSubmit(): void {
+    this.spinner.show();
     this.authService.login(this.loginRequest).subscribe(data => {
+      this.spinner.hide();
       if(data){
         this._router.navigateByUrl("");
       }else{

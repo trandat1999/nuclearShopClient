@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { CategoryService } from 'src/app/service/category.service';
-import {Category} from "../../dto/Category";
-import {BaseResponse} from "../../dto/BaseResponse";
+import {Category} from "../../../dto/Category";
+import {BaseResponse} from "../../../dto/BaseResponse";
 import {TranslateService} from "@ngx-translate/core";
 import { PageEvent } from '@angular/material/paginator';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";

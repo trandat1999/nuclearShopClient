@@ -4,24 +4,112 @@
     cdkDragHandle>{{'common.create' |translate}}</h2>
 <form [formGroup]="userForm">
   <mat-dialog-content class="row">
-    <mat-form-field class="col-md-6" appearance="outline">
+    <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
       <mat-label>{{'user.username' | translate}}</mat-label>
       <input matInput formControlName="username" type="text">
       <mat-error>
         {{getErrors('username')}}
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="col-md-6" appearance="outline">
+    <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
       <mat-label>{{'user.email' | translate}}</mat-label>
       <input matInput formControlName="email" type="text">
       <mat-error>
-        {{getErrors('name')}}
+        {{getErrors('email')}}
       </mat-error>
     </mat-form-field>
-    <mat-radio-group class="col-md-6" formControlName="enabled" aria-label="Select an option">
-      <mat-radio-button value="1">Option 1</mat-radio-button>
-      <mat-radio-button value="2">Option 2</mat-radio-button>
-    </mat-radio-group>
+    <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
+      <mat-label>{{'user.status' | translate}}</mat-label>
+      <mat-select formControlName="enabled">
+        <mat-option [value]="true">
+          {{'user.statusEnabled' | translate}}
+        </mat-option>
+        <mat-option [value]="false">
+          {{'user.statusDisabled' | translate}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
+      <mat-select formControlName="roles" placeholder="{{'role.roles'|translate}}" [multiple]="true" #multiSelect>
+        <mat-option>
+          <ngx-mat-select-search [showToggleAllCheckbox]="true"
+                                 [toggleAllCheckboxIndeterminate]="isIndeterminate"
+                                 [toggleAllCheckboxChecked]="isChecked"
+                                 (toggleAll)="toggleSelectAll($event)" placeholderLabel="{{'common.search' | translate}}"
+                                 [formControl]="roleFilterCtrl" [preventHomeEndKeyPropagation]="true">
+            <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
+            <span ngxMatSelectNoEntriesFound>
+                {{'common.noEntriesFound' | translate}}
+             </span>
+          </ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let role of filteredOptions | async" [value]="role">
+          {{role.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="!user.id" class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
+      <mat-label>{{'user.password' | translate}}</mat-label>
+      <input matInput formControlName="password" type="password">
+      <mat-error>
+        {{getErrors('password')}}
+      </mat-error>
+    </mat-form-field>
+    <mat-checkbox color="primary" *ngIf="user.id" class="col-md-6 col-xl-6 col-lg-6"
+                  formControlName="changePassword">{{'user.changePassword'}}</mat-checkbox>
+    <mat-form-field *ngIf="userForm.controls['changePassword'].value" class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
+      <mat-label>{{'user.password' | translate}}</mat-label>
+      <input matInput formControlName="password" type="password">
+      <mat-error>
+        {{getErrors('password')}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="userForm.controls['changePassword'].value" class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
+      <mat-label>{{'user.confirmPassword' | translate}}</mat-label>
+      <input matInput formControlName="confirmPassword" type="password">
+      <mat-error>
+        {{getErrors('confirmPassword')}}
+      </mat-error>
+    </mat-form-field>
+    <ng-container formGroupName="person">
+      <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
+        <mat-label>{{'person.firstName' | translate}}</mat-label>
+        <input matInput formControlName="firstName" type="text">
+        <mat-error>
+          <mat-error>{{'validation.required' | translate}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
+        <mat-label>{{'person.lastName' | translate}}</mat-label>
+        <input matInput formControlName="lastName" type="text">
+        <mat-error>
+          <mat-error>{{'validation.required' | translate}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
+        <mat-label>{{'user.status' | translate}}</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option *ngFor="let item of genders " [value]="item.value">
+            {{item.name | translate}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <mat-error>{{'validation.required' | translate}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+        <mat-label>{{'profile.birthDate' | translate}}</mat-label>
+        <input matInput formControlName="birthDate" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>{{'validation.required' | translate}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
+        <mat-label>{{'profile.phoneNumber' | translate}}</mat-label>
+        <input matInput formControlName="phoneNumber" type="text">
+        <mat-error>{{'validation.invalid' | translate}}</mat-error>
+      </mat-form-field>
+    </ng-container>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-raised-button color="warn" (click)="dialogRef.close()">

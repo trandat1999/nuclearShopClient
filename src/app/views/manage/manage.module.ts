@@ -8,13 +8,18 @@ import {MaterialModule} from "../../material-module";
 import {TranslateModule} from "@ngx-translate/core";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CategoryComponent, CategoryDialogDeleteConfirm, DialogCreate} from "./category/category.component";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 
 
 @NgModule({
   declarations: [
     UserComponent,
     RoleComponent,
-    UserModalCreateComponent
+    UserModalCreateComponent,
+    CategoryComponent,
+    CategoryDialogDeleteConfirm,
+    DialogCreate
   ],
   imports: [
     CommonModule,
@@ -23,7 +28,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     TranslateModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMatSelectSearchModule
   ]
 })
 export class ManageModule { }

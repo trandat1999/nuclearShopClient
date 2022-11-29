@@ -13,12 +13,6 @@ export const navItem : IMenu[] = [
     children : null
   },
   {
-    text : "navigation.category",
-    icon : "category",
-    routerLink: "/category",
-    children : null
-  },
-  {
     text : "navigation.profile",
     icon : "person",
     routerLink: "/profile",
@@ -46,6 +40,12 @@ export const navItem : IMenu[] = [
         text : "navigation.roles",
         icon : "bubble_chart",
         routerLink: "/manage/roles",
+        children : null
+      },
+      {
+        text : "navigation.category",
+        icon : "category",
+        routerLink: "/manage/category",
         children : null
       },
     ]
