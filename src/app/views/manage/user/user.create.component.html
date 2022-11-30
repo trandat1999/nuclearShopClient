@@ -87,7 +87,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
-        <mat-label>{{'user.status' | translate}}</mat-label>
+        <mat-label>{{'user.gender' | translate}}</mat-label>
         <mat-select formControlName="gender">
           <mat-option *ngFor="let item of genders " [value]="item.value">
             {{item.name | translate}}
@@ -99,7 +99,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
         <mat-label>{{'profile.birthDate' | translate}}</mat-label>
-        <input matInput formControlName="birthDate" [matDatepicker]="picker">
+        <input matInput [max]="nowDate" formControlName="birthDate" [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error>{{'validation.required' | translate}}</mat-error>
@@ -116,7 +116,7 @@
       <mat-icon>close</mat-icon>
       {{'common.close' |translate}}
     </button>
-    <button mat-raised-button color="primary" mat-button (click)="onsubmit()">
+    <button [disabled]="!userForm.valid" mat-raised-button color="primary" mat-button (click)="onsubmit()">
       <mat-icon>done</mat-icon>
       {{'common.save'| translate}}
     </button>

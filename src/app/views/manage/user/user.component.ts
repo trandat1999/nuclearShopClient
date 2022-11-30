@@ -4,12 +4,11 @@ import {ToastrService} from "ngx-toastr";
 import {UserService} from "../../../service/user.service";
 import {TranslateService} from "@ngx-translate/core";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {map, startWith, take, takeUntil} from "rxjs/operators";
-import {catchError, Observable, of, ReplaySubject, Subject} from "rxjs";
+import {map, take, takeUntil} from "rxjs/operators";
+import {catchError, of, ReplaySubject, Subject} from "rxjs";
 import {BaseResponse} from "../../../dto/BaseResponse";
 import {Person, Role} from "../../../dto/AuthResponse";
 import {PageEvent} from "@angular/material/paginator";
-import {CategoryService} from "../../../service/category.service";
 import {
   AbstractControl,
   FormControl,
@@ -21,14 +20,16 @@ import {
 } from '@angular/forms';
 import {Gender} from "../../../dto/Enum.class";
 import {MatSelect} from "@angular/material/select";
-import {Category} from "../../../dto/Category";
+import {CategoryService} from "../../../service/category.service";
+import {CategoryDialogDeleteConfirm} from "../category/category.component";
+import {ConfirmDeleteComponent} from "../../../containers/confirm-delete/confirm-delete.component";
 
 export interface UserResponse {
   user: User
 }
 
 export interface User {
-  id : number
+  id: number
   username: string;
   password: string;
   confirmPassword: string;
@@ -39,7 +40,7 @@ export interface User {
 
 }
 
-export interface ModelCreate{
+export interface ModelCreate {
   user: User;
   roles: Role[];
 }
@@ -60,9 +61,10 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAllRole();
     this.getPages();
   }
-
+  roles : Role[] = [];
   pageEvent!: PageEvent;
   users: UserResponse[] = []
   totalElement: number = 0;
@@ -105,22 +107,7 @@ export class UserComponent implements OnInit {
     })
   }
 
-  handlePageEvent(event: PageEvent) {
-    this.pageEvent = event;
-    this.search.pageIndex = this.pageEvent.pageIndex;
-    this.search.pageSize = this.pageEvent.pageSize;
-    this.getPages()
-  }
-
-  update() {
-
-  }
-
-  delete() {
-
-  }
-
-  create(){
+  getAllRole(){
     this.spinner.show();
     this.userService.getAllRole().pipe(
       map(data => {
@@ -133,23 +120,87 @@ export class UserComponent implements OnInit {
       })
     ).subscribe(role => {
       this.spinner.hide();
-      if(role){
-        const dialogCreate = this.dialog.open(UserModalCreateComponent, {
-          disableClose: true,
-          data : {
-            user: {
-              person : {}
-            },
-            roles : role
-          }
-        });
-        dialogCreate.afterClosed().subscribe(result => {
-          if(result){
-            this.getPages();
-          }
-        })
+      if (role) {
+        this.roles = role;
       }
     })
+  }
+
+  handlePageEvent(event: PageEvent) {
+    this.pageEvent = event;
+    this.search.pageIndex = this.pageEvent.pageIndex;
+    this.search.pageSize = this.pageEvent.pageSize;
+    this.getPages()
+  }
+
+  update(user : User) {
+    if(user && (user.person === null || user.person === undefined)) {
+      user.person = new Person();
+    }
+    if (this.roles.length>0) {
+      const dialogCreate = this.dialog.open(UserModalCreateComponent, {
+        disableClose: true,
+        data: {
+          user: user,
+          roles: this.roles
+        }
+      });
+      dialogCreate.afterClosed().subscribe(result => {
+        if (result) {
+          this.getPages();
+        }
+      })
+    }else{
+      this.getAllRole();
+      this.update(user);
+    }
+
+  }
+
+  delete(id : number) {
+    const dialogDelete = this.dialog.open(ConfirmDeleteComponent,{
+      disableClose : true
+    });
+    dialogDelete.componentInstance.save.subscribe((result) => {
+      this.userService.delete(id).subscribe(data => {
+        this.spinner.hide();
+        let rs = data as BaseResponse
+        if(rs.code === 200){
+          this.toast.success(this.translateService.instant("common.deleteSuccess"),this.translateService.instant("common.notification"));
+          dialogDelete.close(1)
+        }
+      },error => {
+        this.toast.error(this.translateService.instant("common.commonError"), this.translateService.instant("common.error"))
+        this.spinner.hide();
+      })
+    })
+    dialogDelete.afterClosed().subscribe(result => {
+      if(result==1){
+        this.getPages();
+      }
+    });
+  }
+
+  create() {
+    if (this.roles.length>0) {
+      const dialogCreate = this.dialog.open(UserModalCreateComponent, {
+        disableClose: true,
+        data: {
+          user: {
+            person: {}
+          },
+          roles: this.roles
+        }
+      });
+      dialogCreate.afterClosed().subscribe(result => {
+        if (result) {
+          this.getPages();
+        }
+      })
+    }else{
+      this.getAllRole();
+      this.create();
+    }
 
   }
 
@@ -172,19 +223,20 @@ export class UserComponent implements OnInit {
   selector: 'user-modal-create',
   templateUrl: 'user.create.component.html',
 })
-export class UserModalCreateComponent implements OnInit{
-
-  @ViewChild('multiSelect', { static: true }) multiSelect!: MatSelect;
+export class UserModalCreateComponent implements OnInit,AfterViewInit {
+  nowDate: Date | null = new Date();
+  @ViewChild('multiSelect', {static: true}) multiSelect!: MatSelect;
   genders = Gender;
-  roles : Role[] = []
-  user! : User
-  userForm! : FormGroup
+  roles: Role[] = []
+  user!: User
+  userForm!: FormGroup
   roleFilterCtrl: UntypedFormControl = new UntypedFormControl();
   protected filteredRoleCache: Role[] = [];
   public filteredOptions: ReplaySubject<Role[]> = new ReplaySubject<Role[]>(1);
   protected _onDestroy = new Subject<void>();
   isIndeterminate = false;
   isChecked = false;
+
   constructor(
     public dialogRef: MatDialogRef<UserModalCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ModelCreate,
@@ -195,7 +247,6 @@ export class UserModalCreateComponent implements OnInit{
   ) {
     this.roles = data.roles;
     this.user = data.user;
-    this.user.id = 1
   }
 
   ngOnInit(): void {
@@ -220,21 +271,38 @@ export class UserModalCreateComponent implements OnInit{
     this.userForm = new FormGroup({
       id: new FormControl(this.user.id),
       username: new FormControl(this.user.username, [Validators.required]),
-      password: new FormControl(this.user.password, this.user.id?[]:[Validators.required,Validators.minLength(6)]),
-      confirmPassword : new FormControl(this.user.confirmPassword),
-      email : new FormControl(this.user.email, [Validators.required,Validators.email]),
-      enabled : new FormControl((this.user.enabled!=null)?this.user.enabled:true, [Validators.required]),
-      changePassword : new FormControl(),
-      roles : new FormControl(this.user.roles, [Validators.required]),
-      person : new FormGroup({
-        firstName : new FormControl(this.user.person.firstName, [Validators.required]),
-        lastName : new FormControl(this.user.person.lastName,Validators.required),
-        gender : new FormControl(this.user.person.gender, [Validators.required]),
-        birthDate : new FormControl(this.user.person.birthDate,Validators.required),
+      password: new FormControl(this.user.password, this.user.id ? [] : [Validators.required, Validators.minLength(6)]),
+      confirmPassword: new FormControl(this.user.confirmPassword),
+      email: new FormControl(this.user.email, [Validators.required, Validators.email]),
+      enabled: new FormControl((this.user.enabled != null) ? this.user.enabled : true, [Validators.required]),
+      changePassword: new FormControl(),
+      roles: new FormControl(this.user.roles, [Validators.required]),
+      person: new FormGroup({
+        firstName: new FormControl(this.user.person.firstName, [Validators.required]),
+        lastName: new FormControl(this.user.person.lastName, Validators.required),
+        gender: new FormControl(this.user.person.gender, [Validators.required]),
+        birthDate: new FormControl(this.user.person.birthDate?new Date(this.user.person.birthDate):this.user.person.birthDate, Validators.required),
         phoneNumber: new FormControl(this.user.person.phoneNumber, [Validators.pattern("((84|0|'+'84)[3|5|7|8|9])+([0-9]{8})")]),
       })
-    },{validators : this.MatchingPasswords()});
+    }, {validators: this.MatchingPasswords()});
   }
+
+  ngAfterViewInit(): void {
+    this.setInitialValue();
+  }
+  protected setInitialValue() {
+    this.filteredOptions
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        // setting the compareWith property to a comparison function
+        // triggers initializing the selection according to the initial value of
+        // the form control (i.e. _initializeSelection())
+        // this needs to be done after the filteredBanks are loaded initially
+        // and after the mat-option elements are available
+        this.multiSelect.compareWith = (a: Role, b: Role) => a && b && a.id === b.id;
+      });
+  }
+
   private _filter() {
     if (!this.roles) {
       return;
@@ -263,6 +331,7 @@ export class UserModalCreateComponent implements OnInit{
         }
       });
   }
+
   protected setToggleAllCheckboxState() {
     let filteredLength = 0;
     if (this.userForm.controls['roles'] && this.userForm.controls['roles'].value) {
@@ -276,20 +345,83 @@ export class UserModalCreateComponent implements OnInit{
     }
   }
 
-  onsubmit(){
-    console.log(this.userForm.value);
+  onsubmit() {
+    if (this.user.id) {
+      this.spinner.show();
+      this.userService.update(this.userForm.value, this.user.id)
+        .pipe(
+          map((data) => {
+            return data;
+          }),
+          catchError((error) => {
+            if(error && error.error && error.error.errors){
+              Object.keys(error.error.errors).forEach(key => {
+                this.userForm.controls[key]?.setErrors({'serverError': true,'serverErrorExistMess': error.error.errors[key]});
+              });
+            }
+            return of(false);
+          })
+        )
+        .subscribe(data => {
+          this.spinner.hide();
+          if (data && data.code === 200) {
+            this.toast.success(this.translateService.instant("common.updateSuccess"),this.translateService.instant("common.notification"))
+            this.dialogRef.close(1);
+          }else{
+            if(data && data.body){
+              Object.keys(data.body).forEach(key => {
+                this.userForm.controls[key]?.setErrors({'alreadyExist': true});
+              });
+              return;
+            }
+          }
+        })
+    } else {
+      this.spinner.show();
+      this.userService.save(this.userForm.value)
+        .pipe(
+          map((data) => {
+            return data;
+          }),
+          catchError((error) => {
+            if(error && error.error && error.error.errors){
+              Object.keys(error.error.errors).forEach(key => {
+                this.userForm.controls[key]?.setErrors({'serverError': true,'serverErrorExistMess': error.error.errors[key]});
+              });
+            }
+            return of(false);
+          })
+        )
+        .subscribe(data => {
+          this.spinner.hide();
+          if (data && data.code === 201) {
+            this.toast.success(this.translateService.instant("common.createdSuccess"),this.translateService.instant("common.notification"))
+            this.dialogRef.close(1);
+          }else{
+            if(data && data.body){
+              Object.keys(data.body).forEach(key => {
+                this.userForm.controls[key].setErrors({'serverError': true,'serverErrorExistMess': data.body[key]});
+              });
+              return;
+            }
+          }
+        })
+    }
   }
 
-  MatchingPasswords() : ValidatorFn {
-    return (control: AbstractControl) : ValidationErrors | null =>{
+  MatchingPasswords(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const changePassword = control.get('changePassword')?.value;
+      if (!changePassword) {
+        return null;
+      }
       const password = control.get('password')?.value;
       const confirmPassword = control.get('confirmPassword')?.value;
       const currentErrors = control.get('confirmPassword')?.errors
       const confirmControl = control.get('confirmPassword')
-
       if (password !== confirmPassword && confirmPassword !== '') {
         confirmControl?.setErrors({...currentErrors, not_matching: true});
-        return {...currentErrors, not_matching: true};
+        return null;
       } else {
         confirmControl?.setErrors({...currentErrors})
         return null;
@@ -298,22 +430,37 @@ export class UserModalCreateComponent implements OnInit{
 
   }
 
-  getErrors(key :String) {
-    if(this.userForm && key){
-      if(key=="username" && this.userForm.controls['username'].errors ) {
+  getErrors(key: String) {
+    if (this.userForm && key) {
+      if (key == "username" && this.userForm.controls['username'].errors) {
         if (this.userForm.controls['username'].errors?.['required']) {
           return this.translateService.instant("validation.required");
         } else if (this.userForm.controls['username'].errors?.['alreadyExist'] || this.userForm.controls['username'].errors?.['alreadyExistMess']) {
-          return  this.userForm.controls['username'].errors?.['alreadyExistMess'];
-        }else if (this.userForm.controls['username'].errors?.['serverError'] || this.userForm.controls['username'].errors?.['serverErrorExistMess']) {
-          return  this.userForm.controls['username'].errors?.['serverErrorExistMess'];
+          return this.userForm.controls['username'].errors?.['alreadyExistMess'];
+        } else if (this.userForm.controls['username'].errors?.['serverError'] || this.userForm.controls['username'].errors?.['serverErrorExistMess']) {
+          return this.userForm.controls['username'].errors?.['serverErrorExistMess'];
         }
       }
-      if(key=="email" && this.userForm.controls['email'].errors ) {
+      if (key == "email" && this.userForm.controls['email'].errors) {
         if (this.userForm.controls['email'].errors?.['required']) {
           return this.translateService.instant("validation.required");
         } else if (this.userForm.controls['email'].errors?.['serverError'] || this.userForm.controls['email'].errors?.['serverErrorExistMess']) {
-          return  this.userForm.controls['email'].errors?.['serverErrorExistMess'];
+          return this.userForm.controls['email'].errors?.['serverErrorExistMess'];
+        }
+        else if (this.userForm.controls['email'].errors?.['email']) {
+          return this.translateService.instant("validation.email");
+        }
+      }
+      if (key == "password" && this.userForm.controls['password'].errors) {
+        if (this.userForm.controls['password'].errors?.['required']) {
+          return this.translateService.instant("validation.required");
+        } else if (this.userForm.controls['password'].errors?.['minlength']) {
+          return this.translateService.instant("validation.invalid");
+        }
+      }
+      if (key == "confirmPassword" && this.userForm.controls['confirmPassword'].errors) {
+        if (this.userForm.controls['confirmPassword'].errors?.['not_matching']) {
+          return this.translateService.instant("validation.password_not_match");
         }
       }
     }

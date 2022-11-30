@@ -22,7 +22,8 @@
     "backToHome": "Back to Home",
     "404Title": "Page Not Found",
     "404Message": "This is not the web page you are looking for.",
-    "updateSuccess": "Update successfully"
+    "updateSuccess": "Update successfully",
+    "createdSuccess": "Created successfully"
   },
   "loginComponent": {
     "username": "username",
@@ -86,7 +87,10 @@
     "unknown": "Unknown"
   },
   "validation": {
-    "required": "Field is required"
+    "required": "Field is required",
+    "invalid": "Field is invalid",
+    "password_not_match": "Confirm password must be match password",
+    "email" : "Email must be a valid email address"
   },
   "person": {
     "firstName": "First Name",

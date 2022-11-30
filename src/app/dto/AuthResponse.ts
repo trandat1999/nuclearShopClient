@@ -14,13 +14,13 @@ export interface Role {
   description : string;
 }
 
-export interface Person {
-  lastName : string;
-  firstName : string;
-  gender : string;
-  birthDate : Date;
-  phoneNumber : string;
-  photoFile : Attachment;
+export class Person {
+  lastName : string | undefined;
+  firstName : string | undefined;
+  gender : string | undefined;
+  birthDate : Date | undefined;
+  phoneNumber : string | undefined;
+  photoFile : Attachment | undefined;
 }
 
 export interface Attachment {

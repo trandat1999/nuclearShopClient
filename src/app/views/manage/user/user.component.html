@@ -24,12 +24,15 @@
       <tbody>
       <tr *ngFor="let item of users">
         <th scope="row">
-          <button (click)="update()" mat-icon-button mat-button color="primary">
+          <button (click)="update(item.user)" mat-icon-button mat-button color="primary">
             <mat-icon>edit</mat-icon>
           </button>
-          <button (click)="delete()" mat-icon-button mat-button color="warn">
-            <mat-icon>delete</mat-icon>
-          </button>
+<!--          <button (click)="update(item.user)" mat-icon-button mat-button color="primary">-->
+<!--            <mat-icon>edit</mat-icon>-->
+<!--          </button>-->
+<!--          <button (click)="delete(item.user.id)" mat-icon-button mat-button color="warn">-->
+<!--            <mat-icon>delete</mat-icon>-->
+<!--          </button>-->
         </th>
         <td>
           {{ item.user.username }}

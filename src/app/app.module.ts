@@ -32,6 +32,7 @@ import {
 } from "@angular/material-moment-adapter";
 import {TranslateConfigService} from "./service/translate.service";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import { ConfirmDeleteComponent } from './containers/confirm-delete/confirm-delete.component';
 
 export function jwtOptionsFactory(storageService: StorageService) {
   return {
@@ -54,7 +55,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,
