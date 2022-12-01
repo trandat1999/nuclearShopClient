@@ -9,6 +9,7 @@ import {CurrentUser, User} from "../../dto/AuthResponse";
 import {catchError, of} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 import {TranslateService} from "@ngx-translate/core";
+import {WebSocketService} from "../../service/web-socket.service";
 
 @Component({
   selector: 'app-default-header',
@@ -20,6 +21,7 @@ export class DefaultHeaderComponent implements OnInit {
   currentUser!: User;
   currentLanguage: string = "";
   languages : language[] = [{value: "en", name: "English"}, {value: "vi", name: "Vietnamese"}];
+  public notifications = 0;
   constructor(
     private storageService : StorageService,
     private authService : AuthService,
@@ -27,8 +29,17 @@ export class DefaultHeaderComponent implements OnInit {
     private localStorage : StorageService,
     private toast : ToastrService,
     private router: Router,
-    private translate : TranslateService) {
+    private translate : TranslateService,
+    private webSocketService: WebSocketService,
+    private storage : StorageService) {
     this.currentLanguage = localStorage.getLanguage();
+    let stompClient = this.webSocketService.connect();
+    stompClient.connect({'Authorization': 'Bearer '+this.storage.getToken() }, () => {
+      stompClient.subscribe('/topic/notification', (notifications : any) => {
+        this.notifications = JSON.parse(notifications.body);
+        console.log("this.notifications",notifications);
+      })
+    });
   }
 
   @Input() sidenav : any

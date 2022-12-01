@@ -8,6 +8,11 @@
       <button (click)="create()" mat-raised-button mat-button color="primary">
         <mat-label><i class="fa fa-plus"></i> {{'common.create' | translate}}</mat-label>
       </button>
+        <mat-form-field appearance="outline" class="col-md-6 col-lg-6 col-xl-6 float-end" >
+          <mat-label>{{'categoryComponent.name' | translate}}</mat-label>
+          <input matInput [(ngModel)]="search.keyword" (keyup.enter)="enterSearch(0)"  type="text" placeholder="{{'categoryComponent.inputName'| translate}}">
+          <button (click)="enterSearch(0)" mat-icon-button matSuffix color="primary"><mat-icon>search</mat-icon></button>
+        </mat-form-field>
     </div>
     <table class="table table-striped table-bordered">
       <thead>

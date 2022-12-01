@@ -1,4 +1,4 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -16,7 +16,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NuclearLayoutsModule} from "./layouts/layouts.module";
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
-import {LangChangeEvent, TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {MatPaginatorIntl} from "@angular/material/paginator";
 import {CustomMatPaginator} from "./components/CustomMatPage";
@@ -24,15 +24,9 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {ToastrModule} from "ngx-toastr";
 import {MaterialExtensionsModule} from "./material-extensions.module";
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
-import {
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-  MAT_MOMENT_DATE_FORMATS,
-  MomentDateAdapter
-} from "@angular/material-moment-adapter";
-import {TranslateConfigService} from "./service/translate.service";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import { ConfirmDeleteComponent } from './containers/confirm-delete/confirm-delete.component';
+import {MatNativeDateModule} from "@angular/material/core";
+import {ConfirmDeleteComponent} from './containers/confirm-delete/confirm-delete.component';
+import {WebSocketService} from "./service/web-socket.service";
 
 export function jwtOptionsFactory(storageService: StorageService) {
   return {
@@ -107,7 +101,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: MatPaginatorIntl,
       useClass: CustomMatPaginator
-    },
+    },WebSocketService
   ],
   bootstrap: [AppComponent]
 })
