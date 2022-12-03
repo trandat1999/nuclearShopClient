@@ -34,10 +34,11 @@ export class DefaultHeaderComponent implements OnInit {
     private storage : StorageService) {
     this.currentLanguage = localStorage.getLanguage();
     let stompClient = this.webSocketService.connect();
+    stompClient.debug = null
     stompClient.connect({'Authorization': 'Bearer '+this.storage.getToken() }, () => {
-      stompClient.subscribe('/topic/notification', (notifications : any) => {
+      stompClient.subscribe('/user/topic/notification', (notifications : any) => {
         this.notifications = JSON.parse(notifications.body);
-        console.log("this.notifications",notifications);
+        this.toast.success(this.notifications.toString())
       })
     });
   }

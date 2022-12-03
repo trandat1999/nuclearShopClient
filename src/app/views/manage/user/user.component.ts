@@ -415,6 +415,7 @@ export class UserModalCreateComponent implements OnInit,AfterViewInit {
       if (!changePassword) {
         return null;
       }
+      control.get('password')?.addValidators([Validators.required, Validators.minLength(6)]);
       const password = control.get('password')?.value;
       const confirmPassword = control.get('confirmPassword')?.value;
       const currentErrors = control.get('confirmPassword')?.errors
@@ -423,7 +424,8 @@ export class UserModalCreateComponent implements OnInit,AfterViewInit {
         confirmControl?.setErrors({...currentErrors, not_matching: true});
         return null;
       } else {
-        confirmControl?.setErrors({...currentErrors})
+        // @ts-ignore
+        confirmControl?.setErrors(currentErrors)
         return null;
       }
     }

@@ -27,6 +27,7 @@ import {MaterialExtensionsModule} from "./material-extensions.module";
 import {MatNativeDateModule} from "@angular/material/core";
 import {ConfirmDeleteComponent} from './containers/confirm-delete/confirm-delete.component';
 import {WebSocketService} from "./service/web-socket.service";
+import {NgScrollbarModule} from "ngx-scrollbar";
 
 export function jwtOptionsFactory(storageService: StorageService) {
   return {
@@ -92,7 +93,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       enableHtml: true,
       tapToDismiss: true,
     }),
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgScrollbarModule
   ],
   providers: [authInterceptorProviders, AuthGuardService, {
     provide: PERFECT_SCROLLBAR_CONFIG,
