@@ -48,6 +48,12 @@ export const navItem : IMenu[] = [
         routerLink: "/manage/category",
         children : null
       },
+      {
+        text : "navigation.administrativeUnit",
+        icon : "category",
+        routerLink: "/manage/administrative-unit",
+        children : null
+      },
     ]
   },
 ]

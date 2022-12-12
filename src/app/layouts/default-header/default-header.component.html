@@ -9,8 +9,8 @@
     <mat-icon>translate</mat-icon>
   </button>
   <mat-menu #menuLang="matMenu">
-    <button mat-menu-item *ngFor="let item of languages" (click)="changeLanguage(item.value)">
-      <span>{{item.name}}</span>
+    <button  mat-menu-item *ngFor="let item of languages" (click)="changeLanguage(item.value)">
+      <span [ngClass]="item.value == currentLanguage?'fw-bold':''">{{item.name}}</span>
     </button>
   </mat-menu>
   <mat-card style="display: none"></mat-card>

@@ -9,4 +9,5 @@ export class AppSettings {
   public static URL_LOGIN = 'http://localhost:4200/login';
   public static LANGUAGE  = 'language';
   public static LANGUAGE_EN  = 'en';
+  public static SITE_KEY = '6Levl3EjAAAAANYem_eTpM7EOWxQpbraHPdPHsPw';
 }

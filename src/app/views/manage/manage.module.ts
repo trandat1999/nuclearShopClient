@@ -10,6 +10,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CategoryComponent, CategoryDialogDeleteConfirm, DialogCreate} from "./category/category.component";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import { AdministrativeUnitComponent } from './administrative-unit/administrative-unit.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
     UserModalCreateComponent,
     CategoryComponent,
     CategoryDialogDeleteConfirm,
-    DialogCreate
+    DialogCreate,
+    AdministrativeUnitComponent
   ],
   imports: [
     CommonModule,

@@ -7,9 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    data: {
-      title: $localize`Category`
-    }
+    title : 'Dashboard'
   }
 ];
 

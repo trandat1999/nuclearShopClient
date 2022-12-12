@@ -23,7 +23,8 @@
     "404Title": "Page Not Found",
     "404Message": "This is not the web page you are looking for.",
     "updateSuccess": "Update successfully",
-    "createdSuccess": "Created successfully"
+    "createdSuccess": "Created successfully",
+    "inputSearch": "Please enter text for search"
   },
   "loginComponent": {
     "username": "username",
@@ -54,7 +55,8 @@
     "settings": "Settings",
     "manage": "Manage",
     "users": "Users",
-    "roles": "Role"
+    "roles": "Role",
+    "administrativeUnit": "Administrative Unit"
   },
   "user": {
     "profile": "Profile",
@@ -99,5 +101,14 @@
   },
   "role": {
     "name": "Roles"
+  },
+  "manage" : {
+    "manage" : "Manage",
+    "users" : "Users",
+    "administrativeUnit" : "Administrative Unit"
+  },
+  "administrativeUnit": {
+    "name": "Name",
+    "code": "Code"
   }
 }

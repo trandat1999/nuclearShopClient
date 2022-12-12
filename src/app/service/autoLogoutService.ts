@@ -52,7 +52,7 @@ export class AutoLogoutService {
     this.ngZone.runOutsideAngular(() => {
       setInterval(() => {
         this.check();
-      }, 1000);
+      }, 10000);
     })
   }
 
