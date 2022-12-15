@@ -3,7 +3,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
 import {ToastrService} from "ngx-toastr";
-import {UserService} from "../../../service/user.service";
 import {AdminstrativeUnitService} from "./adminstrative-unit.service";
 import { SearchRequest } from 'src/app/dto/SearchRequest.class';
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
