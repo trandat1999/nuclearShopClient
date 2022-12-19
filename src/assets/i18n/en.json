@@ -24,7 +24,8 @@
     "404Message": "This is not the web page you are looking for.",
     "updateSuccess": "Update successfully",
     "createdSuccess": "Created successfully",
-    "inputSearch": "Please enter text for search"
+    "inputSearch": "Please enter text for search",
+    "noResultRecord": "No records"
   },
   "loginComponent": {
     "username": "username",
@@ -109,6 +110,7 @@
   },
   "administrativeUnit": {
     "name": "Name",
-    "code": "Code"
+    "code": "Code",
+    "description" : "Description"
   }
 }

@@ -12,6 +12,7 @@ import {CategoryComponent, CategoryDialogDeleteConfirm, DialogCreate} from "./ca
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import { AdministrativeUnitComponent } from './administrative-unit/administrative-unit.component';
 import {NgSelectModule} from "@ng-select/ng-select";
+import {MaterialExtensionsModule} from "../../material-extensions.module";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {NgSelectModule} from "@ng-select/ng-select";
     FormsModule,
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
-    NgSelectModule
+    NgSelectModule,
+    MaterialExtensionsModule
   ]
 })
 export class ManageModule { }

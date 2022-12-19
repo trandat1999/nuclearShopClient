@@ -10,7 +10,7 @@
     "loading": "Loading",
     "ok": "Ok",
     "save": "Save",
-    "noEntriesFound": "Không tìm thấy",
+    "noEntriesFound": "No Entries Found",
     "search": "Search",
     "none": "None",
     "success": "Success",
@@ -22,7 +22,9 @@
     "backToHome": "Back to Home",
     "404Title": "Page Not Found",
     "404Message": "This is not the web page you are looking for.",
-    "updateSuccess": "Update successfully"
+    "updateSuccess": "Update successfully",
+    "createdSuccess": "Created successfully",
+    "inputSearch": "Please enter text for search"
   },
   "loginComponent": {
     "username": "username",
@@ -40,11 +42,11 @@
     "nameRequired": "Name is required"
   },
   "paginator": {
-    "itemsPerPageLabel": "Số bản ghi 1 trang",
-    "nextPageLabel": "Trang tiếp",
-    "previousPageLabel": "Trang trước",
-    "lastPageLabel": "Trang cuối",
-    "firstPageLabel": "Trang đầu"
+    "itemsPerPageLabel": "items per page",
+    "nextPageLabel": "Next page",
+    "previousPageLabel": "Previous page",
+    "lastPageLabel": "Last page",
+    "firstPageLabel": "first page"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -53,7 +55,8 @@
     "settings": "Settings",
     "manage": "Manage",
     "users": "Users",
-    "roles": "Role"
+    "roles": "Role",
+    "administrativeUnit": "Administrative Unit"
   },
   "user": {
     "profile": "Profile",
@@ -61,7 +64,11 @@
     "logout": "Logout",
     "username": "Username",
     "password": "Password",
-    "email": "Email"
+    "email": "Email",
+    "required": "User is required",
+    "status": "Status",
+    "statusEnabled" : "Enabled",
+    "statusDisabled" : "Disabled"
   },
   "profile": {
     "profile": "Profile",
@@ -82,7 +89,10 @@
     "unknown": "Unknown"
   },
   "validation": {
-    "required": "Field is required"
+    "required": "Field is required",
+    "invalid": "Field is invalid",
+    "password_not_match": "Confirm password must be match password",
+    "email" : "Email must be a valid email address"
   },
   "person": {
     "firstName": "First Name",
@@ -91,5 +101,15 @@
   },
   "role": {
     "name": "Roles"
+  },
+  "manage" : {
+    "manage" : "Manage",
+    "users" : "Users",
+    "administrativeUnit" : "Administrative Unit"
+  },
+  "administrativeUnit": {
+    "name": "Tên",
+    "code": "Code",
+    "description" : "Description"
   }
 }

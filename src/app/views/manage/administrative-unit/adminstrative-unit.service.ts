@@ -42,4 +42,16 @@ export class AdminstrativeUnitService {
       })
     );
   }
+
+  getAllByParent(id : number){
+    return this.http.get(this.baseUrl+"/all-by-parent/"+id).pipe(
+      map(value => {
+        let rs = value as BaseResponse;
+        return rs.body;
+      }),catchError(error => {
+        this.toast.error(this.translate.instant("common.commonError"), this.translate.instant("common.error"))
+        return of(false)
+      })
+    );
+  }
 }

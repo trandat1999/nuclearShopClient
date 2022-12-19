@@ -14,7 +14,7 @@ import {WebSocketService} from "../../service/web-socket.service";
 @Component({
   selector: 'app-default-header',
   templateUrl: './default-header.component.html',
-  styleUrls: ['./default-header.component.css']
+  styleUrls: ['./default-header.component.scss']
 })
 export class DefaultHeaderComponent implements OnInit {
   visibleData = false;

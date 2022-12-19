@@ -6,7 +6,7 @@ import {IMenu, navItem} from "../NavItem";
 @Component({
   selector: 'app-default-sidenav',
   templateUrl: './default-sidenav.component.html',
-  styleUrls: ['./default-sidenav.component.css']
+  styleUrls: ['./default-sidenav.component.scss']
 })
 export class DefaultSidenavComponent implements OnInit {
   currentRoute : string = this.router.url;

@@ -7,13 +7,42 @@ import {AdminstrativeUnitService} from "./adminstrative-unit.service";
 import { SearchRequest } from 'src/app/dto/SearchRequest.class';
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {PageEvent} from "@angular/material/paginator";
+import {MtxGridColumn} from "@ng-matero/extensions/grid";
 
 @Component({
   selector: 'app-administrative-unit',
   templateUrl: './administrative-unit.component.html',
-  styleUrls: ['./administrative-unit.component.css']
+  styleUrls: ['./administrative-unit.component.scss']
 })
 export class AdministrativeUnitComponent implements OnInit {
+  columns: MtxGridColumn[] = [
+    {
+      header: this.translate.stream("common.action"),
+      field: 'operation',
+      type: 'button',
+      width: '20px',
+      buttons: [
+        {
+          type: 'icon',
+          text: 'edit',
+          icon: 'visibility',
+          click: () => alert('visibility'),
+        },
+      ],
+    },
+    { header: this.translate.stream("administrativeUnit.name"), field: 'name', showExpand: true },
+    { header: this.translate.stream("administrativeUnit.code"), field: 'code' },
+    { header: this.translate.stream("administrativeUnit.description"), field: 'description' },
+  ];
+  log(e: any) {
+    if(e.expanded && e.data && e.data.id && (!e.data.children || e.data.children.length==0)) {
+      this.spinner.show();
+      this.api.getAllByParent(e.data.id).subscribe(data => {
+        e.data.children = data;
+        this.spinner.hide();
+      })
+    }
+  }
 
   search : SearchRequest = {
     pageIndex: 0,
