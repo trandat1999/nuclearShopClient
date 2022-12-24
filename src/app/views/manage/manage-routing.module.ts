@@ -4,6 +4,7 @@ import {UserComponent} from "./user/user.component";
 import {RoleComponent} from "./role/role.component";
 import { CategoryComponent } from './category/category.component';
 import {AdministrativeUnitComponent} from "./administrative-unit/administrative-unit.component";
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
     path: 'administrative-unit',
     component : AdministrativeUnitComponent,
     title: "Manage | Administrative Unit"
+  },
+  {
+    path: 'product',
+    component : ProductComponent,
+    title: "Manage | Product"
   }
 
 ];

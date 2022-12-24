@@ -22,13 +22,13 @@ $my-theme: mat.define-light-theme((
 @import '~ngx-spinner/animations/timer.css';
 @import '~ngx-spinner/animations/square-jelly-box.css';
 @import '~ngx-toastr/toastr.css';
-@import "~@ng-select/ng-select/themes/material.theme.css";
+//@import "~@ng-select/ng-select/themes/material.theme.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-expansion-indicator::after {
   color: white;
 }
-.ng-select.custom .ng-value-container{
-  border-top-width: 18px;
-}
+//.ng-select.custom .ng-value-container{
+//  border-top-width: 18px;
+//}

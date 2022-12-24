@@ -16,20 +16,6 @@ import {MtxGridColumn} from "@ng-matero/extensions/grid";
 })
 export class AdministrativeUnitComponent implements OnInit {
   columns: MtxGridColumn[] = [
-    {
-      header: this.translate.stream("common.action"),
-      field: 'operation',
-      type: 'button',
-      width: '20px',
-      buttons: [
-        {
-          type: 'icon',
-          text: 'edit',
-          icon: 'visibility',
-          click: () => alert('visibility'),
-        },
-      ],
-    },
     { header: this.translate.stream("administrativeUnit.name"), field: 'name', showExpand: true },
     { header: this.translate.stream("administrativeUnit.code"), field: 'code' },
     { header: this.translate.stream("administrativeUnit.description"), field: 'description' },

@@ -13,6 +13,7 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import { AdministrativeUnitComponent } from './administrative-unit/administrative-unit.component';
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MaterialExtensionsModule} from "../../material-extensions.module";
+import {DialogCreateProduct, ProductComponent} from './product/product.component';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import {MaterialExtensionsModule} from "../../material-extensions.module";
     CategoryComponent,
     CategoryDialogDeleteConfirm,
     DialogCreate,
-    AdministrativeUnitComponent
+    AdministrativeUnitComponent,
+    ProductComponent,
+    DialogCreateProduct
   ],
   imports: [
     CommonModule,

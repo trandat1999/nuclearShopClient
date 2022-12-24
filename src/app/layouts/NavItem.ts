@@ -54,6 +54,12 @@ export const navItem : IMenu[] = [
         routerLink: "/manage/administrative-unit",
         children : null
       },
+      {
+        text : "navigation.product",
+        icon : "toys",
+        routerLink: "/manage/product",
+        children : null
+      },
     ]
   },
 ]
