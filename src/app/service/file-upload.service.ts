@@ -13,7 +13,6 @@ export class FileUploadService {
   upload(file: File) : Observable<any>{
     const formData: FormData = new FormData();
     formData.append('file', file);
-    // const req = new HttpRequest('POST', AppSettings.API_ENDPOINT +":"+ AppSettings.PORT+"/api/v1/files", formData);
     return this.http.post(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT+"/api/v1/files", formData);
   }
 

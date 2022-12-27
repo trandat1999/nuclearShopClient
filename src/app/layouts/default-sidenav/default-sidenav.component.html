@@ -1,4 +1,4 @@
-<perfect-scrollbar [config]="perfectScrollbarConfig">
+<ng-scrollbar class="virtual-scroll" thumbClass="white-scrollbars">
  <ng-container [ngTemplateOutlet]="rootMenu"
                 [ngTemplateOutletContext]="{menu: menuList, level: 0}">
   </ng-container>
@@ -33,4 +33,4 @@
         </ng-container>
       </mat-expansion-panel>
   </ng-template>
-</perfect-scrollbar>
+</ng-scrollbar>

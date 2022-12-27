@@ -13,4 +13,8 @@ export interface Product{
 export interface File{
   id : number;
   downloadUrl : string;
+
+  fileName : string;
+
+  fileSize : number;
 }

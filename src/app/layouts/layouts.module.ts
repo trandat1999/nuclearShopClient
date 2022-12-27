@@ -13,6 +13,7 @@ import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgHttpLoaderModule} from "ng-http-loader";
 import {FormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
+import {NgScrollbarModule} from "ngx-scrollbar";
 
 
 
@@ -23,17 +24,18 @@ import {TranslateModule} from "@ngx-translate/core";
     DefaultHeaderComponent,
     DefaultSidenavComponent
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    PerfectScrollbarModule,
-    RouterModule,
-    GridModule,
-    FontAwesomeModule,
-    NgbDropdownModule,
-    NgHttpLoaderModule,
-    FormsModule,
-    TranslateModule
-  ]
+    imports: [
+        CommonModule,
+        MaterialModule,
+        PerfectScrollbarModule,
+        RouterModule,
+        GridModule,
+        FontAwesomeModule,
+        NgbDropdownModule,
+        NgHttpLoaderModule,
+        FormsModule,
+        TranslateModule,
+        NgScrollbarModule
+    ]
 })
 export class NuclearLayoutsModule { }

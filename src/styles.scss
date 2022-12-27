@@ -32,3 +32,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 //.ng-select.custom .ng-value-container{
 //  border-top-width: 18px;
 //}
+ng-scrollbar.virtual-scroll {
+  --scrollbar-padding : 1px;
+  --scrollbar-size: 8px;
+  --scrollbar-thumb-color: gray;
+  --scrollbar-hover-size: 12px;
+  --scrollbar-track-color: rgba(0, 0, 0, 0.05);
+  --scrollbar-border-radius: 10px;
+}

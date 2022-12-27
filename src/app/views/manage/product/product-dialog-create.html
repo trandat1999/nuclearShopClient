@@ -1,0 +1,79 @@
+<h1 mat-dialog-title *ngIf="!product.id">{{'common.create' |translate}}</h1>
+<h1 mat-dialog-title *ngIf="product.id">{{'common.update' |translate}}</h1>
+<form [formGroup]="formGroup">
+  <mat-dialog-content class="row">
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'product.code' | translate}}</mat-label>
+      <input matInput formControlName="code" type="text">
+      <mat-error>
+        {{getErrorMessage("code")}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'product.name' | translate}}</mat-label>
+      <input matInput formControlName="name" type="text">
+      <mat-error>
+        {{getErrorMessage("name")}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'product.shortDescription' | translate}}</mat-label>
+      <input matInput formControlName="shortDescription" type="text">
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'product.description' | translate}}</mat-label>
+      <input matInput formControlName="description" type="text">
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'product.categories' | translate}}</mat-label>
+      <mtx-select notFoundText="{{'common.noEntriesFound'}}" appendTo="body"
+                  [items]="categories" bindLabel="name" [multiple]="true"
+                  formControlName="categories">
+      </mtx-select>
+      <mat-error>
+        {{getErrorMessage("categories")}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'product.files' | translate}}</mat-label>
+      <mtx-select notFoundText="{{'common.noEntriesFound' | translate}}" appendTo="body"
+                  [items]="fileOptions" bindLabel="fileName" [multiple]="true"
+                  formControlName="files">
+        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+          <span class="ng-value-label">
+            <img height="20" width="20" [alt]="item.downloadUrl" [src]="item.downloadUrl" />
+            {{item.fileName}}
+          </span>
+          <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+          <img height="30" width="30" [alt]="item.downloadUrl +'a'" [src]="item.downloadUrl" />
+          {{item.fileName}}
+        </ng-template>
+      </mtx-select>
+      <mat-error>
+        {{getErrorMessage("files")}}
+      </mat-error>
+    </mat-form-field>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="col-6">
+      <button (click)="fileInput.click()" mat-raised-button color="primary">
+        <mat-icon>attachment</mat-icon>
+        {{'common.addFile' |translate}}
+      </button>
+      <input hidden="hidden" #fileInput type="file" (change)="onSelectFile($event)">
+    </div>
+    <div class="justify-content-end d-flex col-6">
+      <button mat-raised-button color="warn" (click)="dialogRef.close()">
+        <mat-icon>close</mat-icon>
+        {{'common.close' |translate}}
+      </button>
+      <button mat-raised-button color="primary"  (click)="onSubmit()" [disabled]="!formGroup.valid" mat-button>
+        <mat-icon>done</mat-icon>
+        {{'common.save'| translate}}
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

@@ -37,8 +37,8 @@ export class ProductService {
       map(value => {
         return value as BaseResponse;
       }),catchError(error => {
-        this.toast.error(this.translate.instant("common.commonError"), this.translate.instant("common.error"))
-        return of(false)
+        this.toast.error(error?.error.message? error.error.message : this.translate.instant("common.commonError"), this.translate.instant("common.error") +(error?.error?.code? " "+error?.error?.code:""))
+        return of(error)
       })
     );
   }
@@ -48,7 +48,7 @@ export class ProductService {
       map(value => {
         return value as BaseResponse;
       }),catchError(error => {
-        this.toast.error(this.translate.instant("common.commonError"), this.translate.instant("common.error"))
+        this.toast.error(error?.error.message? error.error.message : this.translate.instant("common.commonError"), this.translate.instant("common.error") +(error?.error?.code? " "+error?.error?.code:""))
         return of(false)
       })
     );
@@ -59,9 +59,8 @@ export class ProductService {
       map(value => {
         return value as BaseResponse;
       }),catchError(error => {
-        console.log("error save", error);
-        this.toast.error(this.translate.instant("common.commonError"), error?.errors?.message? error.errors.message :this.translate.instant("common.error"))
-        return of(false)
+        this.toast.error(error?.error.message? error.error.message : this.translate.instant("common.commonError"), this.translate.instant("common.error") +(error?.error?.code? " "+error?.error?.code:""))
+        return of(error);
       })
     );
   }

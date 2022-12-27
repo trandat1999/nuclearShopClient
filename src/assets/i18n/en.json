@@ -25,7 +25,10 @@
     "updateSuccess": "Update successfully",
     "createdSuccess": "Created successfully",
     "inputSearch": "Please enter text for search",
-    "noResultRecord": "No records"
+    "noResultRecord": "No records",
+    "fieldRequired": "Field is required",
+    "choiceFile" : "Choose file",
+    "addFile": "Add file"
   },
   "loginComponent": {
     "username": "username",
@@ -120,6 +123,7 @@
     "code": "Code",
     "description" : "Description",
     "shortDescription": "Short Description",
-    "categories": "Categories"
+    "categories": "Categories",
+    "files" : "Files"
   }
 }
