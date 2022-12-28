@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {ToastrService} from "ngx-toastr";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -9,11 +9,8 @@ import {File, Product} from 'src/app/dto/Product.class';
 import {PageEvent} from "@angular/material/paginator";
 import {MtxGridColumn} from "@ng-matero/extensions/grid";
 import {Category} from "../../../dto/Category";
-import {map} from "rxjs/operators";
 import {BaseResponse} from "../../../dto/BaseResponse";
-import {catchError, of} from "rxjs";
 import {CategoryService} from "../../../service/category.service";
-import {UserModalCreateComponent} from "../user/user.component";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpErrorResponse} from "@angular/common/http";
 import {FileService} from "../../../service/file.service";
@@ -25,28 +22,29 @@ import {ConfirmDeleteComponent} from "../../../containers/confirm-delete/confirm
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-
   constructor(
-    private translate : TranslateService,
-    private toast : ToastrService,
+    private translate: TranslateService,
+    private toast: ToastrService,
     private loading: NgxSpinnerService,
     private dialog: MatDialog,
-    private api : ProductService,
-    private categoryService : CategoryService
+    private api: ProductService,
+    private categoryService: CategoryService
+  ) {
+  }
 
-  ) { }
-  products : Product[] = [];
-  private categories : Category[] = [];
-  totalElement : number = 0;
-  pageSizeOptions : number[] = [5,10,25,50,100];
-  search : SearchRequest = {
-    pageIndex : 0,
-    pageSize : 10,
-    keyword : ""
+  products: Product[] = [];
+  private categories: Category[] = [];
+  totalElement: number = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 50, 100];
+  search: SearchRequest = {
+    pageIndex: 0,
+    pageSize: 10,
+    keyword: ""
   }
   columns: MtxGridColumn[] = [
-    { header: this.translate.stream("common.action"), field: 'action', type: "button", width:"150px",
-      buttons:[
+    {
+      header: this.translate.stream("common.action"), field: 'action', type: "button", width: "150px",
+      buttons: [
         {
           type: 'icon',
           icon: 'edit',
@@ -60,28 +58,43 @@ export class ProductComponent implements OnInit {
           tooltip: 'Delete',
           click: (rowData) => this.onDelete(rowData.id),
         },
-      ]},
-    { header: this.translate.stream("product.name"), field: 'name'},
-    { header: this.translate.stream("product.code"), field: 'code'},
-    { header: this.translate.stream("product.shortDescription"), field: 'shortDescription' },
-    { header: this.translate.stream("product.description"), field: 'description' },
-    { header: this.translate.stream("product.categories"), field: 'categories', formatter:(row)=>{
-      let cate = "";
-      if(row.categories && row.categories.length>0){
-        for(let item of row.categories){
-          cate+= item.name + "; ";
+      ]
+    },
+    {header: this.translate.stream("product.name"), field: 'name'},
+    {header: this.translate.stream("product.code"), field: 'code'},
+    {header: this.translate.stream("product.shortDescription"), field: 'shortDescription'},
+    {header: this.translate.stream("product.description"), field: 'description'},
+    {
+      header: this.translate.stream("product.categories"), field: 'categories', formatter: (row) => {
+        let cate = "";
+        if (row.categories && row.categories.length > 0) {
+          for (let item of row.categories) {
+            cate += item.name + "; ";
+          }
+          if (cate.length > 2) {
+            cate = cate.substring(0, cate.length - 2);
+          }
         }
-        if(cate.length>2){
-          cate=cate.substring(0, cate.length - 2);
-        }
+        return cate;
       }
-      return cate;
-      }},
+    },
+    {
+      header: this.translate.stream("product.files"), field: 'files', formatter: (row) => {
+        let file = ""
+        if (row.files && row.files.length > 0) {
+          for (let item of row.files) {
+            file += `<img class="border border-dark" height="50" width="40" src="${item.downloadUrl}" alt="${item.downloadUrl}">&nbsp;&nbsp;`
+          }
+        }
+        return file;
+      }
+    },
   ];
+
   getPages() {
     this.loading.show();
     this.api.search(this.search).subscribe(data => {
-      this.loading.hide();
+        this.loading.hide();
         if (data) {
           this.products = data.content;
           this.totalElement = data.totalElements;
@@ -89,27 +102,29 @@ export class ProductComponent implements OnInit {
       }
     )
   }
+
   onDelete(id: number) {
-    const dialogDelete = this.dialog.open(ConfirmDeleteComponent,{
-      disableClose : true
+    const dialogDelete = this.dialog.open(ConfirmDeleteComponent, {
+      disableClose: true
     });
     dialogDelete.componentInstance.save.subscribe((result) => {
       this.loading.show();
       this.api.delete(id).subscribe(data => {
         this.loading.hide();
-        if(data.code === 200){
-          this.toast.success(this.translate.instant("common.deleteSuccess"),this.translate.instant("common.notification"));
+        if (data.code === 200) {
+          this.toast.success(this.translate.instant("common.deleteSuccess"), this.translate.instant("common.notification"));
           dialogDelete.close(1)
         }
       })
     })
     dialogDelete.afterClosed().subscribe(result => {
-      if(result==1){
+      if (result == 1) {
         this.getPages();
       }
     });
   }
-  openDialog(product: Product|null){
+
+  openDialog(product: Product | null) {
     const dialogCreate = this.dialog.open(DialogCreateProduct, {
       disableClose: true,
       data: {
@@ -123,10 +138,11 @@ export class ProductComponent implements OnInit {
       }
     })
   }
-  onCreateOrUpdate(product: Product|null){
-    if (this.categories.length>0) {
-       this.openDialog(product);
-    }else{
+
+  onCreateOrUpdate(product: Product | null) {
+    if (this.categories.length > 0) {
+      this.openDialog(product);
+    } else {
       this.loading.show();
       this.categoryService.getAll().subscribe(category => {
         this.loading.hide();
@@ -137,13 +153,16 @@ export class ProductComponent implements OnInit {
       })
     }
   }
+
   enterSearch(): void {
     this.search.pageIndex = 0;
     this.getPages();
   }
+
   ngOnInit(): void {
     this.getPages();
   }
+
   handlePageEvent(event: PageEvent) {
     this.search.pageIndex = event.pageIndex;
     this.search.pageSize = event.pageSize;
@@ -158,12 +177,12 @@ export class ProductComponent implements OnInit {
 })
 export class DialogCreateProduct implements OnInit {
   constructor(
-    public dialogRef : MatDialogRef<DialogCreateProduct>,
-    private toast : ToastrService,
-    private loading : NgxSpinnerService,
-    private api : ProductService,
-    private translate : TranslateService,
-    private fileService : FileService,
+    public dialogRef: MatDialogRef<DialogCreateProduct>,
+    private toast: ToastrService,
+    private loading: NgxSpinnerService,
+    private api: ProductService,
+    private translate: TranslateService,
+    private fileService: FileService,
     @Inject(MAT_DIALOG_DATA) public data: MatDialogData,
   ) {
     this.categories = data.categories;
@@ -179,58 +198,61 @@ export class DialogCreateProduct implements OnInit {
       }
     }
   }
-  fileOptions :File[] = [];
+
+  fileOptions: File[] = [];
   product!: Product;
-  categories : Category[] = [];
+  categories: Category[] = [];
   formGroup!: FormGroup;
+
   ngOnInit(): void {
     this.intiForm();
     this.fileOptions = [...this.product.files];
   }
 
-  private intiForm(){
+  private intiForm() {
     this.formGroup = new FormGroup({
-      id : new FormControl(this.product.id),
-      code:  new FormControl(this.product.code,[Validators.required]),
-      name: new FormControl(this.product.name,[Validators.required]),
+      id: new FormControl(this.product.id),
+      code: new FormControl(this.product.code, [Validators.required]),
+      name: new FormControl(this.product.name, [Validators.required]),
       description: new FormControl(this.product.description),
       shortDescription: new FormControl(this.product.shortDescription),
-      files : new FormControl(this.product.files,[Validators.required]),
-      categories : new FormControl(this.product.categories,[Validators.required])
+      files: new FormControl(this.product.files, [Validators.required]),
+      categories: new FormControl(this.product.categories, [Validators.required])
     })
   }
-  getErrorMessage(field: string){
-    if(this.formGroup && field){
-      if(field=="code" && this.formGroup.controls['code'].errors ) {
+
+  getErrorMessage(field: string) {
+    if (this.formGroup && field) {
+      if (field == "code" && this.formGroup.controls['code'].errors) {
         if (this.formGroup.controls['code'].errors?.['required']) {
           return this.translate.instant("common.fieldRequired");
-        }else if (this.formGroup.controls['code'].errors?.['serverError'] ||
+        } else if (this.formGroup.controls['code'].errors?.['serverError'] ||
           this.formGroup.controls['code'].errors?.['serverErrorMess']) {
-          return  this.formGroup.controls['code'].errors?.['serverErrorMess'];
+          return this.formGroup.controls['code'].errors?.['serverErrorMess'];
         }
       }
-      if(field=="name" && this.formGroup.controls['name'].errors ) {
+      if (field == "name" && this.formGroup.controls['name'].errors) {
         if (this.formGroup.controls['name'].errors?.['required']) {
           return this.translate.instant("common.fieldRequired");
-        }else if (this.formGroup.controls['code'].errors?.['serverError'] ||
+        } else if (this.formGroup.controls['code'].errors?.['serverError'] ||
           this.formGroup.controls['code'].errors?.['serverErrorMess']) {
-          return  this.formGroup.controls['code'].errors?.['serverErrorMess'];
+          return this.formGroup.controls['code'].errors?.['serverErrorMess'];
         }
       }
-      if(field=="categories" && this.formGroup.controls['categories'].errors ) {
+      if (field == "categories" && this.formGroup.controls['categories'].errors) {
         if (this.formGroup.controls['categories'].errors?.['required']) {
           return this.translate.instant("common.fieldRequired");
-        }else if (this.formGroup.controls['categories'].errors?.['serverError'] ||
+        } else if (this.formGroup.controls['categories'].errors?.['serverError'] ||
           this.formGroup.controls['categories'].errors?.['serverErrorMess']) {
-          return  this.formGroup.controls['categories'].errors?.['serverErrorMess'];
+          return this.formGroup.controls['categories'].errors?.['serverErrorMess'];
         }
       }
-      if(field=="files" && this.formGroup.controls['files'].errors ) {
+      if (field == "files" && this.formGroup.controls['files'].errors) {
         if (this.formGroup.controls['files'].errors?.['required']) {
           return this.translate.instant("common.fieldRequired");
-        }else if (this.formGroup.controls['files'].errors?.['serverError'] ||
+        } else if (this.formGroup.controls['files'].errors?.['serverError'] ||
           this.formGroup.controls['files'].errors?.['serverErrorMess']) {
-          return  this.formGroup.controls['files'].errors?.['serverErrorMess'];
+          return this.formGroup.controls['files'].errors?.['serverErrorMess'];
         }
       }
     }
@@ -241,23 +263,23 @@ export class DialogCreateProduct implements OnInit {
     this.loading.show();
     this.api.save(data).subscribe(data => {
       this.loading.hide();
-      if(data instanceof HttpErrorResponse){
+      if (data instanceof HttpErrorResponse) {
         let error = data.error;
-        if(error && error.errors){
+        if (error && error.errors) {
           Object.keys(error.errors).forEach(key => {
-            this.formGroup.controls[key].setErrors({'serverError': true,'serverErrorMess': error.errors[key]});
+            this.formGroup.controls[key].setErrors({'serverError': true, 'serverErrorMess': error.errors[key]});
           });
           return;
         }
       }
       let rs = data as BaseResponse
-      if(rs && (rs.code === 200 || rs.code === 201)){
-        this.toast.success(this.translate.instant("common.success"),this.translate.instant("common.notification"));
+      if (rs && (rs.code === 200 || rs.code === 201)) {
+        this.toast.success(this.translate.instant("common.success"), this.translate.instant("common.notification"));
         this.dialogRef.close(1);
-      }else{
-        if(rs && rs.body && rs.body){
+      } else {
+        if (rs && rs.body && rs.body) {
           Object.keys(rs.body).forEach(key => {
-            this.formGroup.controls[key].setErrors({'serverError': true,'serverErrorMess': rs.body[key]});
+            this.formGroup.controls[key].setErrors({'serverError': true, 'serverErrorMess': rs.body[key]});
           });
           return;
         }
@@ -265,37 +287,38 @@ export class DialogCreateProduct implements OnInit {
     })
   }
 
-  update(data: Product, id : number) {
+  update(data: Product, id: number) {
     this.loading.show();
-    this.api.put(id,data).subscribe(data => {
+    this.api.put(id, data).subscribe(data => {
       this.loading.hide();
-      if(data instanceof HttpErrorResponse){
+      if (data instanceof HttpErrorResponse) {
         let error = data.error;
-        if(error && error.errors){
+        if (error && error.errors) {
           Object.keys(error.errors).forEach(key => {
-            this.formGroup.controls[key].setErrors({'serverError': true,'serverErrorMess': error.errors[key]});
+            this.formGroup.controls[key].setErrors({'serverError': true, 'serverErrorMess': error.errors[key]});
           });
           return;
         }
       }
       let rs = data as BaseResponse
-      if(rs && (rs.code === 200 || rs.code === 201)){
-        this.toast.success(this.translate.instant("common.success"),this.translate.instant("common.notification"));
+      if (rs && (rs.code === 200 || rs.code === 201)) {
+        this.toast.success(this.translate.instant("common.success"), this.translate.instant("common.notification"));
         this.dialogRef.close(1);
-      }else{
-        if(rs && rs.body && rs.body){
+      } else {
+        if (rs && rs.body && rs.body) {
           Object.keys(rs.body).forEach(key => {
-            this.formGroup.controls[key].setErrors({'serverError': true,'serverErrorMess': rs.body[key]});
+            this.formGroup.controls[key].setErrors({'serverError': true, 'serverErrorMess': rs.body[key]});
           });
           return;
         }
       }
     })
   }
-  onSubmit(){
-    if(this.product.id){
-      this.update(this.formGroup.value,this.product.id)
-    }else{
+
+  onSubmit() {
+    if (this.product.id) {
+      this.update(this.formGroup.value, this.product.id)
+    } else {
       this.save(this.formGroup.value);
     }
   }
@@ -307,7 +330,7 @@ export class DialogCreateProduct implements OnInit {
           this.loading.hide();
           if (data) {
             let baseResponse = data as BaseResponse;
-            this.fileOptions = [...this.fileOptions,baseResponse.body];
+            this.fileOptions = [...this.fileOptions, baseResponse.body];
             let valueFormFile = this.formGroup.controls["files"].value;
             valueFormFile.push(baseResponse.body)
             this.formGroup.controls["files"].setValue([...valueFormFile]);
@@ -318,7 +341,8 @@ export class DialogCreateProduct implements OnInit {
   }
 
 }
+
 export interface MatDialogData {
-  categories : Category[];
-  product : Product
+  categories: Category[];
+  product: Product
 }
