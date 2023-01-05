@@ -28,7 +28,14 @@
     "noResultRecord": "No records",
     "fieldRequired": "Field is required",
     "choiceFile" : "Choose file",
-    "addFile": "Add file"
+    "addFile": "Add file",
+    "name": "Name",
+    "code": "Code",
+    "description": "Description",
+    "province" : "Province",
+    "district": "District",
+    "commune": "Commune",
+    "address": "Address"
   },
   "loginComponent": {
     "username": "username",
@@ -61,7 +68,9 @@
     "users": "Users",
     "roles": "Role",
     "administrativeUnit": "Administrative Unit",
-    "product" : "Product"
+    "product" : "Product",
+    "import": "Import",
+    "publisher": "Publisher"
   },
   "user": {
     "profile": "Profile",
@@ -125,5 +134,7 @@
     "shortDescription": "Short Description",
     "categories": "Categories",
     "files" : "Files"
+  },
+  "publisher": {
   }
 }

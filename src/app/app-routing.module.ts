@@ -34,6 +34,11 @@ const routes: Routes = [
           import('./views/manage/manage.module').then((m) => m.ManageModule)
       },
       {
+        path: 'import',
+        loadChildren: () =>
+          import('./views/order-import/order-import.module').then((m) => m.OrderImportModule)
+      },
+      {
         path: '404',
         component: Page404Component,
         title: 'Page 404'

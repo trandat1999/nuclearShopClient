@@ -22,21 +22,34 @@ $my-theme: mat.define-light-theme((
 @import '~ngx-spinner/animations/timer.css';
 @import '~ngx-spinner/animations/square-jelly-box.css';
 @import '~ngx-toastr/toastr.css';
-//@import "~@ng-select/ng-select/themes/material.theme.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-expansion-indicator::after {
   color: white;
 }
-//.ng-select.custom .ng-value-container{
-//  border-top-width: 18px;
-//}
 ng-scrollbar.virtual-scroll {
   --scrollbar-padding : 1px;
-  --scrollbar-size: 8px;
+  --scrollbar-size: 10px;
   --scrollbar-thumb-color: gray;
-  --scrollbar-hover-size: 12px;
+  --scrollbar-hover-size: 14px;
   --scrollbar-track-color: rgba(0, 0, 0, 0.05);
   --scrollbar-border-radius: 10px;
+}
+::-webkit-scrollbar {
+  padding: 1px;
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  width:  14px;
+  height: 14px;
 }

@@ -62,4 +62,17 @@ export const navItem : IMenu[] = [
       },
     ]
   },
+  {
+    text : "navigation.import",
+    icon : "cloud_download",
+    routerLink: "/importOrder",
+    children : [
+      {
+        text : "navigation.publisher",
+        icon : "person_pin",
+        routerLink: "/import/publisher",
+        children : null
+      },
+    ]
+  },
 ]

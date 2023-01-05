@@ -1,0 +1,72 @@
+<h1 cdkDrag cdkDragHandle cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title *ngIf="!publisher.id">{{'common.create' |translate}}</h1>
+<h1 cdkDrag cdkDragHandle cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title *ngIf="publisher.id">{{'common.update' |translate}}</h1>
+<form [formGroup]="formGroup">
+  <mat-dialog-content class="row">
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'common.code' | translate}}</mat-label>
+      <input matInput formControlName="code" type="text">
+      <mat-error>
+        {{getErrorMessage("code")}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'common.name' | translate}}</mat-label>
+      <input matInput formControlName="name" type="text">
+      <mat-error>
+        {{getErrorMessage("name")}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-12" appearance="outline">
+      <mat-label>{{'common.description' | translate}}</mat-label>
+      <input matInput formControlName="description" type="text">
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'common.province' | translate}}</mat-label>
+      <mtx-select [clearable]="false" (change)="getByPrent(1,formGroup.controls['province'].value)"
+                  notFoundText="{{'common.noEntriesFound'|translate}}" appendTo="body"
+                  [items]="provinces" bindLabel="name" [multiple]="false"
+                  formControlName="province">
+      </mtx-select>
+      <mat-error>
+        {{getErrorMessage("province")}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'common.district' | translate}}</mat-label>
+      <mtx-select [clearable]="false" (change)="getByPrent(2,formGroup.controls['district'].value)"
+                  notFoundText="{{'common.noEntriesFound'|translate}}" appendTo="body"
+                  [items]="districts" bindLabel="name" [multiple]="false"
+                  formControlName="district">
+      </mtx-select>
+      <mat-error>
+        {{getErrorMessage("district")}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'common.commune' | translate}}</mat-label>
+      <mtx-select [clearable]="false" notFoundText="{{'common.noEntriesFound'|translate}}" appendTo="body"
+                  [items]="communes" bindLabel="name" [multiple]="false"
+                  formControlName="administrativeUnit">
+      </mtx-select>
+      <mat-error>
+        {{getErrorMessage("administrativeUnit")}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-6" appearance="outline">
+      <mat-label>{{'common.address' | translate}}</mat-label>
+      <input matInput formControlName="description" type="text">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="justify-content-end d-flex col-12">
+      <button mat-raised-button color="warn" (click)="dialogRef.close()">
+        <mat-icon>close</mat-icon>
+        {{'common.close' |translate}}
+      </button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!formGroup.valid" mat-button>
+        <mat-icon>done</mat-icon>
+        {{'common.save'| translate}}
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

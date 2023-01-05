@@ -1,0 +1,42 @@
+<mat-card class="mat-elevation-z5">
+  <mat-card-header>
+    <mat-card-title>{{'manage.manage' | translate}}</mat-card-title>
+    <mat-card-subtitle>{{'manage.product' | translate}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <button (click)="onCreateOrUpdate(null)"  mat-fab color="primary"
+            matTooltipPosition="after"
+            matTooltip="{{'common.create' | translate}}">
+      <mat-icon>add</mat-icon>
+    </button>
+    <mat-form-field appearance="outline" class="col-md-6 col-lg-6 col-xl-6 float-end" >
+      <mat-label>{{'common.search' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.keyword" (keyup.enter)="enterSearch()"  type="text" placeholder="{{'common.inputSearch'| translate}}">
+      <button (click)="enterSearch()" mat-icon-button matSuffix color="primary"><mat-icon>search</mat-icon></button>
+    </mat-form-field>
+    <mtx-grid [data]="publishers"
+              [rowHover]="true"
+              [rowStriped]="true"
+              [columns]="columns"
+              [showPaginator]="false"
+              [pageOnFront]="false"
+              [pageSize]="search.pageSize"
+              noResultText="{{'common.noEntriesFound' | translate}}"
+              [headerTemplate]="headerTpl">
+    </mtx-grid>
+    <ng-template #headerTpl let-col>
+      <span class="fw-bold" style="color: black">{{col.header | async }}</span>
+    </ng-template>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-paginator [pageSizeOptions]="pageSizeOptions"
+                   showFirstLastButtons
+                   [pageSize]="search.pageSize"
+                   [length]="totalElement"
+                   (page)="handlePageEvent($event)"
+                   [pageIndex]="search.pageIndex"
+    ></mat-paginator>
+  </mat-card-actions>
+</mat-card>
+
