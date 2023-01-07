@@ -31,6 +31,14 @@ export class DialogCreatePublisher implements OnInit {
     if (!this.publisher) {
       this.publisher = new Publisher();
     }
+    if(this.publisher.administrativeUnit?.parent?.parent){
+      this.getByPrent(1,this.publisher.administrativeUnit.parent.parent,false);
+      this.publisher.province = this.publisher.administrativeUnit.parent.parent;
+    }
+    if(this.publisher.administrativeUnit?.parent){
+      this.getByPrent(2,this.publisher.administrativeUnit.parent,false);
+      this.publisher.district = this.publisher.administrativeUnit.parent;
+    }
   }
 
   publisher!: Publisher;
@@ -157,18 +165,22 @@ export class DialogCreatePublisher implements OnInit {
     }
   }
 
-  getByPrent(type:number,item : AdministrativeUnit){
+  getByPrent(type:number,item : AdministrativeUnit,clear : boolean){
     if(item && item.id){
       this.loading.show();
       this.administrativeUnitService.getAllByParent(item.id).subscribe(data =>{
         this.loading.hide();
         if(type==1){
           this.districts = data;
-          this.formGroup.controls['district'].setValue(undefined);
-          this.formGroup.controls['administrativeUnit'].setValue(undefined);
+          if(clear){
+            this.formGroup.controls['district'].setValue(undefined);
+            this.formGroup.controls['administrativeUnit'].setValue(undefined);
+          }
         }else{
           this.communes = data;
-          this.formGroup.controls['administrativeUnit'].setValue(undefined);
+          if(clear){
+            this.formGroup.controls['administrativeUnit'].setValue(undefined);
+          }
         }
       })
     }

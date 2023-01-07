@@ -1,7 +1,7 @@
 <mat-card class="mat-elevation-z5">
   <mat-card-header>
-    <mat-card-title>{{'manage.manage' | translate}}</mat-card-title>
-    <mat-card-subtitle>{{'manage.product' | translate}}</mat-card-subtitle>
+    <mat-card-title>{{'importOrder.name' | translate}}</mat-card-title>
+    <mat-card-subtitle>{{'importOrder.publisher' | translate}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <button (click)="onCreateOrUpdate(null)"  mat-fab color="primary"
@@ -15,6 +15,8 @@
       <button (click)="enterSearch()" mat-icon-button matSuffix color="primary"><mat-icon>search</mat-icon></button>
     </mat-form-field>
     <mtx-grid [data]="publishers"
+              [loading]="loadingTable"
+              [sortOnFront]="true"
               [rowHover]="true"
               [rowStriped]="true"
               [columns]="columns"
@@ -22,12 +24,8 @@
               [pageOnFront]="false"
               [pageSize]="search.pageSize"
               noResultText="{{'common.noEntriesFound' | translate}}"
-              [headerTemplate]="headerTpl">
+              >
     </mtx-grid>
-    <ng-template #headerTpl let-col>
-      <span class="fw-bold" style="color: black">{{col.header | async }}</span>
-    </ng-template>
-
   </mat-card-content>
   <mat-card-actions>
     <mat-paginator [pageSizeOptions]="pageSizeOptions"

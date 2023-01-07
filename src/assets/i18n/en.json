@@ -135,6 +135,10 @@
     "categories": "Categories",
     "files" : "Files"
   },
+  "importOrder": {
+    "name": "Name",
+    "publisher": "Publisher"
+  },
   "publisher": {
   }
 }

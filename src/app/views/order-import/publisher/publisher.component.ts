@@ -12,6 +12,7 @@ import {PageEvent} from "@angular/material/paginator";
 import {Publisher} from "../../../dto/Publisher.class";
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {DialogCreatePublisher} from "./dialog-create-publisher.component";
+import {MtxDialog} from "@ng-matero/extensions/dialog";
 
 @Component({
   selector: 'app-publisher',
@@ -38,6 +39,7 @@ export class PublisherComponent implements OnInit {
     pageSize: 10,
     keyword: ""
   }
+  loadingTable : boolean = false;
   columns: MtxGridColumn[] = [
     {
       header: this.translate.stream("common.action"), field: 'action', type: "button", width: "150px",pinned:"left",
@@ -88,9 +90,9 @@ export class PublisherComponent implements OnInit {
   ];
 
   getPages() {
-    this.loading.show();
+    this.loadingTable= true;
     this.api.search(this.search).subscribe(data => {
-        this.loading.hide();
+        this.loadingTable= false;
         if (data) {
           this.publishers = data.content;
           this.totalElement = data.totalElements;
@@ -126,7 +128,8 @@ export class PublisherComponent implements OnInit {
       data: {
         publisher: publisher,
         provinces: this.provinces
-      }
+      },
+      closeOnNavigation : true
     });
     dialogCreate.afterClosed().subscribe(result => {
       if (result) {

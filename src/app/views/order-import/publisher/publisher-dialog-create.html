@@ -22,7 +22,7 @@
     </mat-form-field>
     <mat-form-field class="col-md-6" appearance="outline">
       <mat-label>{{'common.province' | translate}}</mat-label>
-      <mtx-select [clearable]="false" (change)="getByPrent(1,formGroup.controls['province'].value)"
+      <mtx-select [clearable]="false" (change)="getByPrent(1,formGroup.controls['province'].value,true)"
                   notFoundText="{{'common.noEntriesFound'|translate}}" appendTo="body"
                   [items]="provinces" bindLabel="name" [multiple]="false"
                   formControlName="province">
@@ -33,7 +33,7 @@
     </mat-form-field>
     <mat-form-field class="col-md-6" appearance="outline">
       <mat-label>{{'common.district' | translate}}</mat-label>
-      <mtx-select [clearable]="false" (change)="getByPrent(2,formGroup.controls['district'].value)"
+      <mtx-select [clearable]="false" (change)="getByPrent(2,formGroup.controls['district'].value,true)"
                   notFoundText="{{'common.noEntriesFound'|translate}}" appendTo="body"
                   [items]="districts" bindLabel="name" [multiple]="false"
                   formControlName="district">
