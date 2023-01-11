@@ -5,6 +5,7 @@ import {RoleComponent} from "./role/role.component";
 import { CategoryComponent } from './category/category.component';
 import {AdministrativeUnitComponent} from "./administrative-unit/administrative-unit.component";
 import { ProductComponent } from './product/product.component';
+import {WarehouseComponent} from "./warehouse/warehouse.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
     path: 'product',
     component : ProductComponent,
     title: "Manage | Product"
+  },
+  {
+    path: 'warehouse',
+    component : WarehouseComponent,
+    title: "Manage | Warehouse"
   }
 
 ];

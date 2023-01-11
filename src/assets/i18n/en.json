@@ -35,7 +35,8 @@
     "province" : "Province",
     "district": "District",
     "commune": "Commune",
-    "address": "Address"
+    "address": "Address",
+    "phoneNumber": "Phone Number"
   },
   "loginComponent": {
     "username": "username",
@@ -70,7 +71,8 @@
     "administrativeUnit": "Administrative Unit",
     "product" : "Product",
     "import": "Import",
-    "publisher": "Publisher"
+    "publisher": "Publisher",
+    "warehouse": "Warehouse"
   },
   "user": {
     "profile": "Profile",
@@ -136,9 +138,12 @@
     "files" : "Files"
   },
   "importOrder": {
-    "name": "Name",
+    "name": "Import Order",
     "publisher": "Publisher"
   },
   "publisher": {
+  },
+  "warehouse": {
+    "acreage": "Acreage"
   }
 }

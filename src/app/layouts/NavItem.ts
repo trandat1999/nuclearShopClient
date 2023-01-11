@@ -60,6 +60,12 @@ export const navItem : IMenu[] = [
         routerLink: "/manage/product",
         children : null
       },
+      {
+        text : "navigation.warehouse",
+        icon : "bubble_chart",
+        routerLink: "/manage/warehouse",
+        children : null
+      },
     ]
   },
   {

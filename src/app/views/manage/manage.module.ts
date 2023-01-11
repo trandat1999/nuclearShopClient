@@ -14,6 +14,8 @@ import { AdministrativeUnitComponent } from './administrative-unit/administrativ
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MaterialExtensionsModule} from "../../material-extensions.module";
 import {DialogCreateProduct, ProductComponent} from './product/product.component';
+import { WarehouseComponent } from './warehouse/warehouse.component';
+import {DialogCreateWarehouse} from "./warehouse/dialog-create-warehouse.component";
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {DialogCreateProduct, ProductComponent} from './product/product.component
     DialogCreate,
     AdministrativeUnitComponent,
     ProductComponent,
-    DialogCreateProduct
+    DialogCreateProduct,
+    WarehouseComponent,
+    DialogCreateWarehouse
   ],
   imports: [
     CommonModule,

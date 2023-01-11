@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogCreateProduct} from "../../manage/product/product.component";
 import {ToastrService} from "ngx-toastr";
 import {NgxSpinnerService} from "ngx-spinner";
 import {TranslateService} from "@ngx-translate/core";
@@ -9,39 +8,40 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {BaseResponse} from "../../../dto/BaseResponse";
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {Publisher} from "../../../dto/Publisher.class";
-import {PublisherService} from "./publisher.service";
-import {AdminstrativeUnitService} from "../../manage/administrative-unit/adminstrative-unit.service";
+import {AdminstrativeUnitService} from "../administrative-unit/adminstrative-unit.service";
+import {Warehouse} from "../../../dto/Warehouse.class";
+import {WarehouseService} from "./warehouse.service";
 
 @Component({
-  selector: 'publisher-dialog-create',
-  templateUrl: 'publisher-dialog-create.html',
+  selector: 'warehouse-dialog-create',
+  templateUrl: 'dialog-create.html',
 })
-export class DialogCreatePublisher implements OnInit {
+export class DialogCreateWarehouse implements OnInit {
   constructor(
-    public dialogRef: MatDialogRef<DialogCreatePublisher>,
+    public dialogRef: MatDialogRef<DialogCreateWarehouse>,
     private toast: ToastrService,
     private loading: NgxSpinnerService,
-    private api: PublisherService,
+    private api: WarehouseService,
     private translate: TranslateService,
     private administrativeUnitService: AdminstrativeUnitService,
     @Inject(MAT_DIALOG_DATA) public data: MatDialogData,
   ) {
     this.provinces = data.provinces;
-    this.publisher = data.publisher;
-    if (!this.publisher) {
-      this.publisher = new Publisher();
+    this.entity = data.entity;
+    if (!this.entity) {
+      this.entity = new Warehouse();
     }
-    if(this.publisher.administrativeUnit?.parent?.parent){
-      this.getByPrent(1,this.publisher.administrativeUnit.parent.parent,false);
-      this.publisher.province = this.publisher.administrativeUnit.parent.parent;
+    if(this.entity.administrativeUnit?.parent?.parent){
+      this.getByPrent(1,this.entity.administrativeUnit.parent.parent,false);
+      this.entity.province = this.entity.administrativeUnit.parent.parent;
     }
-    if(this.publisher.administrativeUnit?.parent){
-      this.getByPrent(2,this.publisher.administrativeUnit.parent,false);
-      this.publisher.district = this.publisher.administrativeUnit.parent;
+    if(this.entity.administrativeUnit?.parent){
+      this.getByPrent(2,this.entity.administrativeUnit.parent,false);
+      this.entity.district = this.entity.administrativeUnit.parent;
     }
   }
 
-  publisher!: Publisher;
+  entity!: Warehouse;
   provinces: AdministrativeUnit[] = [];
   districts: AdministrativeUnit[] = [];
   communes: AdministrativeUnit[] = [];
@@ -53,14 +53,16 @@ export class DialogCreatePublisher implements OnInit {
 
   private intiForm() {
     this.formGroup = new FormGroup({
-      id: new FormControl(this.publisher.id),
-      code: new FormControl(this.publisher.code, [Validators.required]),
-      name: new FormControl(this.publisher.name, [Validators.required]),
-      description: new FormControl(this.publisher.description),
-      province: new FormControl(this.publisher.province, [Validators.required]),
-      district: new FormControl(this.publisher.district, [Validators.required]),
-      address: new FormControl(this.publisher.address),
-      administrativeUnit: new FormControl(this.publisher.administrativeUnit, [Validators.required])
+      id: new FormControl(this.entity.id),
+      code: new FormControl(this.entity.code, [Validators.required]),
+      name: new FormControl(this.entity.name, [Validators.required]),
+      description: new FormControl(this.entity.description),
+      province: new FormControl(this.entity.province, [Validators.required]),
+      district: new FormControl(this.entity.district, [Validators.required]),
+      phoneNumber: new FormControl(this.entity.phoneNumber,[Validators.pattern("((84|0|'+'84)[3|5|7|8|9])+([0-9]{8})")]),
+      acreage: new FormControl(this.entity.acreage, [Validators.required]),
+      address: new FormControl(this.entity.address),
+      administrativeUnit: new FormControl(this.entity.administrativeUnit, [Validators.required])
     })
   }
 
@@ -101,7 +103,7 @@ export class DialogCreatePublisher implements OnInit {
     return "";
   }
 
-  save(data: Publisher) {
+  save(data: Warehouse) {
     this.loading.show();
     this.api.save(data).subscribe(data => {
       this.loading.hide();
@@ -158,8 +160,8 @@ export class DialogCreatePublisher implements OnInit {
   }
 
   onSubmit() {
-    if (this.publisher.id) {
-      this.update(this.formGroup.value, this.publisher.id)
+    if (this.entity.id) {
+      this.update(this.formGroup.value, this.entity.id)
     } else {
       this.save(this.formGroup.value);
     }
@@ -189,5 +191,5 @@ export class DialogCreatePublisher implements OnInit {
 
 export interface MatDialogData {
   provinces: AdministrativeUnit[];
-  publisher: Publisher
+  entity: Warehouse
 }
