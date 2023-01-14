@@ -8,12 +8,16 @@ import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialExtensionsModule} from "../../material-extensions.module";
 import {DialogCreatePublisher} from "./publisher/dialog-create-publisher.component";
+import { OrderImportComponent } from './order-import/order-import.component';
+import { OrderImportEditComponent } from './order-import-edit/order-import-edit.component';
 
 
 @NgModule({
   declarations: [
     PublisherComponent,
-    DialogCreatePublisher
+    DialogCreatePublisher,
+    OrderImportComponent,
+    OrderImportEditComponent
   ],
   imports: [
     CommonModule,

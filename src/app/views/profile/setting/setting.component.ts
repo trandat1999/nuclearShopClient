@@ -8,7 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {TranslateService} from "@ngx-translate/core";
 import {ProfileService} from "../../../service/profile.service";
 import {Person} from "../../../dto/Profile.class";
-import {Gender} from "../../../dto/Enum.class";
+import {Gender} from "../../../dto/enum/Enum.class";
 import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({

@@ -79,6 +79,12 @@ export const navItem : IMenu[] = [
         routerLink: "/import/publisher",
         children : null
       },
+      {
+        text : "navigation.orderImport",
+        icon : "bubble_chart",
+        routerLink: "/import/order-import",
+        children : null
+      },
     ]
   },
 ]

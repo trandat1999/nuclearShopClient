@@ -42,11 +42,11 @@
     "nameRequired": "Name is required"
   },
   "paginator": {
-    "itemsPerPageLabel": "items per page",
-    "nextPageLabel": "Next page",
-    "previousPageLabel": "Previous page",
-    "lastPageLabel": "Last page",
-    "firstPageLabel": "first page"
+    "itemsPerPageLabel": "Số bản ghi trên 1 trang",
+    "nextPageLabel": "Trang tiếp theo",
+    "previousPageLabel": "Trang trước",
+    "lastPageLabel": "Trang cuối",
+    "firstPageLabel": "Trang đầu"
   },
   "navigation": {
     "dashboard": "Dashboard",

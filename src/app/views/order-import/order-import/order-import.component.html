@@ -14,29 +14,6 @@
       <input matInput [(ngModel)]="search.keyword" (keyup.enter)="enterSearch()"  type="text" placeholder="{{'common.inputSearch'| translate}}">
       <button (click)="enterSearch()" mat-icon-button matSuffix color="primary"><mat-icon>search</mat-icon></button>
     </mat-form-field>
-    <mat-form-field class="col-md-2 col-lg-2 col-xl-2 float-end" appearance="outline">
-      <mat-label>{{'common.commune' | translate}}</mat-label>
-      <mtx-select [clearable]="true" (change)="enterSearch()" notFoundText="{{'common.noEntriesFound'|translate}}"
-                  [items]="communes" bindLabel="name" bindValue="id" [multiple]="false"
-                  [(ngModel)]="search.communeId">
-      </mtx-select>
-    </mat-form-field>
-    <mat-form-field class="col-md-2 col-lg-2 col-xl-2 float-end" appearance="outline">
-      <mat-label>{{'common.district' | translate}}</mat-label>
-      <mtx-select [clearable]="true" (change)="getByPrent(2,search.districtId,true)"
-                  notFoundText="{{'common.noEntriesFound'|translate}}"
-                  [items]="districts" bindLabel="name" bindValue="id" [multiple]="false"
-                  [(ngModel)]="search.districtId">
-      </mtx-select>
-    </mat-form-field>
-      <mat-form-field class="col-md-2 col-lg-2 col-xl-2 float-end" appearance="outline">
-        <mat-label>{{'common.province' | translate}}</mat-label>
-        <mtx-select [clearable]="true" (change)="getByPrent(1,search.provinceId,true)"
-                    notFoundText="{{'common.noEntriesFound'|translate}}"
-                    [items]="provinces" bindLabel="name" bindValue="id" [multiple]="false"
-                    [(ngModel)]="search.provinceId">
-        </mtx-select>
-      </mat-form-field>
     <mtx-grid [data]="rows"
               [loading]="loadingTable"
               [sortOnFront]="true"
@@ -60,5 +37,4 @@
     ></mat-paginator>
   </mat-card-actions>
 </mat-card>
-
 

@@ -18,7 +18,7 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import {Gender} from "../../../dto/Enum.class";
+import {Gender} from "../../../dto/enum/Enum.class";
 import {MatSelect} from "@angular/material/select";
 import {CategoryService} from "../../../service/category.service";
 import {CategoryDialogDeleteConfirm} from "../category/category.component";

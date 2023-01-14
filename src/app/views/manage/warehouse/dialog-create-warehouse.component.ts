@@ -60,7 +60,7 @@ export class DialogCreateWarehouse implements OnInit {
       province: new FormControl(this.entity.province, [Validators.required]),
       district: new FormControl(this.entity.district, [Validators.required]),
       phoneNumber: new FormControl(this.entity.phoneNumber,[Validators.pattern("((84|0|'+'84)[3|5|7|8|9])+([0-9]{8})")]),
-      acreage: new FormControl(this.entity.acreage, [Validators.required]),
+      acreage: new FormControl(this.entity.acreage, [Validators.required,Validators.min(0)]),
       address: new FormControl(this.entity.address),
       administrativeUnit: new FormControl(this.entity.administrativeUnit, [Validators.required])
     })
@@ -97,6 +97,18 @@ export class DialogCreateWarehouse implements OnInit {
       if (field == "administrativeUnit" && this.formGroup.controls['administrativeUnit'].errors) {
         if (this.formGroup.controls['administrativeUnit'].errors?.['required']) {
           return this.translate.instant("common.fieldRequired");
+        }
+      }
+      if (field == "phoneNumber" && this.formGroup.controls['phoneNumber'].errors) {
+        if (this.formGroup.controls['phoneNumber'].errors?.['pattern']) {
+          return this.translate.instant("common.fieldInvalid");
+        }
+      }
+      if (field == "acreage" && this.formGroup.controls['acreage'].errors) {
+        if (this.formGroup.controls['acreage'].errors?.['required']) {
+          return this.translate.instant("common.fieldRequired");
+        }else if (this.formGroup.controls['acreage'].errors?.['min']) {
+          return this.translate.instant("warehouse.acreageMinValid",{value :this.formGroup.controls['acreage'].errors?.['min'].min});
         }
       }
     }

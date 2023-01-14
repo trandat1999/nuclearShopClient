@@ -27,6 +27,7 @@
     "inputSearch": "Please enter text for search",
     "noResultRecord": "No records",
     "fieldRequired": "Field is required",
+    "fieldInvalid": "Field is invalid",
     "choiceFile" : "Choose file",
     "addFile": "Add file",
     "name": "Name",
@@ -72,7 +73,8 @@
     "product" : "Product",
     "import": "Import",
     "publisher": "Publisher",
-    "warehouse": "Warehouse"
+    "warehouse": "Warehouse",
+    "orderImport": "Order Import"
   },
   "user": {
     "profile": "Profile",
@@ -144,6 +146,12 @@
   "publisher": {
   },
   "warehouse": {
-    "acreage": "Acreage"
+    "acreage": "Acreage",
+    "acreageMinValid": "Acreage requires min value is {{value}}"
+  },
+  "orderImportStatus": {
+    "new": "New",
+    "paid": "Paid",
+    "finished": "Finished"
   }
 }

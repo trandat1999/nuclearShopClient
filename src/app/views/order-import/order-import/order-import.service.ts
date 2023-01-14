@@ -4,12 +4,11 @@ import {TranslateService} from "@ngx-translate/core";
 import {ToastrService} from "ngx-toastr";
 import {BaseService} from "../../../service/base.service";
 import {AppSettings} from "../../../../../AppSettings";
-import {SearchRequest} from "../../../dto/SearchRequest.class";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WarehouseService {
+export class OrderImportService {
   constructor(
     private http : HttpClient,
     private translate : TranslateService,

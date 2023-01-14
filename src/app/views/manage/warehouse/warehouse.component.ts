@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {ToastrService} from "ngx-toastr";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatDialog} from "@angular/material/dialog";
-import {PublisherService} from "../../order-import/publisher/publisher.service";
 import {AdminstrativeUnitService} from "../administrative-unit/adminstrative-unit.service";
 import {Publisher} from "../../../dto/Publisher.class";
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
-import {SearchRequest} from "../../../dto/SearchRequest.class";
+import {WarehouseSearch} from "../../../dto/SearchRequest.class";
 import {MtxGridColumn} from "@ng-matero/extensions/grid";
 import {ConfirmDeleteComponent} from "../../../containers/confirm-delete/confirm-delete.component";
-import {DialogCreatePublisher} from "../../order-import/publisher/dialog-create-publisher.component";
 import {PageEvent} from "@angular/material/paginator";
 import {WarehouseService} from "./warehouse.service";
 import {Warehouse} from "../../../dto/Warehouse.class";
@@ -31,12 +29,21 @@ export class WarehouseComponent implements OnInit {
     private api: WarehouseService,
     private administrativeUnitService: AdminstrativeUnitService
   ) {
+    this.loading.show();
+    this.administrativeUnitService.getAllParent().subscribe(provinces => {
+      this.loading.hide();
+      if (provinces) {
+        this.provinces = provinces;
+      }
+    })
   }
   rows: Warehouse[] = [];
-  private provinces: AdministrativeUnit[] = [];
+  provinces: AdministrativeUnit[] = [];
+  districts: AdministrativeUnit[] = [];
+  communes: AdministrativeUnit[] = [];
   totalElement: number = 0;
   pageSizeOptions: number[] = [5, 10, 25, 50, 100];
-  search: SearchRequest = {
+  search: WarehouseSearch = {
     pageIndex: 0,
     pageSize: 10,
     keyword: ""
@@ -66,33 +73,62 @@ export class WarehouseComponent implements OnInit {
     {header: this.translate.stream("warehouse.acreage"), field: 'acreage',sortable:true},
     {header: this.translate.stream("common.phoneNumber"), field: 'phoneNumber'},
     {header: this.translate.stream("common.description"), field: 'description'},
-    {
-      header: this.translate.stream("common.province"), field: 'province',sortable:true, formatter: (row) => {
+    {header: this.translate.stream("common.province"), field: 'province',sortable:true, formatter: (row) => {
         if (row.administrativeUnit && row.administrativeUnit.parent && row.administrativeUnit.parent.parent) {
           return row.administrativeUnit.parent.parent.name;
         }
         return "";
-      }
-    },
-    {
-      header: this.translate.stream("common.district"), field: 'district',sortable:true, formatter: (row) => {
+      }},
+    {header: this.translate.stream("common.district"), field: 'district',sortable:true, formatter: (row) => {
         if (row.administrativeUnit && row.administrativeUnit.parent) {
           return row.administrativeUnit.parent.name;
         }
         return "";
-      }
-    },
-    {
-      header: this.translate.stream("common.commune"), field: 'administrativeUnit',sortable:true, formatter: (row) => {
+      }},
+    {header: this.translate.stream("common.commune"), field: 'administrativeUnit',sortable:true, formatter: (row) => {
         if (row.administrativeUnit) {
           return row.administrativeUnit.name;
         }
         return "";
-      }
-    },
+      }},
     {header: this.translate.stream("common.address"), field: 'address'},
   ];
 
+  getByPrent(type:number,idItem : number|undefined,clear : boolean){
+    if(idItem){
+      this.loading.show();
+      this.administrativeUnitService.getAllByParent(idItem).subscribe(data =>{
+        this.loading.hide();
+        if(type==1){
+          this.districts = data;
+          if(clear){
+            this.search.districtId = undefined;
+            this.search.communeId = undefined;
+          }
+        }else{
+          this.communes = data;
+          if(clear){
+            this.search.communeId = undefined;
+          }
+        }
+      })
+    }else{
+      if(type==1){
+        this.districts = [];
+        this.communes = [];
+        if(clear){
+          this.search.districtId = undefined;
+          this.search.communeId = undefined;
+        }
+      }else{
+        this.communes = [];
+        if(clear){
+          this.search.communeId = undefined;
+        }
+      }
+    }
+    this.enterSearch();
+  }
   getPages() {
     this.loadingTable= true;
     this.api.search(this.search).subscribe(data => {
