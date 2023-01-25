@@ -1,2 +1,33 @@
-<p>order-import-edit works!</p>
-<button color="primary" mat-raised-button (click)="back()"><mat-icon>undo</mat-icon></button>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-label>{{'importOrder.name'|translate}}</mat-label>
+    </mat-card-title>
+    <mat-card-subtitle><mat-label>{{'importOrder.name'|translate}}</mat-label></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <button class="mat-elevation-z3" color="primary" matTooltipPosition="right" matTooltip="{{'common.save' | translate}}"
+            mat-raised-button (click)="back()"><mat-icon>done</mat-icon></button>
+    <button class="ms-3 mat-elevation-z3" color="primary" matTooltipPosition="right" matTooltip="{{'common.back' | translate}}"
+            mat-raised-button (click)="back()"><mat-icon>undo</mat-icon></button>
+  </mat-card-content>
+  <mat-card-content class="mat-elevation-z3 row">
+    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6 mt-3">
+      <mat-label>{{'common.name'|translate}}</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6 mt-3">
+      <mat-label>{{'common.name'|translate}}</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
+      <mat-label>{{'common.name'|translate}}</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
+      <mat-label>{{'common.name'|translate}}</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+

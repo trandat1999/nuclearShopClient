@@ -1,5 +1,6 @@
 {
   "common": {
+    "back": "Back",
     "action": "Action",
     "edit": "Edit",
     "delete": "Delete",
