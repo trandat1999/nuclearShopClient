@@ -31,4 +31,7 @@ export class WarehouseService {
   search(search :any){
     return this.base.search(this.baseUrl + "/pages", search);
   }
+  getAll(){
+    return this.base.get(this.baseUrl);
+  }
 }

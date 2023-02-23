@@ -6,28 +6,130 @@
     <mat-card-subtitle><mat-label>{{'importOrder.name'|translate}}</mat-label></mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <button class="mat-elevation-z3" color="primary" matTooltipPosition="right" matTooltip="{{'common.save' | translate}}"
-            mat-raised-button (click)="back()"><mat-icon>done</mat-icon></button>
-    <button class="ms-3 mat-elevation-z3" color="primary" matTooltipPosition="right" matTooltip="{{'common.back' | translate}}"
-            mat-raised-button (click)="back()"><mat-icon>undo</mat-icon></button>
+    <button class="mat-elevation-z3" color="primary" matTooltipPosition="below" matTooltip="{{'common.save' | translate}}"
+            mat-raised-button [disabled]="!formGroup.valid" (click)="onSubmit()"><mat-icon>done</mat-icon></button>
+    <button class="ms-3 mat-elevation-z3" color="warn" matTooltipPosition="below" matTooltip="{{'common.back' | translate}}"
+            mat-raised-button (click)="back()"><mat-icon>close</mat-icon></button>
   </mat-card-content>
-  <mat-card-content class="mat-elevation-z3 row">
-    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6 mt-3">
-      <mat-label>{{'common.name'|translate}}</mat-label>
-      <input matInput type="text">
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6 mt-3">
-      <mat-label>{{'common.name'|translate}}</mat-label>
-      <input matInput type="text">
+  <mat-card-content [formGroup]="formGroup"  *ngIf="isShowComponent" class="row">
+    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
+      <mat-label>{{'importOrder.orderDate'|translate}}</mat-label>
+      <mtx-datetimepicker #datetimePicker
+                          [timeInput]="true"
+                          type="datetime"
+                          mode="auto"
+                          [multiYearSelector]="true"
+                          startView="month"></mtx-datetimepicker>
+      <input [max]="$any(toDay)" [mtxDatetimepicker]="datetimePicker" formControlName="orderDate" matInput>
+      <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
+      <mat-error>{{getErrorMessage("orderDate")}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
-      <mat-label>{{'common.name'|translate}}</mat-label>
-      <input matInput type="text">
+      <mat-label>{{'importOrder.staffOrder'|translate}}</mat-label>
+      <input matInput formControlName="staffOrder" type="text">
+      <mat-error>{{getErrorMessage("staffOrder")}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
-      <mat-label>{{'common.name'|translate}}</mat-label>
-      <input matInput type="text">
+      <mat-label>{{'importOrder.status'|translate}}</mat-label>
+      <mtx-select formControlName="status" [items]="statusOrderImport" bindValue="value">
+        <ng-template ng-label-tmp let-item="item">
+          {{item.name | translate}}
+        </ng-template>
+        <ng-template ng-option-tmp let-item="item">
+          {{item.name | translate}}
+        </ng-template>
+      </mtx-select>
+      <mat-error>{{getErrorMessage("status")}}</mat-error>
     </mat-form-field>
+    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
+      <mat-label>{{'publisher.name'|translate}}</mat-label>
+      <mtx-select clearAllText="{{'common.clearAll'|translate}}" formControlName="publisher"
+                  bindLabel="name" notFoundText="{{'common.noEntriesFound' |translate}}" [items]="publishers" >
+      </mtx-select>
+      <mat-error>{{getErrorMessage("publisher")}}</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="formGroup.controls['status'].value == 'FINISHED'" appearance="outline" class="col-sm-4 col-md-4 col-lg-4">
+      <mat-label>{{'importOrder.orderDate'|translate}}</mat-label>
+      <mtx-datetimepicker #datetimePickerFinish
+                          [timeInput]="true"
+                          type="datetime"
+                          mode="auto"
+                          [multiYearSelector]="true"
+                          startView="month"></mtx-datetimepicker>
+      <input [max]="$any(toDay)" [mtxDatetimepicker]="datetimePickerFinish" formControlName="dateFinished" matInput>
+      <mtx-datetimepicker-toggle [for]="datetimePickerFinish" matSuffix></mtx-datetimepicker-toggle>
+      <mat-error>{{getErrorMessage("orderDate")}}</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="formGroup.controls['status'].value == 'FINISHED'" appearance="outline" class="col-sm-4 col-md-4 col-lg-4">
+      <mat-label>{{'importOrder.staffFinished'|translate}}</mat-label>
+      <input matInput formControlName="staffFinished" type="text">
+      <mat-error>{{getErrorMessage("staffFinished")}}</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="formGroup.controls['status'].value == 'FINISHED'" appearance="outline" class="col-sm-4 col-md-4 col-lg-4">
+      <mat-label>{{'warehouse.name'|translate}}</mat-label>
+      <mtx-select clearAllText="{{'common.clearAll'|translate}}" bindLabel="name"
+                  formControlName="warehouse" notFoundText="{{'common.noEntriesFound' |translate}}" [items]="warehouses" >
+      </mtx-select>
+      <mat-error>{{getErrorMessage("warehouse")}}</mat-error>
+    </mat-form-field>
+    <div class="row">
+      <table class="table-bordered table col-12 table-striped-columns">
+        <thead>
+        <tr>
+          <th scope="col">
+            <button mat-mini-fab color="primary" (click)="onAddItem()" matTooltip="{{'common.add'|translate}}">
+            <mat-icon>add</mat-icon>
+            </button>
+          </th>
+          <th scope="col">{{'navigation.product'|translate}}</th>
+          <th scope="col">{{'product.price'|translate}}</th>
+          <th scope="col">{{'common.quantity'|translate}}</th>
+          <th scope="col">{{'common.total'|translate}}</th>
+        </tr>
+        </thead>
+        <tbody formArrayName="products">
+        <tr *ngFor="let item of productFormArray.controls;index as i">
+          <ng-container [formGroup]="$any(item)">
+            <td style="text-align: center">
+              <button mat-mini-fab color="warn" (click)="deleteItem(i)" matTooltip="{{'common.delete'|translate}}">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+            <td>
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>{{'navigation.product'|translate}}</mat-label>
+                <mtx-select [items]="products" bindLabel="name" formControlName="product"></mtx-select>
+                <mat-error>{{'common.fieldRequired'| translate}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>{{'product.price'|translate}}</mat-label>
+                <input matInput min="0" type="text" numbersOnly formControlName="price">
+                <mat-error>{{'common.fieldInvalid'| translate}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="w-100" appearance="outline">
+                <mat-label>{{'common.quantity'|translate}}</mat-label>
+                <input matInput min="1" numbersOnly formControlName="quantity">
+                <mat-error>{{'common.fieldInvalid'| translate}}</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-label>{{item.get('price')?.value * item.get('quantity')?.value || 0}}</mat-label>
+            </td>
+          </ng-container>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </mat-card-content>
+  <mat-card-actions align="start">
+    <button class="mat-elevation-z3" color="primary" matTooltipPosition="below" matTooltip="{{'common.save' | translate}}"
+            mat-raised-button [disabled]="!formGroup.valid" (click)="onSubmit()"><mat-icon>done</mat-icon></button>
+    <button class="ms-3 mat-elevation-z3" color="warn" matTooltipPosition="below" matTooltip="{{'common.back' | translate}}"
+            mat-raised-button (click)="back()"><mat-icon>close</mat-icon></button>
+  </mat-card-actions>
 </mat-card>
 

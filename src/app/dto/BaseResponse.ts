@@ -13,3 +13,10 @@ export interface ErrorResponse{
   timestamp: any;
   path : string;
 }
+export interface ImportExcelResponse{
+  successfully : any;
+  totalRecords: number;
+  successRecords:number;
+  failedRecords: number;
+  errorRecords:any;
+}

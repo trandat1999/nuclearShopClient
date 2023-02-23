@@ -4,7 +4,7 @@ export const  Gender = [
   {value: 'UNKNOWN',name: 'gender.unknown'}
 ]
 export const OrderImportStatus = [
-  {value: 'NEW', name: 'OrderImportStatus.new'},
-  {value: 'PAID',name: 'OrderImportStatus.paid'},
-  {value: 'FINISHED',name: 'OrderImportStatus.finished'},
+  {value: 'NEW', name: 'orderImportStatus.new'},
+  {value: 'PAID',name: 'orderImportStatus.paid'},
+  {value: 'FINISHED',name: 'orderImportStatus.finished'},
 ]

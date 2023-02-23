@@ -17,7 +17,7 @@ export class AdminstrativeUnitService {
               private toast : ToastrService,
               private translate : TranslateService) { }
 
-  private baseUrl : string = AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/v1/administrative-units";
+  private readonly baseUrl : string = AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/v1/administrative-units";
 
   getAllParent(){
     return this.http.get(this.baseUrl+"/all-parent").pipe(
@@ -49,6 +49,19 @@ export class AdminstrativeUnitService {
         let rs = value as BaseResponse;
         return rs.body;
       }),catchError(error => {
+        this.toast.error(this.translate.instant("common.commonError"), this.translate.instant("common.error"))
+        return of(false)
+      })
+    );
+  }
+  importExcel(file: File){
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.http.post(this.baseUrl+"/import-excel", formData).pipe(
+      map((data) => {
+        return data as BaseResponse;
+      }),
+      catchError((error) => {
         this.toast.error(this.translate.instant("common.commonError"), this.translate.instant("common.error"))
         return of(false)
       })

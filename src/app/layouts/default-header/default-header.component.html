@@ -19,6 +19,7 @@
     [matMenuTriggerFor]="menuUser"
   >
     <img *ngIf="!currentUser || !currentUser.person || !currentUser.person.photoFile || !currentUser.person.photoFile.downloadUrl" alt="avatar" src="./assets/images/no-avatar.jpg" mat-card-avatar>
+    <img *ngIf="!(!currentUser || !currentUser.person || !currentUser.person.photoFile || !currentUser.person.photoFile.downloadUrl)" alt="avatar" [src]="currentUser.person.photoFile.downloadUrl" mat-card-avatar>
     <span> {{currentUser.person.firstName}} {{currentUser.person.lastName}}</span>
   </button>
 

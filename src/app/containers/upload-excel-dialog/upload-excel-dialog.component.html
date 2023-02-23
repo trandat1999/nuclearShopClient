@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{"common.uploadExcel"|translate}}</h1>
+<mat-dialog-content>
+  <div class="row">
+   <mat-label>{{"importExcel.totalRecords"|translate}}: {{importExcelResponse.totalRecords}}</mat-label>
+    <mat-label>{{"importExcel.successRecords"|translate}}: {{importExcelResponse.successRecords}}</mat-label>
+    <mat-label>{{"importExcel.failsRecords"|translate}}: {{importExcelResponse.failedRecords}}</mat-label>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="dialogRef.close()"  mat-button>
+    <mat-icon>done</mat-icon>{{'common.done'| translate}}</button>
+</mat-dialog-actions>

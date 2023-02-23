@@ -23,10 +23,14 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {ToastrModule} from "ngx-toastr";
 import {MaterialExtensionsModule} from "./material-extensions.module";
-import {MatNativeDateModule} from "@angular/material/core";
+import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
 import {ConfirmDeleteComponent} from './containers/confirm-delete/confirm-delete.component';
 import {WebSocketService} from "./service/web-socket.service";
 import {NgScrollbarModule} from "ngx-scrollbar";
+import {MTX_DATETIME_FORMATS, MtxNativeDatetimeModule} from "@ng-matero/extensions/core";
+import {MtxMomentDatetimeModule} from "@ng-matero/extensions-moment-adapter";
+import {MtxLuxonDatetimeModule} from "@ng-matero/extensions-luxon-adapter";
+import {UploadExcelDialogComponent} from "./containers/upload-excel-dialog/upload-excel-dialog.component";
 
 export function jwtOptionsFactory(storageService: StorageService) {
   return {
@@ -46,11 +50,33 @@ export function rootLoaderI18n(http: HttpClient) {
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
+const date_format_mtx = {
+  parse: {
+    dateInput: 'dd-MM-yyyy',
+    monthInput: 'MMMM',
+    yearInput: 'yyyy',
+    timeInput: 'HH:mm',
+    datetimeInput: 'dd-MM-yyyy HH:mm',
+  },
+  display: {
+    dateInput: 'dd-MM-yyyy',
+    monthInput: 'MMMM',
+    yearInput: 'yyyy',
+    timeInput: 'HH:mm',
+    datetimeInput: 'dd-MM-yyyy HH:mm',
+    monthLabel: "MMMM",
+    monthYearLabel: 'MMMM yyyy',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM yyyy',
+    popupHeaderDateLabel: 'dd MMMM yyyy',
+  },
+};
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmDeleteComponent
+    ConfirmDeleteComponent,
+    UploadExcelDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +119,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       tapToDismiss: true,
     }),
     MatNativeDateModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    MtxNativeDatetimeModule,
+    MtxMomentDatetimeModule,
+    MtxLuxonDatetimeModule,
+    // MtxDateFnsDatetimeModule
   ],
   providers: [authInterceptorProviders, AuthGuardService, {
     provide: PERFECT_SCROLLBAR_CONFIG,
@@ -102,7 +132,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: MatPaginatorIntl,
       useClass: CustomMatPaginator
-    },WebSocketService
+    }, WebSocketService,
+    {
+      provide: MTX_DATETIME_FORMATS,
+      useValue: date_format_mtx
+    },
+    {provide: MAT_DATE_FORMATS, useValue: date_format_mtx},
   ],
   bootstrap: [AppComponent]
 })

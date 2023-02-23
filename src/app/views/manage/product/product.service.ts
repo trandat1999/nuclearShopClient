@@ -7,6 +7,7 @@ import {map} from "rxjs/operators";
 import {BaseResponse} from "../../../dto/BaseResponse";
 import {catchError, of} from "rxjs";
 import {SearchRequest} from "../../../dto/SearchRequest.class";
+import {BaseService} from "../../../service/base.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,15 @@ export class ProductService {
   constructor(
     private http: HttpClient,
     private toast: ToastrService,
+    private base: BaseService,
     private translate: TranslateService) {
   }
 
   private baseUrl : string = AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/v1/products";
+
+  getAll(){
+    return this.base.get(this.baseUrl);
+  }
 
   get(id : number){
     return this.http.get(this.baseUrl+"/"+id).pipe(

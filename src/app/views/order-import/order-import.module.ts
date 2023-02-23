@@ -10,6 +10,9 @@ import {MaterialExtensionsModule} from "../../material-extensions.module";
 import {DialogCreatePublisher} from "./publisher/dialog-create-publisher.component";
 import { OrderImportComponent } from './order-import/order-import.component';
 import { OrderImportEditComponent } from './order-import-edit/order-import-edit.component';
+import {NgSelectModule} from "@ng-select/ng-select";
+import {MtxDatetimepickerModule} from "@ng-matero/extensions/datetimepicker";
+import {NumberDirective} from "../../components/number-input.directive";
 
 
 @NgModule({
@@ -17,16 +20,19 @@ import { OrderImportEditComponent } from './order-import-edit/order-import-edit.
     PublisherComponent,
     DialogCreatePublisher,
     OrderImportComponent,
-    OrderImportEditComponent
+    OrderImportEditComponent,
+    NumberDirective
   ],
-  imports: [
-    CommonModule,
-    OrderImportRoutingModule,
-    MaterialModule,
-    TranslateModule,
-    FormsModule,
-    MaterialExtensionsModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        OrderImportRoutingModule,
+        MaterialModule,
+        TranslateModule,
+        FormsModule,
+        MaterialExtensionsModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+        MtxDatetimepickerModule
+    ]
 })
 export class OrderImportModule { }

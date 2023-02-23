@@ -5,6 +5,8 @@
   </mat-card-header>
   <mat-card-content>
     <div class="mb-3">
+      <button (click)="fileInput.click()" mat-fab color="primary" matTooltip="{{'common.uploadExcel'|translate}}"><mat-icon>backup</mat-icon></button>
+      <input hidden="hidden" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" #fileInput type="file" (change)="onSelectFile($event)">
       <mat-form-field appearance="outline" class="col-md-6 col-lg-6 col-xl-6 float-end" >
         <mat-label>{{'common.search' | translate}}</mat-label>
         <input matInput [(ngModel)]="search.keyword" (keyup.enter)="enterSearch(0)"  type="text" placeholder="{{'common.inputSearch'| translate}}">
@@ -20,6 +22,7 @@
               [pageSize]="search.pageSize"
               [expansionTemplate]="expansionTpl"
               [headerTemplate]="headerTpl"
+              emptyValuePlaceholder=""
               (expansionChange)="log($event)">
     </mtx-grid>
     <ng-template #headerTpl let-col>

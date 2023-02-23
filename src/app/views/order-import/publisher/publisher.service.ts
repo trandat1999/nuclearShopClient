@@ -31,4 +31,7 @@ export class PublisherService{
   search(search :SearchRequest){
     return this.base.search(this.baseUrl + "/pages", search);
   }
+  getAll(){
+    return this.base.get(this.baseUrl);
+  }
 }

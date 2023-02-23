@@ -38,7 +38,13 @@
     "district": "District",
     "commune": "Commune",
     "address": "Address",
-    "phoneNumber": "Phone Number"
+    "phoneNumber": "Phone Number",
+    "uploadExcel": "Upload Excel",
+    "fileNotSelect": "File not selected",
+    "clearAll": "Clear All",
+    "quantity": "Quantity",
+    "total": "Total",
+    "add": "Add"
   },
   "loginComponent": {
     "username": "username",
@@ -138,15 +144,24 @@
     "description" : "Description",
     "shortDescription": "Short Description",
     "categories": "Categories",
-    "files" : "Files"
+    "files" : "Files",
+    "price": "Price"
   },
   "importOrder": {
     "name": "Import Order",
-    "publisher": "Publisher"
+    "publisher": "Publisher",
+    "orderDate": "Order date",
+    "staffOrder": "Staff order",
+    "status": "Status",
+    "staffFinished": "Staff finished",
+    "dateFinished": "Date finished",
+    "products": "Products"
   },
   "publisher": {
+    "name": "Publisher"
   },
   "warehouse": {
+    "name": "Warehouse",
     "acreage": "Acreage",
     "acreageMinValid": "Acreage requires min value is {{value}}"
   },

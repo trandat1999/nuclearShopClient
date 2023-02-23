@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -8,6 +8,8 @@ import { SearchRequest } from 'src/app/dto/SearchRequest.class';
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {PageEvent} from "@angular/material/paginator";
 import {MtxGridColumn} from "@ng-matero/extensions/grid";
+import {UploadExcelDialogComponent} from "../../../containers/upload-excel-dialog/upload-excel-dialog.component";
+import {BaseResponse} from "../../../dto/BaseResponse";
 
 @Component({
   selector: 'app-administrative-unit',
@@ -15,6 +17,7 @@ import {MtxGridColumn} from "@ng-matero/extensions/grid";
   styleUrls: ['./administrative-unit.component.scss']
 })
 export class AdministrativeUnitComponent implements OnInit {
+  @ViewChild('fileInput') myInputVariable!: ElementRef;
   columns: MtxGridColumn[] = [
     { header: this.translate.stream("administrativeUnit.name"), field: 'name', showExpand: true },
     { header: this.translate.stream("administrativeUnit.code"), field: 'code' },
@@ -22,10 +25,10 @@ export class AdministrativeUnitComponent implements OnInit {
   ];
   log(e: any) {
     if(e.expanded && e.data && e.data.id && (!e.data.children || e.data.children.length==0)) {
-      this.spinner.show();
+      this.loading.show();
       this.api.getAllByParent(e.data.id).subscribe(data => {
         e.data.children = data;
-        this.spinner.hide();
+        this.loading.hide();
       })
     }
   }
@@ -41,7 +44,7 @@ export class AdministrativeUnitComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     public dialog: MatDialog,
-    private spinner: NgxSpinnerService,
+    private loading: NgxSpinnerService,
     private toast: ToastrService,
     private api : AdminstrativeUnitService
   ) {}
@@ -51,9 +54,9 @@ export class AdministrativeUnitComponent implements OnInit {
   }
 
   getPages(){
-    this.spinner.show()
+    this.loading.show()
     this.api.getPageParent(this.search).subscribe(res => {
-      this.spinner.hide();
+      this.loading.hide();
       if(res){
         this.administrativeUnits = res.content;
         this.totalElement = res.totalElements;
@@ -78,5 +81,23 @@ export class AdministrativeUnitComponent implements OnInit {
     this.search.pageSize = event.pageSize;
     this.getPages()
   }
-
+  onSelectFile(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.loading.show();
+      this.api.importExcel(event.target.files[0]).subscribe(data => {
+          this.loading.hide();
+          if (data) {
+            let rs = data as BaseResponse;
+            this.dialog.open(UploadExcelDialogComponent,{
+              disableClose:true,
+              data: rs.body
+            }).afterClosed().subscribe(data => {
+              this.getPages();
+            })
+          }
+        }
+      );
+      this.myInputVariable.nativeElement.value = "";
+    }
+  }
 }

@@ -15,7 +15,7 @@ import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { MtxSliderModule } from '@ng-matero/extensions/slider';
 import { MtxSplitModule } from '@ng-matero/extensions/split';
 import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
-import { MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
+import {MTX_DATETIME_FORMATS, MtxNativeDatetimeModule} from '@ng-matero/extensions/core';
 
 @NgModule({
   exports: [
@@ -33,32 +33,7 @@ import { MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
     MtxSelectModule,
     MtxSliderModule,
     MtxSplitModule,
-    MtxTooltipModule
-  ],
-  providers: [
-    {
-      provide: MTX_DATETIME_FORMATS,
-      useValue: {
-        parse: {
-          dateInput: 'YYYY-MM-DD',
-          yearInput: 'YYYY',
-          monthInput: 'MMMM',
-          datetimeInput: 'YYYY-MM-DD HH:mm',
-          timeInput: 'HH:mm',
-        },
-        display: {
-          dateInput: 'YYYY-MM-DD',
-          yearInput: 'YYYY',
-          monthInput: 'MMMM',
-          datetimeInput: 'YYYY-MM-DD HH:mm',
-          timeInput: 'HH:mm',
-          monthYearLabel: 'YYYY MMMM',
-          dateA11yLabel: 'LL',
-          monthYearA11yLabel: 'MMMM YYYY',
-          popupHeaderDateLabel: 'MMM DD, ddd',
-        },
-      },
-    },
+    MtxTooltipModule,
   ],
 })
 export class MaterialExtensionsModule {}

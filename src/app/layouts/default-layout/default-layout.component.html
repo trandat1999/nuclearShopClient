@@ -1,6 +1,6 @@
 <app-default-header [sidenav]="sidenav" ></app-default-header>
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'">
+  <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="true">
     <app-default-sidenav></app-default-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
