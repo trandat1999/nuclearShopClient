@@ -9,7 +9,6 @@ import { DefaultSidenavComponent } from './default-sidenav/default-sidenav.compo
 import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 import {GridModule} from "@coreui/angular";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgHttpLoaderModule} from "ng-http-loader";
 import {FormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
@@ -31,7 +30,6 @@ import {NgScrollbarModule} from "ngx-scrollbar";
         RouterModule,
         GridModule,
         FontAwesomeModule,
-        NgbDropdownModule,
         NgHttpLoaderModule,
         FormsModule,
         TranslateModule,

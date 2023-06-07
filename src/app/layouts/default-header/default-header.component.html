@@ -1,7 +1,6 @@
 <mat-toolbar color="primary">
   <button (click)="sidenav?.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon *ngIf="!sidenav?.opened">menu</mat-icon>
-    <mat-icon *ngIf="sidenav?.opened">arrow_back</mat-icon>
+    <mat-icon>menu</mat-icon>
   </button>
   <span>NuclearShop</span>
   <span class="example-spacer"></span>
@@ -9,8 +8,8 @@
     <mat-icon>translate</mat-icon>
   </button>
   <mat-menu #menuLang="matMenu">
-    <button  mat-menu-item *ngFor="let item of languages" (click)="changeLanguage(item.value)">
-      <span [ngClass]="item.value == currentLanguage?'fw-bold':''">{{item.name}}</span>
+    <button mat-menu-item *ngFor="let item of languages" (click)="changeLanguage(item.value)">
+      <span [ngClass]="item.value == currentLanguage?'font-weight-bold':''">{{item.name}}</span>
     </button>
   </mat-menu>
   <mat-card style="display: none"></mat-card>

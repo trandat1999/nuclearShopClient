@@ -11,7 +11,6 @@ import {StorageService} from './service/storage.service';
 import {AppSettings} from "../../AppSettings";
 import {AuthGuardService} from "./service/authGuardService";
 import {MaterialModule} from "./material-module";
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NuclearLayoutsModule} from "./layouts/layouts.module";
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
@@ -93,7 +92,6 @@ const date_format_mtx = {
     }),
     MaterialModule,
     MaterialExtensionsModule,
-    NgbModule,
     FontAwesomeModule,
     NuclearLayoutsModule,
     PerfectScrollbarModule,

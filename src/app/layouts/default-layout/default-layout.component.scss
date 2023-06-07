@@ -15,11 +15,12 @@ mat-sidenav-content{
 }
 mat-sidenav{
   width: 15%;
-  background: #3f51b5;
+  background: #673ab7;
   border:0;
 }
 .content{
-  min-height: 78vh;
+  min-height: 80vh;
+  position: relative;
 }
 mat-sidenav-container{
   /*margin-top: 64px;*/

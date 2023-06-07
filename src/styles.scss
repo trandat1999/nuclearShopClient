@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 @use '@ng-matero/extensions' as mtx;
-$my-primary: mat.define-palette(mat.$indigo-palette);
+$my-primary: mat.define-palette(mat.$deep-purple-palette);
 $my-accent: mat.define-palette(mat.$pink-palette);
 $my-warn: mat.define-palette(mat.$red-palette);
 $my-theme: mat.define-light-theme((
@@ -13,8 +13,8 @@ $my-theme: mat.define-light-theme((
   typography: mat.define-typography-config(),
   density: 0,
 ));
-//@include mat.core();
-//@include mat.all-component-themes($my-theme);
+@include mat.core();
+@include mat.all-component-themes($my-theme);
 @include mtx.all-component-themes($my-theme);
 @import '~@fortawesome/fontawesome-free/css/fontawesome.css';
 @import '~@fortawesome/fontawesome-free/css/solid.css';
@@ -24,7 +24,6 @@ $my-theme: mat.define-light-theme((
 @import '~ngx-spinner/animations/timer.css';
 @import '~ngx-spinner/animations/square-jelly-box.css';
 @import '~ngx-toastr/toastr.css';
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-expansion-indicator::after {
@@ -32,9 +31,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 ng-scrollbar.virtual-scroll {
   --scrollbar-padding : 1px;
-  --scrollbar-size: 10px;
+  --scrollbar-size: 9px;
   --scrollbar-thumb-color: gray;
-  --scrollbar-hover-size: 14px;
+  --scrollbar-hover-size: 12px;
   --scrollbar-track-color: rgba(0, 0, 0, 0.05);
   --scrollbar-border-radius: 10px;
 }

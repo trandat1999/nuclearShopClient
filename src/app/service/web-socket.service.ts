@@ -6,9 +6,27 @@ var Stomp = require("stompjs");
   providedIn: 'root'
 })
 export class WebSocketService {
+  public stompClient: any;
   constructor() { }
   public connect() {
     let socket = new SockJs(AppSettings.API_ENDPOINT +":"+ AppSettings.PORT+`/socket`);
-    return Stomp.over(socket);
+    this.stompClient = Stomp.over(socket);
+    return this.stompClient;
+  }
+  public disconnect(){
+    if (this.stompClient) {
+      this.stompClient.disconnect();
+    }
+  }
+  errorCallBack() {
+    setTimeout(() => {
+      this.connect();
+    }, 5000);
+  }
+  send(message:any) {
+    this.stompClient.send("/app/hello", {}, JSON.stringify(message));
+  }
+
+  onMessageReceived() {
   }
 }

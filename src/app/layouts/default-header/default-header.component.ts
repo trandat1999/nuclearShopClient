@@ -37,8 +37,7 @@ export class DefaultHeaderComponent implements OnInit {
     stompClient.debug = null
     stompClient.connect({'Authorization': 'Bearer '+this.storage.getToken() }, () => {
       stompClient.subscribe('/user/topic/notification', (notifications : any) => {
-        this.notifications = JSON.parse(notifications.body);
-        this.toast.success(this.notifications.toString())
+        this.toast.success(notifications.body,this.translate.instant("common.notification"))
       })
     });
   }
