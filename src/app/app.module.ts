@@ -30,6 +30,7 @@ import {MTX_DATETIME_FORMATS, MtxNativeDatetimeModule} from "@ng-matero/extensio
 import {MtxMomentDatetimeModule} from "@ng-matero/extensions-moment-adapter";
 import {MtxLuxonDatetimeModule} from "@ng-matero/extensions-luxon-adapter";
 import {UploadExcelDialogComponent} from "./containers/upload-excel-dialog/upload-excel-dialog.component";
+import {IConfig, NgxMaskModule} from "ngx-mask";
 
 export function jwtOptionsFactory(storageService: StorageService) {
   return {
@@ -51,11 +52,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 const date_format_mtx = {
   parse: {
-    dateInput: 'dd-MM-yyyy',
+    dateInput: 'ddMMyyyy',
     monthInput: 'MMMM',
     yearInput: 'yyyy',
-    timeInput: 'HH:mm',
-    datetimeInput: 'dd-MM-yyyy HH:mm',
+    timeInput: 'HHmm',
+    datetimeInput: 'ddMMyyyyHHmm',
   },
   display: {
     dateInput: 'dd-MM-yyyy',
@@ -70,7 +71,9 @@ const date_format_mtx = {
     popupHeaderDateLabel: 'dd MMMM yyyy',
   },
 };
-
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,7 +106,7 @@ const date_format_mtx = {
       }
     }),
     NgxSpinnerModule.forRoot({
-        type: "square-jelly-box"
+        type: "ball-spin-clockwise"
       }
     ),
     NgxMatSelectSearchModule,
@@ -121,6 +124,7 @@ const date_format_mtx = {
     MtxNativeDatetimeModule,
     MtxMomentDatetimeModule,
     MtxLuxonDatetimeModule,
+    NgxMaskModule.forRoot(maskConfig),
     // MtxDateFnsDatetimeModule
   ],
   providers: [authInterceptorProviders, AuthGuardService, {

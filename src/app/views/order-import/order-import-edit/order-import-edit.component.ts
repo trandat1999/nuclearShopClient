@@ -138,7 +138,13 @@ export class OrderImportEditComponent implements OnInit {
 
   }
   onSubmit(){
-
+    this.service.save(this.formGroup.getRawValue()).subscribe(data => {
+      if(data instanceof HttpErrorResponse){
+        // this.toast.error(data.message);
+        return
+      }
+      this.router.navigate(['/import/order-import']);
+    })
   }
   onAddItem(){
     this.productFormArray.push(new FormGroup({

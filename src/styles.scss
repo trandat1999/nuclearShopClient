@@ -21,8 +21,7 @@ $my-theme: mat.define-light-theme((
 @import '~@fortawesome/fontawesome-free/css/regular.css';
 @import '~@fortawesome/fontawesome-free/css/brands.css';
 @import '~perfect-scrollbar/css/perfect-scrollbar.css';
-@import '~ngx-spinner/animations/timer.css';
-@import '~ngx-spinner/animations/square-jelly-box.css';
+@import '~ngx-spinner/animations/ball-spin-clockwise.css';
 @import '~ngx-toastr/toastr.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

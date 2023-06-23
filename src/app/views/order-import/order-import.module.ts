@@ -13,6 +13,7 @@ import { OrderImportEditComponent } from './order-import-edit/order-import-edit.
 import {NgSelectModule} from "@ng-select/ng-select";
 import {MtxDatetimepickerModule} from "@ng-matero/extensions/datetimepicker";
 import {NumberDirective} from "../../components/number-input.directive";
+import {NgxMaskModule} from "ngx-mask";
 
 
 @NgModule({
@@ -23,16 +24,17 @@ import {NumberDirective} from "../../components/number-input.directive";
     OrderImportEditComponent,
     NumberDirective
   ],
-    imports: [
-        CommonModule,
-        OrderImportRoutingModule,
-        MaterialModule,
-        TranslateModule,
-        FormsModule,
-        MaterialExtensionsModule,
-        ReactiveFormsModule,
-        NgSelectModule,
-        MtxDatetimepickerModule
-    ]
+  imports: [
+    CommonModule,
+    OrderImportRoutingModule,
+    MaterialModule,
+    TranslateModule,
+    FormsModule,
+    MaterialExtensionsModule,
+    ReactiveFormsModule,
+    NgSelectModule,
+    MtxDatetimepickerModule,
+    NgxMaskModule,
+  ],
 })
 export class OrderImportModule { }

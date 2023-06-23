@@ -5,14 +5,9 @@
     </mat-card-title>
     <mat-card-subtitle><mat-label>{{'importOrder.name'|translate}}</mat-label></mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
-    <button class="mat-elevation-z3" color="primary" matTooltipPosition="below" matTooltip="{{'common.save' | translate}}"
-            mat-raised-button [disabled]="!formGroup.valid" (click)="onSubmit()"><mat-icon>done</mat-icon></button>
-    <button class="ms-3 mat-elevation-z3" color="warn" matTooltipPosition="below" matTooltip="{{'common.back' | translate}}"
-            mat-raised-button (click)="back()"><mat-icon>close</mat-icon></button>
-  </mat-card-content>
-  <mat-card-content [formGroup]="formGroup"  *ngIf="isShowComponent" class="row">
-    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
+  <mat-divider></mat-divider>
+  <mat-card-content [formGroup]="formGroup"  *ngIf="isShowComponent" class="row mt-3">
+    <mat-form-field class="col-sm-3 col-md-3 col-lg-3" appearance="outline">
       <mat-label>{{'importOrder.orderDate'|translate}}</mat-label>
       <mtx-datetimepicker #datetimePicker
                           [timeInput]="true"
@@ -20,16 +15,16 @@
                           mode="auto"
                           [multiYearSelector]="true"
                           startView="month"></mtx-datetimepicker>
-      <input [max]="$any(toDay)" [mtxDatetimepicker]="datetimePicker" formControlName="orderDate" matInput>
+      <input [max]="$any(toDay)" placeholder="DD-MM-YYYY HH:MM" [mtxDatetimepicker]="$any(datetimePicker)" formControlName="orderDate" matInput>
       <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
       <mat-error>{{getErrorMessage("orderDate")}}</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
+    <mat-form-field appearance="outline" class="col-sm-3 col-md-3 col-lg-3">
       <mat-label>{{'importOrder.staffOrder'|translate}}</mat-label>
       <input matInput formControlName="staffOrder" type="text">
       <mat-error>{{getErrorMessage("staffOrder")}}</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
+    <mat-form-field appearance="outline" class="col-sm-3 col-md-3 col-lg-3">
       <mat-label>{{'importOrder.status'|translate}}</mat-label>
       <mtx-select formControlName="status" [items]="statusOrderImport" bindValue="value">
         <ng-template ng-label-tmp let-item="item">
@@ -41,7 +36,7 @@
       </mtx-select>
       <mat-error>{{getErrorMessage("status")}}</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="col-sm-6 col-md-6 col-lg-6">
+    <mat-form-field appearance="outline" class="col-sm-3 col-md-3 col-lg-3">
       <mat-label>{{'publisher.name'|translate}}</mat-label>
       <mtx-select clearAllText="{{'common.clearAll'|translate}}" formControlName="publisher"
                   bindLabel="name" notFoundText="{{'common.noEntriesFound' |translate}}" [items]="publishers" >
@@ -56,7 +51,7 @@
                           mode="auto"
                           [multiYearSelector]="true"
                           startView="month"></mtx-datetimepicker>
-      <input [max]="$any(toDay)" [mtxDatetimepicker]="datetimePickerFinish" formControlName="dateFinished" matInput>
+      <input [max]="$any(toDay)" [mtxDatetimepicker]="$any(datetimePickerFinish)" formControlName="dateFinished" matInput>
       <mtx-datetimepicker-toggle [for]="datetimePickerFinish" matSuffix></mtx-datetimepicker-toggle>
       <mat-error>{{getErrorMessage("orderDate")}}</mat-error>
     </mat-form-field>
@@ -72,13 +67,13 @@
       </mtx-select>
       <mat-error>{{getErrorMessage("warehouse")}}</mat-error>
     </mat-form-field>
-    <div class="row">
-      <table class="table-bordered table col-12 table-striped-columns">
+    <div class="col-sm-12 col-md-12 col-lg-12 mt-3">
+      <table class="table-bordered table table-striped-columns">
         <thead>
         <tr>
           <th scope="col">
             <button mat-mini-fab color="primary" (click)="onAddItem()" matTooltip="{{'common.add'|translate}}">
-            <mat-icon>add</mat-icon>
+              <mat-icon>add</mat-icon>
             </button>
           </th>
           <th scope="col">{{'navigation.product'|translate}}</th>

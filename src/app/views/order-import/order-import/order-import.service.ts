@@ -14,7 +14,7 @@ export class OrderImportService {
     private translate : TranslateService,
     private toast : ToastrService,
     private base : BaseService) {}
-  private baseUrl : string = AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/v1/warehouses";
+  private baseUrl : string = AppSettings.API_ENDPOINT +":"+ AppSettings.PORT + "/api/v1/order-imports";
   get(id : number){
     return this.base.get(this.baseUrl+"/"+id);
   }
