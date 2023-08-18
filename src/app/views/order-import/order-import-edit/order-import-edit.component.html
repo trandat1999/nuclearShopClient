@@ -44,7 +44,7 @@
       <mat-error>{{getErrorMessage("publisher")}}</mat-error>
     </mat-form-field>
     <mat-form-field *ngIf="formGroup.controls['status'].value == 'FINISHED'" appearance="outline" class="col-sm-4 col-md-4 col-lg-4">
-      <mat-label>{{'importOrder.orderDate'|translate}}</mat-label>
+      <mat-label>{{'importOrder.dateFinished'|translate}}</mat-label>
       <mtx-datetimepicker #datetimePickerFinish
                           [timeInput]="true"
                           type="datetime"
@@ -60,7 +60,7 @@
       <input matInput formControlName="staffFinished" type="text">
       <mat-error>{{getErrorMessage("staffFinished")}}</mat-error>
     </mat-form-field>
-    <mat-form-field *ngIf="formGroup.controls['status'].value == 'FINISHED'" appearance="outline" class="col-sm-4 col-md-4 col-lg-4">
+    <mat-form-field appearance="outline" class="col-sm-4 col-md-4 col-lg-4">
       <mat-label>{{'warehouse.name'|translate}}</mat-label>
       <mtx-select clearAllText="{{'common.clearAll'|translate}}" bindLabel="name"
                   formControlName="warehouse" notFoundText="{{'common.noEntriesFound' |translate}}" [items]="warehouses" >
@@ -120,7 +120,7 @@
       </table>
     </div>
   </mat-card-content>
-  <mat-card-actions align="start">
+  <mat-card-actions align="start" *ngIf="isShowComponent">
     <button class="mat-elevation-z3" color="primary" matTooltipPosition="below" matTooltip="{{'common.save' | translate}}"
             mat-raised-button [disabled]="!formGroup.valid" (click)="onSubmit()"><mat-icon>done</mat-icon></button>
     <button class="ms-3 mat-elevation-z3" color="warn" matTooltipPosition="below" matTooltip="{{'common.back' | translate}}"

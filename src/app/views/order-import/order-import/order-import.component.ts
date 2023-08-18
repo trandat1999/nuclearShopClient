@@ -63,11 +63,13 @@ export class OrderImportComponent implements OnInit {
         },
       ]
     },
-    {header: this.translate.stream("common.name"), field: 'name',sortable:true},
-    {header: this.translate.stream("common.code"), field: 'code',sortable:true},
-    {header: this.translate.stream("warehouse.acreage"), field: 'acreage',sortable:true},
-    {header: this.translate.stream("common.phoneNumber"), field: 'phoneNumber'},
-    {header: this.translate.stream("common.description"), field: 'description'},
+    {header: this.translate.stream("importOrder.orderDate"), field: 'orderDate',sortable:true,type:"date", typeParameter: {
+      format: "yyyy-MM-dd hh:mm:ss",
+      }},
+    {header: this.translate.stream("importOrder.staffOrder"), field: 'staffOrder',sortable:true},
+    {header: this.translate.stream("importOrder.status"), field: 'status',sortable:true},
+    {header: this.translate.stream("publisher.name"), field: 'publisher.name'},
+    {header: this.translate.stream("warehouse.name"), field: 'warehouse.name'},
   ];
   getPages() {
     this.loadingTable= true;

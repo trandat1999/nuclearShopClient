@@ -1,9 +1,10 @@
-<mat-card class="mat-elevation-z5">
+<mat-card class="card">
   <mat-card-header>
     <mat-card-title>{{'navigation.manage' | translate}}</mat-card-title>
     <mat-card-subtitle>{{'navigation.warehouse' | translate}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content class="row">
+  <mat-divider></mat-divider>
+  <mat-card-content class="row mt-3">
     <button class="ms-4" (click)="onCreateOrUpdate(null)"  mat-fab color="primary"
             matTooltipPosition="after"
             matTooltip="{{'common.create' | translate}}">

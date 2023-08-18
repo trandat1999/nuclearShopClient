@@ -21,10 +21,10 @@ export class OrderImportService {
   delete(id : number){
     return this.base.delete(this.baseUrl+"/"+id);
   }
-  put(id : number,request :any ){
-    return this.base.put(this.baseUrl+"/"+id, request);
-  }
-  save(request :any){
+  saveOrUpdate(id : number|undefined,request :any){
+    if(id){
+      return this.base.put(this.baseUrl+"/"+id, request);
+    }
     return this.base.save(this.baseUrl, request);
   }
   search(search :any){

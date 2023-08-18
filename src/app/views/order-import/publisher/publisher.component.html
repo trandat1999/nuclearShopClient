@@ -3,7 +3,8 @@
     <mat-card-title>{{'importOrder.name' | translate}}</mat-card-title>
     <mat-card-subtitle>{{'importOrder.publisher' | translate}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-content class="mt-3">
     <button (click)="onCreateOrUpdate(null)"  mat-fab color="primary"
             matTooltipPosition="after"
             matTooltip="{{'common.create' | translate}}">

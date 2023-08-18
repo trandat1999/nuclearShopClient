@@ -23,6 +23,7 @@ import {WarehouseService} from "../../manage/warehouse/warehouse.service";
 import {Publisher} from "../../../dto/Publisher.class";
 import { ProductService } from '../../manage/product/product.service';
 import {Product} from "../../../dto/Product.class";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-order-import-edit',
@@ -39,7 +40,9 @@ export class OrderImportEditComponent implements OnInit {
   publishers : Publisher[]=[];
   toDay = new Date();
   products: Product[] = [];
+  editable = true;
   constructor(
+    private translate: TranslateService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private service: OrderImportService,
@@ -76,6 +79,9 @@ export class OrderImportEditComponent implements OnInit {
         }
         let data = res as BaseResponse;
         this.entity = data.body;
+        if(this.entity.status !="NEW"){
+          this.editable = false;
+        }
         this.intiForm();
       })
     }else{
@@ -138,13 +144,21 @@ export class OrderImportEditComponent implements OnInit {
 
   }
   onSubmit(){
-    this.service.save(this.formGroup.getRawValue()).subscribe(data => {
-      if(data instanceof HttpErrorResponse){
-        // this.toast.error(data.message);
-        return
-      }
-      this.router.navigate(['/import/order-import']);
-    })
+      this.service.saveOrUpdate(this.currentId,this.formGroup.getRawValue()).subscribe(data => {
+        if(data instanceof HttpErrorResponse){
+          return;
+        }
+        let rs = data as BaseResponse;
+        if(rs.code ==200 || rs.code == 201){
+          this.toast.success(this.translate.instant("common.success"),this.translate.instant("common.notification"));
+          this.router.navigate(['/import/order-import']);
+        } else if (rs && rs.body && rs.body) {
+          Object.keys(rs.body).forEach(key => {
+            this.formGroup.controls[key].setErrors({'serverError': true, 'serverErrorMess': rs.body[key]});
+          });
+          return;
+        }
+      })
   }
   onAddItem(){
     this.productFormArray.push(new FormGroup({
