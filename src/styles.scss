@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 @use '@ng-matero/extensions' as mtx;
-$my-primary: mat.define-palette(mat.$deep-purple-palette);
-$my-accent: mat.define-palette(mat.$pink-palette);
-$my-warn: mat.define-palette(mat.$red-palette);
+$my-primary: mat.define-palette(mat.$indigo-palette,800);
+$my-accent: mat.define-palette(mat.$pink-palette,400);
+$my-warn: mat.define-palette(mat.$red-palette,900);
 $my-theme: mat.define-light-theme((
   color: (
     primary: $my-primary,
@@ -16,12 +16,8 @@ $my-theme: mat.define-light-theme((
 @include mat.core();
 @include mat.all-component-themes($my-theme);
 @include mtx.all-component-themes($my-theme);
-@import '~@fortawesome/fontawesome-free/css/fontawesome.css';
-@import '~@fortawesome/fontawesome-free/css/solid.css';
-@import '~@fortawesome/fontawesome-free/css/regular.css';
-@import '~@fortawesome/fontawesome-free/css/brands.css';
-@import '~perfect-scrollbar/css/perfect-scrollbar.css';
 @import '~ngx-spinner/animations/ball-spin-clockwise.css';
+@import "assets/css/bootstrap.min.css";
 @import '~ngx-toastr/toastr.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -58,10 +54,12 @@ ng-scrollbar.virtual-scroll {
   color: black;
   font-weight: bold;
 }
-::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0 0.7em 0 !important;}
-::ng-deep .mat-form-field-label-wrapper { top: -1.3em; }
-
-::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+ .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0 0.7em 0 !important;}
+ .mat-form-field-label-wrapper { top: -1.3em; }
+.mat-form-field-appearance-outline .mat-form-field-flex{
+  margin-top:0 !important;
+}
+ .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
   transform: translatey(-1.1em) scale(.75);
   width: 133.33333%;
 }

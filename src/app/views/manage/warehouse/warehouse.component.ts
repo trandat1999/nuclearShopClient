@@ -3,7 +3,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {ToastrService} from "ngx-toastr";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatDialog} from "@angular/material/dialog";
-import {AdminstrativeUnitService} from "../administrative-unit/adminstrative-unit.service";
+import {AdministrativeUnitService} from "../administrative-unit/adminstrative-unit.service";
 import {Publisher} from "../../../dto/Publisher.class";
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {WarehouseSearch} from "../../../dto/SearchRequest.class";
@@ -27,7 +27,7 @@ export class WarehouseComponent implements OnInit {
     private loading: NgxSpinnerService,
     private dialog: MatDialog,
     private api: WarehouseService,
-    private administrativeUnitService: AdminstrativeUnitService
+    private administrativeUnitService: AdministrativeUnitService
   ) {
     this.loading.show();
     this.administrativeUnitService.getAllParent().subscribe(provinces => {

@@ -10,27 +10,20 @@ import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import {StorageService} from './service/storage.service';
 import {AppSettings} from "../../AppSettings";
 import {AuthGuardService} from "./service/authGuardService";
-import {MaterialModule} from "./material-module";
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NuclearLayoutsModule} from "./layouts/layouts.module";
-import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {MatPaginatorIntl} from "@angular/material/paginator";
-import {CustomMatPaginator} from "./components/CustomMatPage";
+import {CustomMatPaginator} from "./directives/CustomMatPage";
 import {NgxSpinnerModule} from "ngx-spinner";
-import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {ToastrModule} from "ngx-toastr";
-import {MaterialExtensionsModule} from "./material-extensions.module";
 import {MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
-import {ConfirmDeleteComponent} from './containers/confirm-delete/confirm-delete.component';
 import {WebSocketService} from "./service/web-socket.service";
-import {NgScrollbarModule} from "ngx-scrollbar";
 import {MTX_DATETIME_FORMATS, MtxNativeDatetimeModule} from "@ng-matero/extensions/core";
 import {MtxMomentDatetimeModule} from "@ng-matero/extensions-moment-adapter";
 import {MtxLuxonDatetimeModule} from "@ng-matero/extensions-luxon-adapter";
-import {UploadExcelDialogComponent} from "./containers/upload-excel-dialog/upload-excel-dialog.component";
 import {IConfig, NgxMaskModule} from "ngx-mask";
+import {ContainersModule} from "./containers/containers.module";
 
 export function jwtOptionsFactory(storageService: StorageService) {
   return {
@@ -42,14 +35,10 @@ export function jwtOptionsFactory(storageService: StorageService) {
       AppSettings.API_ENDPOINT + ":" + AppSettings.PORT + "/api/v1/publish/**"]
   }
 }
-
 export function rootLoaderI18n(http: HttpClient) {
   return new TranslateHttpLoader(http, "assets/i18n/", ".json");
 }
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 const date_format_mtx = {
   parse: {
     dateInput: 'ddMMyyyy',
@@ -76,9 +65,7 @@ const maskConfig: Partial<IConfig> = {
 };
 @NgModule({
   declarations: [
-    AppComponent,
-    ConfirmDeleteComponent,
-    UploadExcelDialogComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -93,11 +80,7 @@ const maskConfig: Partial<IConfig> = {
         deps: [StorageService]
       }
     }),
-    MaterialModule,
-    MaterialExtensionsModule,
-    FontAwesomeModule,
     NuclearLayoutsModule,
-    PerfectScrollbarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -109,7 +92,6 @@ const maskConfig: Partial<IConfig> = {
         type: "ball-spin-clockwise"
       }
     ),
-    NgxMatSelectSearchModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-top-right',
@@ -120,17 +102,16 @@ const maskConfig: Partial<IConfig> = {
       tapToDismiss: true,
     }),
     MatNativeDateModule,
-    NgScrollbarModule,
     MtxNativeDatetimeModule,
     MtxMomentDatetimeModule,
     MtxLuxonDatetimeModule,
     NgxMaskModule.forRoot(maskConfig),
+    ContainersModule,
     // MtxDateFnsDatetimeModule
   ],
-  providers: [authInterceptorProviders, AuthGuardService, {
-    provide: PERFECT_SCROLLBAR_CONFIG,
-    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-  },
+  providers: [
+    authInterceptorProviders,
+    AuthGuardService,
     {
       provide: MatPaginatorIntl,
       useClass: CustomMatPaginator

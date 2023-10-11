@@ -80,8 +80,8 @@
     "birthDate": "Birth Date",
     "phoneNumber": "Phone Number",
     "email": "Email",
-    "idNumber": "Id Number",
-    "idNumberIssueDate": "Id Issue Date"
+    "idNumber": "Giấy tờ tùy thân",
+    "idNumberIssueDate": "Ngày tạo"
   },
   "gender": {
     "male": "Male",
@@ -89,7 +89,7 @@
     "unknown": "Unknown"
   },
   "validation": {
-    "required": "Field is required",
+    "required": "Trường bắt buộc",
     "invalid": "Field is invalid",
     "password_not_match": "Confirm password must be match password",
     "email" : "Email must be a valid email address"

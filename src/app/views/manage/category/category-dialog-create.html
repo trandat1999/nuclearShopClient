@@ -22,20 +22,8 @@
     </mat-form-field>
     <mat-form-field class="col-md-6" appearance="outline">
       <mat-label>{{'categoryComponent.parent' | translate}}</mat-label>
-      <mat-select formControlName="parentId" placeholder="{{'categoryComponent.parent' | translate}}" #singleSelect>
-        <mat-option>
-          <ngx-mat-select-search placeholderLabel="{{'common.search' | translate}}"
-                                 [formControl]="categoryFilterCtrl" [preventHomeEndKeyPropagation]="true">
-             <span ngxMatSelectNoEntriesFound>
-                {{'common.noEntriesFound' | translate}}
-             </span>
-          </ngx-mat-select-search>
-        </mat-option>
-        <mat-option>{{'common.none'| translate}}</mat-option>
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.id">
-          {{option.name}}
-        </mat-option>
-      </mat-select>
+      <mtx-select [items]="categoryParent" [multiple]="true" formControlName="parentId" bindLabel="name" bindValue="id"
+                  [notFoundText]="'common.noEntriesFound' | translate"></mtx-select>
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions class="float-end">

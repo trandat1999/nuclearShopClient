@@ -3,10 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { SettingComponent } from './setting/setting.component';
-import {MaterialModule} from "../../material-module";
 import {TranslateModule} from "@ngx-translate/core";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MaterialExtensionsModule} from "../../material-extensions.module";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {ContainersModule} from "../../containers/containers.module";
 
 @NgModule({
   declarations: [
@@ -15,10 +21,16 @@ import {MaterialExtensionsModule} from "../../material-extensions.module";
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    MaterialModule,
     TranslateModule,
     ReactiveFormsModule,
-    MaterialExtensionsModule
+    MatCardModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    ContainersModule
   ]
 })
 export class ProfileModule { }

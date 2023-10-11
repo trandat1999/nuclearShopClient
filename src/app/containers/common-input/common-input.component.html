@@ -1,0 +1,13 @@
+<mat-form-field [style.width.%]="100" [appearance]="appearance" class="input-component">
+  <label>{{label}}</label>
+  <div *ngIf="textArea" class="input-container-textarea">
+    <textarea matInput  #inputValue="ngModel" type="{{ type }}"  [placeholder]="placeholder" [(ngModel)]="value"></textarea>
+  </div>
+  <div *ngIf="!textArea" class="input-container">
+    <input *ngIf="!needCapitalize" matInput type="text" [placeholder]="placeholder" [(ngModel)]="value" required #inputValue="ngModel" />
+    <input *ngIf="needCapitalize" matInput autocapitalize="on" #inputValue="ngModel" [(ngModel)]="value" type="{{ type }}" [placeholder]="placeholder" />
+  </div>
+
+  <mat-hint>{{ hint }}</mat-hint>
+  <mat-error>{{errorText}}</mat-error>
+</mat-form-field>

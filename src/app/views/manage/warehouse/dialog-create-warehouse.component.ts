@@ -8,7 +8,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {BaseResponse} from "../../../dto/BaseResponse";
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {Publisher} from "../../../dto/Publisher.class";
-import {AdminstrativeUnitService} from "../administrative-unit/adminstrative-unit.service";
+import {AdministrativeUnitService} from "../administrative-unit/adminstrative-unit.service";
 import {Warehouse} from "../../../dto/Warehouse.class";
 import {WarehouseService} from "./warehouse.service";
 
@@ -23,7 +23,7 @@ export class DialogCreateWarehouse implements OnInit {
     private loading: NgxSpinnerService,
     private api: WarehouseService,
     private translate: TranslateService,
-    private administrativeUnitService: AdminstrativeUnitService,
+    private administrativeUnitService: AdministrativeUnitService,
     @Inject(MAT_DIALOG_DATA) public data: MatDialogData,
   ) {
     this.provinces = data.provinces;

@@ -1,22 +1,22 @@
-<mat-card *ngIf="showComponent" class="mat-elevation-z0">
-  <mat-card-header>
-    <mat-card-title>
-      {{'profile.profile' | translate}}
-    </mat-card-title>
-    <mat-card-subtitle>
-      {{'profile.settings' | translate}}
-    </mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
+<breadcrumbs-component [crumbs]="breadcrumbs"></breadcrumbs-component>
+<div class="card" *ngIf="showComponent">
+  <div class="card-header">
+    <mat-label class="mat-h2">{{'profile.settings' | translate}}</mat-label>
+  </div>
+  <div class="card-body">
     <div class="row">
       <div class="col-md-3 col-lg-3 col-xl-3">
-        <mat-card class="mat-elevation-z3">
+        <mat-card class="card">
           <mat-card-content>
             <div class="text-center">
               <label class="hoverable" for="fileInput">
-                <img *ngIf="!formEdit.controls['photoFile'].value.downloadUrl" alt="avatar-settings" [src]="'./assets/images/no-avatar.jpg'">
-                <img *ngIf="formEdit.controls['photoFile'].value.downloadUrl" alt="avatar-settings" [src]="formEdit.controls['photoFile'].value.downloadUrl">
-                <div class="hover-text"><mat-icon>add_a_photo</mat-icon></div>
+                <img *ngIf="!formEdit.controls['photoFile'].value.downloadUrl" alt="avatar-settings"
+                     [src]="'./assets/images/no-avatar.jpg'">
+                <img *ngIf="formEdit.controls['photoFile'].value.downloadUrl" alt="avatar-settings"
+                     [src]="formEdit.controls['photoFile'].value.downloadUrl">
+                <div class="hover-text">
+                  <mat-icon>add_a_photo</mat-icon>
+                </div>
                 <div class="background"></div>
               </label>
               <br/>
@@ -24,26 +24,20 @@
               <h4 class="fw-bold">{{formEdit.controls['firstName'].value}} {{formEdit.controls['lastName'].value}}</h4>
             </div>
           </mat-card-content>
-
         </mat-card>
       </div>
       <div class="col-md-9 col-lg-9 col-xl-9 ">
         <form [formGroup]="formEdit">
-        <mat-card class="mat-elevation-z3">
-          <mat-card-title>{{'profile.edit' | translate}}</mat-card-title>
-          <mat-card-content>
-
+          <mat-card class="card">
+            <mat-card-title>{{'profile.edit' | translate}}</mat-card-title>
+            <mat-card-content>
               <div class="row">
-                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
-                  <mat-label>{{'profile.firstName' | translate}}</mat-label>
-                  <input matInput formControlName="firstName" type="text">
-                  <mat-error>{{'validation.required' | translate}}</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
-                  <mat-label>{{'profile.lastName' | translate}}</mat-label>
-                  <input matInput formControlName="lastName" type="text">
-                  <mat-error>{{'validation.required' | translate}}</mat-error>
-                </mat-form-field>
+                <nuclear-input class="col-md-6 col-xl-6 col-lg-6" [label]="'profile.firstName' | translate"
+                               formControlName="firstName" type="text"
+                               [errorText]="'validation.required' | translate"></nuclear-input>
+                <nuclear-input class="col-md-6 col-xl-6 col-lg-6" [label]="'profile.lastName' | translate"
+                               formControlName="lastName" type="text"
+                               [errorText]="'validation.required' | translate"></nuclear-input>
               </div>
               <div class="row">
                 <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
@@ -55,48 +49,35 @@
                   </mat-select>
                   <mat-error>{{'validation.required' | translate}}</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
-                  <mat-label>{{'profile.birthDate' | translate}}</mat-label>
-                  <input matInput formControlName="birthDate" [matDatepicker]="picker">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                  <mat-error>{{'validation.required' | translate}}</mat-error>
-                </mat-form-field>
+                <nuclear-input class="col-md-6 col-xl-6 col-lg-6" [label]="'profile.birthDate' | translate"
+                               formControlName="birthDate" type="date"
+                               [errorText]="'validation.required' | translate"></nuclear-input>
               </div>
               <div class="row">
-                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
-                  <mat-label>{{'profile.phoneNumber' | translate}}</mat-label>
-                  <input matInput formControlName="phoneNumber" type="text">
-                  <mat-error>{{'validation.invalid' | translate}}</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
-                  <mat-label>{{'profile.email' | translate}}</mat-label>
-                  <input matInput formControlName="email" type="text">
-                  <mat-error>{{'validation.required' | translate}}</mat-error>
-                </mat-form-field>
+                <nuclear-input class="col-md-6 col-xl-6 col-lg-6" [label]="'profile.phoneNumber' | translate"
+                               formControlName="phoneNumber" type="text"
+                               [errorText]="'validation.invalid' | translate"></nuclear-input>
+                <nuclear-input class="col-md-6 col-xl-6 col-lg-6" [label]="'profile.email' | translate"
+                               formControlName="email" type="text"
+                               [errorText]="'validation.invalid' | translate"></nuclear-input>
               </div>
               <div class="row">
-                <mat-form-field appearance="outline" class="col-md-4 col-xl-6 col-lg-6">
-                  <mat-label>{{'profile.idNumber' | translate}}</mat-label>
-                  <input matInput formControlName="idNumber" type="text">
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
-                  <mat-label>{{'profile.idNumberIssueDate' | translate}}</mat-label>
-                  <input matInput formControlName="idNumberIssueDate" type="text">
-                </mat-form-field>
+                <nuclear-input class="col-md-6 col-xl-6 col-lg-6" [label]="'profile.idNumber' | translate"
+                               formControlName="idNumber" type="text"></nuclear-input>
+                <nuclear-input class="col-md-6 col-xl-6 col-lg-6" [label]="'profile.idNumberIssueDate' | translate"
+                               formControlName="idNumberIssueDate" type="date"></nuclear-input>
               </div>
 
-          </mat-card-content>
-          <mat-card-actions class="justify-content-end d-flex" >
-            <button  mat-button mat-raised-button color="primary" (click)="onSubmit()">
-              <mat-icon>done</mat-icon>
-              <mat-label>{{'common.save'|translate}}</mat-label>
-            </button>
-          </mat-card-actions>
-        </mat-card>
+            </mat-card-content>
+            <mat-card-actions class="justify-content-end d-flex">
+              <button mat-button mat-raised-button color="primary" (click)="onSubmit()">
+                <mat-icon>done</mat-icon>
+                <mat-label>{{'common.save' | translate}}</mat-label>
+              </button>
+            </mat-card-actions>
+          </mat-card>
         </form>
       </div>
     </div>
-  </mat-card-content>
-
-</mat-card>
+  </div>
+</div>

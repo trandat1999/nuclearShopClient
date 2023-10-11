@@ -4,7 +4,7 @@ import {ToastrService} from "ngx-toastr";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatDialog} from "@angular/material/dialog";
 import {PublisherService} from "./publisher.service";
-import {AdminstrativeUnitService} from "../../manage/administrative-unit/adminstrative-unit.service";
+import {AdministrativeUnitService} from "../../manage/administrative-unit/adminstrative-unit.service";
 import {SearchRequest} from "../../../dto/SearchRequest.class";
 import {MtxGridColumn} from "@ng-matero/extensions/grid";
 import {ConfirmDeleteComponent} from "../../../containers/confirm-delete/confirm-delete.component";
@@ -12,7 +12,6 @@ import {PageEvent} from "@angular/material/paginator";
 import {Publisher} from "../../../dto/Publisher.class";
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {DialogCreatePublisher} from "./dialog-create-publisher.component";
-import {MtxDialog} from "@ng-matero/extensions/dialog";
 
 @Component({
   selector: 'app-publisher',
@@ -27,7 +26,7 @@ export class PublisherComponent implements OnInit {
     private loading: NgxSpinnerService,
     private dialog: MatDialog,
     private api: PublisherService,
-    private administrativeUnitService: AdminstrativeUnitService
+    private administrativeUnitService: AdministrativeUnitService
   ) {
   }
   publishers: Publisher[] = [];

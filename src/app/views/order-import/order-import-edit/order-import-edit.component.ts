@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -16,12 +16,11 @@ import {ToastrService} from "ngx-toastr";
 import {HttpErrorResponse} from "@angular/common/http";
 import {BaseResponse} from "../../../dto/BaseResponse";
 import {OrderImportStatus} from "../../../dto/enum/Enum.class";
-import {Observable} from "rxjs";
 import {Warehouse} from "../../../dto/Warehouse.class";
-import { PublisherService } from '../publisher/publisher.service';
+import {PublisherService} from '../publisher/publisher.service';
 import {WarehouseService} from "../../manage/warehouse/warehouse.service";
 import {Publisher} from "../../../dto/Publisher.class";
-import { ProductService } from '../../manage/product/product.service';
+import {ProductService} from '../../manage/product/product.service';
 import {Product} from "../../../dto/Product.class";
 import {TranslateService} from "@ngx-translate/core";
 

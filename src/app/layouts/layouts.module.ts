@@ -4,15 +4,18 @@ import { DefaultLayoutComponent } from './default-layout/default-layout.componen
 import {RouterModule, RouterOutlet} from "@angular/router";
 import { DefaultFooterComponent } from './default-footer/default-footer.component';
 import { DefaultHeaderComponent } from './default-header/default-header.component';
-import {MaterialModule} from "../material-module";
 import { DefaultSidenavComponent } from './default-sidenav/default-sidenav.component';
-import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
-import {GridModule} from "@coreui/angular";
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {NgHttpLoaderModule} from "ng-http-loader";
 import {FormsModule} from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
-import {NgScrollbarModule} from "ngx-scrollbar";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatIconModule} from "@angular/material/icon";
+import {MatListModule} from "@angular/material/list";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
 
 
 
@@ -23,17 +26,20 @@ import {NgScrollbarModule} from "ngx-scrollbar";
     DefaultHeaderComponent,
     DefaultSidenavComponent
   ],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        PerfectScrollbarModule,
-        RouterModule,
-        GridModule,
-        FontAwesomeModule,
-        NgHttpLoaderModule,
-        FormsModule,
-        TranslateModule,
-        NgScrollbarModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule,
+    NgHttpLoaderModule,
+    FormsModule,
+    TranslateModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatButtonModule
+  ]
 })
 export class NuclearLayoutsModule { }

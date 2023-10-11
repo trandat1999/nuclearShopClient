@@ -1,28 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from "./service/auth.service";
 import {AutoLogoutService} from "./service/autoLogoutService";
 import {TranslateConfigService} from "./service/translate.service";
+import {PreloaderService} from "./service/preloader.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit,AfterViewInit  {
+  ngAfterViewInit(): void {
+    this.preloader.hide();
+  }
   title = 'NuclearShopClient';
-
   constructor(
-    private authService : AuthService,
-    private router: Router,
-    private autoLogoutService: AutoLogoutService,
-    private translate : TranslateConfigService,
+    private preloader: PreloaderService,
   ) {
   }
-
   ngOnInit(): void {
   }
-  public perfectScrollbarConfig = {
-    suppressScrollX: true,
-  };
 }

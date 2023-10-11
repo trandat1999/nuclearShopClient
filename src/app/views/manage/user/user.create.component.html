@@ -30,23 +30,10 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
-      <mat-select formControlName="roles" placeholder="{{'role.roles'|translate}}" [multiple]="true" #multiSelect>
-        <mat-option>
-          <ngx-mat-select-search [showToggleAllCheckbox]="true"
-                                 [toggleAllCheckboxIndeterminate]="isIndeterminate"
-                                 [toggleAllCheckboxChecked]="isChecked"
-                                 (toggleAll)="toggleSelectAll($event)" placeholderLabel="{{'common.search' | translate}}"
-                                 [formControl]="roleFilterCtrl" [preventHomeEndKeyPropagation]="true">
-            <mat-icon ngxMatSelectSearchClear>delete</mat-icon>
-            <span ngxMatSelectNoEntriesFound>
-                {{'common.noEntriesFound' | translate}}
-             </span>
-          </ngx-mat-select-search>
-        </mat-option>
-        <mat-option *ngFor="let role of filteredOptions | async" [value]="role">
-          {{role.name}}
-        </mat-option>
-      </mat-select>
+      <mat-label>{{'role.roles'|translate}}</mat-label>
+      <mtx-select [items]="roles" [multiple]="true" formControlName="roles" bindLabel="name"
+                  [notFoundText]="'common.noEntriesFound' | translate"></mtx-select>
+      <mat-error>{{'validation.required' | translate}}</mat-error>
     </mat-form-field>
     <mat-form-field *ngIf="!user.id" class="col-md-6 col-xl-6 col-lg-6" appearance="outline">
       <mat-label>{{'user.password' | translate}}</mat-label>
@@ -93,13 +80,11 @@
             {{item.name | translate}}
           </mat-option>
         </mat-select>
-        <mat-error>
-          <mat-error>{{'validation.required' | translate}}</mat-error>
-        </mat-error>
+        <mat-error>{{'validation.required' | translate}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-md-6 col-xl-6 col-lg-6">
         <mat-label>{{'profile.birthDate' | translate}}</mat-label>
-        <input matInput [max]="nowDate" formControlName="birthDate" [matDatepicker]="picker">
+        <input matInput [max]="nowDate" formControlName="birthDate" [matDatepicker]="$any(picker)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error>{{'validation.required' | translate}}</mat-error>

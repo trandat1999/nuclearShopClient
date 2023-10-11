@@ -3,7 +3,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
 import {ToastrService} from "ngx-toastr";
-import {AdminstrativeUnitService} from "./adminstrative-unit.service";
+import {AdministrativeUnitService} from "./adminstrative-unit.service";
 import { SearchRequest } from 'src/app/dto/SearchRequest.class';
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {PageEvent} from "@angular/material/paginator";
@@ -46,7 +46,7 @@ export class AdministrativeUnitComponent implements OnInit {
     public dialog: MatDialog,
     private loading: NgxSpinnerService,
     private toast: ToastrService,
-    private api : AdminstrativeUnitService
+    private api : AdministrativeUnitService
   ) {}
 
   ngOnInit(): void {

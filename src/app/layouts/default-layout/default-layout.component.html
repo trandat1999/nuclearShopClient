@@ -1,13 +1,28 @@
-<app-default-header [sidenav]="sidenav" ></app-default-header>
-<mat-sidenav-container class="h-100">
-  <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="true">
-    <app-default-sidenav></app-default-sidenav>
-  </mat-sidenav>
-  <mat-sidenav-content>
-<!--    <div class="bg-body m-4 card content  mat-elevation-z5">-->
+<!--<app-default-header [sidenav]="sidenav" ></app-default-header>-->
+<!--<mat-sidenav-container class="h-100">-->
+<!--  <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="true">-->
+<!--    <app-default-sidenav></app-default-sidenav>-->
+<!--  </mat-sidenav>-->
+<!--  <mat-sidenav-content>-->
+<!--&lt;!&ndash;    <div class="bg-body m-4 card content  mat-elevation-z5">&ndash;&gt;-->
+<!--&lt;!&ndash;      <router-outlet></router-outlet>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    <div class="content m-3">-->
 <!--      <router-outlet></router-outlet>-->
 <!--    </div>-->
-    <div class="content m-3">
+<!--    <app-default-footer></app-default-footer>-->
+<!--  </mat-sidenav-content>-->
+<!--</mat-sidenav-container>-->
+
+
+<mat-sidenav-container class="mat-typography">
+  <mat-sidenav [fixedInViewport]="mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'" #sidenav
+               opened="true">
+    <app-default-sidenav style="overflow: auto"></app-default-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content style="background: whitesmoke">
+    <app-default-header [sidenav]="sidenav"></app-default-header>
+    <div class="p-3">
       <router-outlet></router-outlet>
     </div>
     <app-default-footer></app-default-footer>

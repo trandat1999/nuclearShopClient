@@ -159,9 +159,7 @@ export class CategoryComponent implements OnInit {
 export class DialogCreate implements OnInit {
   category! : Category
   categoryParent! : Array<Category>
-  filteredOptions!: Observable<Category[]>;
   categoryForm! : FormGroup;
-  public categoryFilterCtrl: UntypedFormControl = new UntypedFormControl();
   @ViewChild('singleSelect', { static: true }) singleSelect!: MatSelect;
   constructor(
     public dialogRef: MatDialogRef<DialogCreate>,
@@ -182,27 +180,10 @@ export class DialogCreate implements OnInit {
       parentId : new FormControl(this.category.parentId),
       id : new FormControl(this.category.id),
     })
-    this.filteredOptions = this.categoryFilterCtrl.valueChanges.pipe(
-      startWith(''),
-      map(value => {
-        const name = typeof value === 'string' ? value : value?.name;
-        return name ? this._filter(name as string) : this.categoryParent.slice();
-      }),
-    );
-
   }
 
-  displayFn (id: number): string {
-    let name = this.categoryParent?.find(category => category.id == id)?.name;
-    return  name?name:'';
-  }
   onNoClick(): void {
     this.dialogRef.close(0);
-  }
-
-  private _filter(value: string): Category[] {
-    const filterValue = value.toLowerCase();
-    return this.categoryParent.filter(item => item.name?.toLowerCase().includes(filterValue));
   }
 
   onSubmit(){

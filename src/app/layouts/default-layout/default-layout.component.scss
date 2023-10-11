@@ -13,11 +13,11 @@ mat-sidenav-content{
   /*min-height: 100vh;*/
   flex-direction: column;
 }
-mat-sidenav{
-  width: 15%;
-  background: #673ab7;
-  border:0;
-}
+//mat-sidenav{
+//  width: 15%;
+//  background: #673ab7;
+//  border:0;
+//}
 .content{
   min-height: 80vh;
   position: relative;
@@ -25,3 +25,47 @@ mat-sidenav{
 mat-sidenav-container{
   /*margin-top: 64px;*/
 }
+
+mat-sidenav{
+  border:0;
+  width: 250px;
+  height: 100%;
+  background-color: #673ab7;
+  z-index: 99999;
+  align-items: center;
+  box-sizing: border-box;
+  //color: #fff !important;
+  cursor: pointer;
+}
+
+mat-drawer{
+  background-color: #673ab7;
+  min-height: 100%;
+}
+.mat-drawer-container {
+  position: revert;
+}
+//
+//mat-sidenav:not(.mat-drawer-opened) {
+//  transform: translate3d(0, 0, 0) !important;
+//  visibility: visible !important;
+//  width: 60px !important;
+//  overflow: hidden;
+//}
+//
+//mat-sidenav:not(.mat-drawer-opened) div.leftNav div.navProfile img {
+//  width: 40px; margin: 16px 0 0 0;
+//}
+//mat-sidenav:not(.mat-drawer-opened) .navTitle,
+//mat-sidenav:not(.mat-drawer-opened) .profileTitle {
+//  display: none;
+//}
+
+app-header{
+  top: 0;
+  width: 100%;
+}
+mat-sidenav-container{
+  height: 100%;
+}
+

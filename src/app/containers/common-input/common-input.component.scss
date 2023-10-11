@@ -1,0 +1,120 @@
+:host ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0 0 0 !important;}
+.text-danger {
+  color: #dd4b39 !important;
+}
+.input-component {
+  margin: 0;
+  width: 100%;
+
+  label,mat-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    overflow: hidden;
+    display: -webkit-box;
+    white-space: nowrap;
+  }
+
+  .input-container {
+    border: 1px solid #D4D4D4;
+    padding: 10px;
+    border-radius: 5px;
+    height: 40px;
+    background-color: white;
+    &:has(input:hover) {
+      border: 2px solid black;
+    }
+    &:has(input:focus) {
+      border: 2px solid #3949ab;
+    }
+    & ~ ::ng-deep span {
+      display: none;
+    }
+  }
+
+  .input-container-textarea {
+    border: 1px solid #D4D4D4;
+    padding: 10px;
+    border-radius: 5px;
+    height: auto;
+    background-color: white;
+
+    &:has(input:focus) {
+      border: 2px solid #3949ab;
+    }
+
+    & ~ ::ng-deep span {
+      display: none;
+    }
+  }
+
+  &.mat-form-field-disabled {
+
+    .input-container {
+      background-color: #eee;
+      cursor: no-drop;
+
+      input {
+        cursor: no-drop;
+        color: rgba(0, 0, 0, 1);
+      }
+
+      ::ng-deep .ng-value {
+        color: rgba(0, 0, 0, 1);
+      }
+    }
+
+    .input-container-textarea {
+      background-color: #eee;
+      cursor: no-drop;
+
+      input {
+        cursor: no-drop;
+        color: rgba(0, 0, 0, 1);
+      }
+
+      ::ng-deep .ng-value {
+        color: rgba(0, 0, 0, 1);
+      }
+    }
+  }
+
+  //&.ng-valid.ng-touched {
+  //  label {
+  //    color: #00a65a;
+  //  }
+  //  .input-container {
+  //    border-color: #00a65a;
+  //  }
+  //}
+  &.ng-invalid.ng-touched {
+    label {
+      color: #f44336;
+    }
+    .input-container {
+      border: 2px solid #f44336;
+    }
+  }
+
+  ::ng-deep {
+    .mat-form-field-outline {
+      display: none;
+    }
+
+    .mat-form-field-wrapper {
+      margin: 0;
+    }
+
+    .mat-form-field-flex {
+      padding: 0;
+      margin-top: 0;
+    }
+
+    .mat-form-field-infix {
+      width: 100%;
+      padding: 0;
+      height: auto;
+      border: none;
+    }
+  }
+}

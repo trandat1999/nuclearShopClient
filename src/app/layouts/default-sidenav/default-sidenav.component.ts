@@ -54,4 +54,7 @@ export class DefaultSidenavComponent implements OnInit {
     this.listTextRouter = [];
     this.displayExpandedRouter(text,this.menuList);
   }
+  backHome(){
+    this.router.navigate(['/dashboard']);
+  }
 }

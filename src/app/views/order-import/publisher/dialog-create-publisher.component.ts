@@ -1,6 +1,5 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogCreateProduct} from "../../manage/product/product.component";
 import {ToastrService} from "ngx-toastr";
 import {NgxSpinnerService} from "ngx-spinner";
 import {TranslateService} from "@ngx-translate/core";
@@ -10,7 +9,7 @@ import {BaseResponse} from "../../../dto/BaseResponse";
 import {AdministrativeUnit} from "../../../dto/AdministrativeUnit.class";
 import {Publisher} from "../../../dto/Publisher.class";
 import {PublisherService} from "./publisher.service";
-import {AdminstrativeUnitService} from "../../manage/administrative-unit/adminstrative-unit.service";
+import {AdministrativeUnitService} from "../../manage/administrative-unit/adminstrative-unit.service";
 
 @Component({
   selector: 'publisher-dialog-create',
@@ -23,7 +22,7 @@ export class DialogCreatePublisher implements OnInit {
     private loading: NgxSpinnerService,
     private api: PublisherService,
     private translate: TranslateService,
-    private administrativeUnitService: AdminstrativeUnitService,
+    private administrativeUnitService: AdministrativeUnitService,
     @Inject(MAT_DIALOG_DATA) public data: MatDialogData,
   ) {
     this.provinces = data.provinces;

@@ -1,0 +1,8 @@
+<ul class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a class="breadcrumb-button" (click)="navigateToHome()"><i class="fa fa-home"></i> {{'breadcrumbs.home' | translate}}
+    </a>
+  </li>
+  <li *ngFor="let item of crumbs" class="breadcrumb-item"><a (click)="handleClickCrumb(item?.link)" class="breadcrumb-button">{{item?.text | translate}}</a></li>
+</ul>
+

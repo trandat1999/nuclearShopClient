@@ -17,6 +17,10 @@ import {NgxSpinnerService} from "ngx-spinner";
   styleUrls: ['./setting.component.scss']
 })
 export class SettingComponent implements OnInit {
+  breadcrumbs = [
+    {link: null, text: 'breadcrumbs.profile'},
+    {link: null, text: 'breadcrumbs.setting'},
+  ]
   showComponent = false;
   person!: Person
   formEdit: FormGroup = new FormGroup({})

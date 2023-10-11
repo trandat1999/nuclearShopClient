@@ -11,7 +11,6 @@ import {MatCardModule} from "@angular/material/card";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatIconModule} from "@angular/material/icon";
 import {TranslateModule} from "@ngx-translate/core";
 
@@ -30,7 +29,6 @@ import {TranslateModule} from "@ngx-translate/core";
         FormsModule,
         MatInputModule,
         MatButtonModule,
-        FontAwesomeModule,
         MatIconModule,
         ReactiveFormsModule,
         TranslateModule

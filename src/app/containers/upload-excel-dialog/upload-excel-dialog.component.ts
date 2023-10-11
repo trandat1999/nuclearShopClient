@@ -1,7 +1,6 @@
-import {Component, ElementRef, EventEmitter, Inject, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {BaseResponse, ImportExcelResponse} from "../../dto/BaseResponse";
-import {MatDialogData} from "../../views/manage/product/product.component";
+import {ImportExcelResponse} from "../../dto/BaseResponse";
 
 @Component({
   selector: 'app-upload-excel-dialog',

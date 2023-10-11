@@ -1,0 +1,19 @@
+.breadcrumb{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background: none;
+  padding: 0;
+
+  .breadcrumb-item{
+    list-style-type: none;
+  }
+
+  .breadcrumb-button:hover{
+    text-decoration: underline;
+  }
+  .breadcrumb-button{
+    cursor: pointer;
+    color: #494ca2;
+  }
+}

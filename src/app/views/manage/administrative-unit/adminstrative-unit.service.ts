@@ -11,7 +11,7 @@ import { BaseResponse } from 'src/app/dto/BaseResponse';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminstrativeUnitService {
+export class AdministrativeUnitService {
 
   constructor(private http : HttpClient,
               private toast : ToastrService,

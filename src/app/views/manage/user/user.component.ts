@@ -20,8 +20,6 @@ import {
 } from '@angular/forms';
 import {Gender} from "../../../dto/enum/Enum.class";
 import {MatSelect} from "@angular/material/select";
-import {CategoryService} from "../../../service/category.service";
-import {CategoryDialogDeleteConfirm} from "../category/category.component";
 import {ConfirmDeleteComponent} from "../../../containers/confirm-delete/confirm-delete.component";
 
 export interface UserResponse {
