@@ -1,15 +1,15 @@
 <mat-form-field [style.width.%]="100" [appearance]="appearance">
   <mat-label>{{label}}</mat-label>
-  <textarea *ngIf="textArea && type!='date'" matInput type="{{ type }}"
+  <textarea [disabled]="isDisabled" *ngIf="textArea && type!='date'" matInput type="{{ type }}"
             [placeholder]="placeholder" [(ngModel)]="value"></textarea>
-  <input *ngIf="!needCapitalize && !textArea && type!='date'" matInput type="text" [placeholder]="placeholder"
+  <input [disabled]="isDisabled" *ngIf="!needCapitalize && !textArea && type!='date'" matInput type="text" [placeholder]="placeholder"
          [(ngModel)]="value"/>
-  <input *ngIf="needCapitalize && !textArea && type!='date'" matInput autocapitalize="on"
+  <input [disabled]="isDisabled" *ngIf="needCapitalize && !textArea && type!='date'" matInput autocapitalize="on"
          [(ngModel)]="value" type="{{ type }}" [placeholder]="placeholder"/>
-  <input *ngIf="type=='date'" matInput [(ngModel)]="value" [matDatepicker]="picker">
+  <input [disabled]="isDisabled" *ngIf="type=='date'" matInput [(ngModel)]="value" [matDatepicker]="picker">
   <mat-datepicker-toggle *ngIf="type=='date'" matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
-  <mat-hint>{{ hint }}</mat-hint>
+  <mat-hint>{{hint}}</mat-hint>
   <mat-error>{{errorText}}</mat-error>
 </mat-form-field>
 

@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @use '@angular/material' as mat;
 @use '@ng-matero/extensions' as mtx;
 $my-primary: mat.define-palette(mat.$indigo-palette,800);
@@ -33,21 +36,22 @@ ng-scrollbar.virtual-scroll {
   --scrollbar-border-radius: 10px;
 }
 ::-webkit-scrollbar {
-  padding: 1px;
-  width: 10px;
-  height: 10px;
+    padding: 1px;
+    width: 10px;
+    height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: gray;
-  border-radius: 10px;
+    background: gray;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  width:  14px;
-  height: 14px;
+    border: 0;
 }
 
 .mat-header-cell,.mat-sort-header-arrow,.mat-sort-header-indicator{
